@@ -1,9 +1,11 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import React from "react";
+import { mount } from "enzyme";
+import App from "./App";
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+describe("<App/> message then rendering", () => {
+  //
+  it("should be a message is Set up! on html", () => {
+    const wrapper = mount(<App />);
+    expect(wrapper.find("section").contains("Set up!")).toBe(true);
+  });
 });

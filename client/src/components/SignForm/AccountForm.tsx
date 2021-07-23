@@ -4,7 +4,7 @@ import SignFormHeader from "./Header/SignFormHeader";
 import SignIn from "./SignIn/SignIn";
 import SignUp from "./SignUpBtn/SignUpBtn";
 
-const Form = () => {
+const AccountForm = () => {
   return (
     <FormSection>
       <SignFormHeader />
@@ -21,4 +21,4 @@ const FormSection = styled.section`
   align-items: center;
 `;
 
-export default Form;
+export default AccountForm;

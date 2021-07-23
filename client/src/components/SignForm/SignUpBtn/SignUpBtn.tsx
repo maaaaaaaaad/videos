@@ -1,10 +1,16 @@
 import React from "react";
+import { useHistory, withRouter } from "react-router-dom";
 import styled from "styled-components";
 
 const SignUp = () => {
-  //Then onClick btn, history push "/signup"
+  const history = useHistory();
 
-  return <SignUpBtn>Create Account</SignUpBtn>;
+  const handleSignUpRouter = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    history.push("/signup");
+  };
+
+  return <SignUpBtn onClick={handleSignUpRouter}>Create Account</SignUpBtn>;
 };
 
 const SignUpBtn = styled.button`
@@ -15,7 +21,7 @@ const SignUpBtn = styled.button`
   background: none;
   cursor: pointer;
   text-decoration: underline;
-  color: #147ee0;
+  color: #4c7cd6;
 `;
 
-export default SignUp;
+export default withRouter(SignUp);

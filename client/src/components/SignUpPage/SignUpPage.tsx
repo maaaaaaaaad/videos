@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import theme from "../../mediaQuery";
+import { SignUpUserData } from "../../types/signUp.type";
 
 const SignUpPage = () => {
-  const [signUpData, setSignUpData] = useState({
+  const [signUpData, setSignUpData] = useState<SignUpUserData>({
     //sample user data
     userId: "dummy",
     pass1: "123",
@@ -11,7 +12,31 @@ const SignUpPage = () => {
     email: "123@gs.com",
     nickname: "www",
   });
+
+  const [signUpId, setSignUpId] = useState<string>("");
   const [okSign, setOkSign] = useState<boolean>(false);
+
+  const [onIdValidationBtn, setOnValidationBtn] = useState<boolean>(false);
+
+  const handleChangedId = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const idValue = e.currentTarget.value;
+    const idReg = /^[A-za-z0-9]{5,15}$/g;
+
+    const test = idReg.test(idValue);
+
+    if (test === true) {
+      setOnValidationBtn(true);
+    } else {
+      setOnValidationBtn(false);
+    }
+  };
+
+  const handleOnIdValBtn = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    //Call API
+    console.log("Success ID format, call by API");
+  };
 
   return (
     <>
@@ -24,14 +49,21 @@ const SignUpPage = () => {
           <Label htmlFor="id">
             <Name theme={theme}>Create ID</Name>
             <Input
+              onChange={handleChangedId}
               theme={theme}
               type="text"
               id="id"
               name="id"
-              placeholder="Plase you enter create only your use ID"
+              placeholder="Numbers and(or) letters(5-15length)"
               autoComplete="off"
             />
-            <ValidationBtn theme={theme}>ID Validation</ValidationBtn>
+            {onIdValidationBtn ? (
+              <ValidationBtn onClick={handleOnIdValBtn} theme={theme}>
+                ID Validation
+              </ValidationBtn>
+            ) : (
+              <NotValidationBtn theme={theme}>ID Validation</NotValidationBtn>
+            )}
           </Label>
           <Label htmlFor="password1">
             <Name theme={theme}>Set Password</Name>
@@ -154,6 +186,22 @@ const ValidationBtn = styled.button`
   font-weight: bold;
   background: #4c7cd6;
   color: white;
+  @media ${({ theme }) => theme.device.mobile} {
+    font-size: 10px;
+    height: 20px;
+  }
+`;
+
+const NotValidationBtn = styled.span`
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  font-weight: bold;
+  background: #4a4d53;
+  color: white;
+  opacity: 0.3;
   @media ${({ theme }) => theme.device.mobile} {
     font-size: 10px;
     height: 20px;

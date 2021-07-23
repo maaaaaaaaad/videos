@@ -1,11 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import theme from "../../mediaQuery";
 import NaviSearch from "./Navi-Search/NaviSearch";
 
 const Navigator = () => {
   return (
-    <NaviSection>
+    <NaviSection theme={theme}>
       Logo
       <Link to="/">
         <NaviItem>Home</NaviItem>
@@ -24,6 +25,9 @@ const Navigator = () => {
 const NaviSection = styled.section`
   display: flex;
   justify-content: space-evenly;
+  @media ${({ theme }) => theme.device.mobile} {
+    font-size: 12px;
+  }
 `;
 
 const NaviItem = styled.nav`

@@ -1,10 +1,13 @@
 import React from "react";
 import styled from "styled-components";
+import Items from "./Items/Items";
 
 const Home = () => {
   return (
     <>
-      <HomeMain>Main content</HomeMain>
+      <HomeMain>
+        <Items />
+      </HomeMain>
       <HomeFooter>© Videos Books Notes by Woong</HomeFooter>
     </>
   );

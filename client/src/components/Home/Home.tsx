@@ -14,6 +14,7 @@ const Home = () => {
 };
 
 const HomeMain = styled.main`
+  width: 100%;
   flex: 1;
   display: flex;
   align-items: center;

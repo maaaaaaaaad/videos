@@ -15,10 +15,14 @@ const SignUpPage = () => {
   });
 
   const [checkingId, setCheckingId] = useState<string>("");
+  const [firPassword, setFirPassword] = useState<string>("");
+  const [secPassword, setSecPassword] = useState<string>("");
+  const [okFirPassword, setOkFirPassword] = useState<boolean>(false);
+  const [okSecPassword, setOkSecPassword] = useState<boolean>(false);
   const [saveId, setSaveId] = useState<string>("");
   const [okSign, setOkSign] = useState<boolean>(false);
 
-  const [onIdValidationBtn, setOnValidationBtn] = useState<boolean>(false);
+  const [onIdValidationBtn, setOnidValidationBtn] = useState<boolean>(false);
 
   const handleChangedId = (e: React.ChangeEvent<HTMLInputElement>) => {
     const idValue = e.currentTarget.value;
@@ -27,10 +31,38 @@ const SignUpPage = () => {
     const test = idReg.test(idValue);
 
     if (test === true) {
-      setOnValidationBtn(true);
+      setOnidValidationBtn(true);
       setCheckingId(idValue);
     } else {
-      setOnValidationBtn(false);
+      setOnidValidationBtn(false);
+    }
+  };
+
+  const handleChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const firPassValue = e.currentTarget.value;
+    const passReg =
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/g;
+
+    const test = passReg.test(firPassValue);
+
+    if (test === true) {
+      setFirPassword(firPassValue);
+      setOkFirPassword(true);
+    } else {
+      setOkFirPassword(false);
+    }
+  };
+
+  const handleCheckingPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const secPassword = e.currentTarget.value;
+
+    if (firPassword !== secPassword) {
+      setOkSecPassword(false);
+    }
+    //
+    else {
+      setOkSecPassword(true);
+      setSecPassword(secPassword);
     }
   };
 
@@ -63,9 +95,17 @@ const SignUpPage = () => {
               autoComplete="off"
             />
             {onIdValidationBtn ? (
-              <ValidationBtn onClick={handleOnIdValBtn} theme={theme}>
-                ID Validation
-              </ValidationBtn>
+              <>
+                {saveId ? (
+                  <SuccessValidation theme={theme}>
+                    OK Validation
+                  </SuccessValidation>
+                ) : (
+                  <ValidationBtn onClick={handleOnIdValBtn} theme={theme}>
+                    ID Validation
+                  </ValidationBtn>
+                )}
+              </>
             ) : (
               <NotValidationBtn theme={theme}>ID Validation</NotValidationBtn>
             )}
@@ -79,18 +119,36 @@ const SignUpPage = () => {
               name="password1"
               placeholder="Password"
               autoComplete="off"
+              onChange={handleChangePassword}
             />
+            <PasswordFormat theme={theme}>
+              {okFirPassword ? (
+                <FirPassWordSign theme={theme}>* Success!</FirPassWordSign>
+              ) : (
+                "At least 8 characters, including uppercase and special characters"
+              )}
+            </PasswordFormat>
           </Label>
           <Label htmlFor="password2">
             <Name theme={theme}>Val Password</Name>
             <Input
               theme={theme}
-              type="text"
+              type="password"
               id="password2"
               name="password"
               placeholder="Password"
               autoComplete="off"
+              onChange={handleCheckingPassword}
             />
+            <PasswordFormat theme={theme}>
+              {okSecPassword ? (
+                <SecPassWordSign theme={theme}>
+                  * Your password has been verified!
+                </SecPassWordSign>
+              ) : (
+                "Please enter the same password"
+              )}
+            </PasswordFormat>
           </Label>
           <Label htmlFor="email">
             <Name theme={theme}>Email</Name>
@@ -191,6 +249,7 @@ const ValidationBtn = styled.button`
   font-weight: bold;
   background: #4c7cd6;
   color: white;
+
   @media ${({ theme }) => theme.device.mobile} {
     font-size: 10px;
     height: 20px;
@@ -231,10 +290,8 @@ const SignUpBtn = styled.button`
   }
 `;
 
-const NotSignUpBtn = styled.button`
-  margin-top: 3rem;
-  padding: 0 20px 0 20px;
-  height: 28px;
+const NotSignUpBtn = styled.span`
+  padding: 5px;
   border-radius: 5px;
   border: none;
   outline: none;
@@ -246,6 +303,55 @@ const NotSignUpBtn = styled.button`
   @media ${({ theme }) => theme.device.mobile} {
     font-size: 10px;
     height: 20px;
+  }
+`;
+
+const SuccessValidation = styled.span`
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  font-weight: bold;
+  background: #4a4d53;
+  color: white;
+  opacity: 0.3;
+  @media ${({ theme }) => theme.device.mobile} {
+    font-size: 10px;
+    height: 20px;
+  }
+`;
+
+const PasswordFormat = styled.div`
+  margin-left: 6rem;
+  margin-top: 3px;
+  padding: 0;
+  font-size: 11px;
+  color: #4a4d53;
+  @media ${({ theme }) => theme.device.mobile} {
+    font-size: 5px;
+  }
+`;
+
+const FirPassWordSign = styled.span`
+  margin-top: 3px;
+  padding: 0;
+  font-size: 11px;
+  font-weight: bold;
+  color: #4c7cd6;
+  @media ${({ theme }) => theme.device.mobile} {
+    font-size: 5px;
+  }
+`;
+
+const SecPassWordSign = styled.span`
+  margin-top: 3px;
+  padding: 0;
+  font-size: 11px;
+  font-weight: bold;
+  color: #4c7cd6;
+  @media ${({ theme }) => theme.device.mobile} {
+    font-size: 5px;
   }
 `;
 

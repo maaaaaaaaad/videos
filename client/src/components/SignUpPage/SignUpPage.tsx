@@ -3,6 +3,7 @@ import styled from "styled-components";
 import theme from "../../mediaQuery";
 import { SignUpUserData } from "../../types/signUp.type";
 import axios from "axios";
+import { useEffect } from "react";
 
 const SignUpPage = () => {
   const [signUpData, setSignUpData] = useState<SignUpUserData>({
@@ -17,12 +18,31 @@ const SignUpPage = () => {
   const [checkingId, setCheckingId] = useState<string>("");
   const [firPassword, setFirPassword] = useState<string>("");
   const [secPassword, setSecPassword] = useState<string>("");
+  const [checkingEmail, setCheckingEmail] = useState<string>("");
+  const [checkingNick, setCheckingNick] = useState<string>("");
+
   const [okFirPassword, setOkFirPassword] = useState<boolean>(false);
   const [okSecPassword, setOkSecPassword] = useState<boolean>(false);
+
   const [saveId, setSaveId] = useState<string>("");
-  const [okSign, setOkSign] = useState<boolean>(false);
+  const [saveEmail, SetSaveEmail] = useState<string>("");
+  const [saveNickname, setSaveNickname] = useState<string>("");
 
   const [onIdValidationBtn, setOnidValidationBtn] = useState<boolean>(false);
+
+  const [onEmailValidationBtn, setOnEmailValidationBtn] =
+    useState<boolean>(false);
+
+  const [onNicknameValidationBtn, SetOnNicknameValidationBtn] =
+    useState<boolean>(false);
+
+  const [okSign, setOkSign] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (secPassword && saveId && saveEmail && saveNickname) {
+      setOkSign(true);
+    }
+  }, [secPassword, saveId, saveEmail, saveNickname]);
 
   const handleChangedId = (e: React.ChangeEvent<HTMLInputElement>) => {
     const idValue = e.currentTarget.value;
@@ -39,30 +59,81 @@ const SignUpPage = () => {
   };
 
   const handleChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const firPassValue = e.currentTarget.value;
-    const passReg =
-      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/g;
+    //
 
-    const test = passReg.test(firPassValue);
+    if (saveId !== "") {
+      const firPassValue = e.currentTarget.value;
+      const passReg =
+        /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/g;
 
-    if (test === true) {
-      setFirPassword(firPassValue);
-      setOkFirPassword(true);
+      const test = passReg.test(firPassValue);
+
+      if (test === true) {
+        setFirPassword(firPassValue);
+        setOkFirPassword(true);
+      } else {
+        setOkFirPassword(false);
+      }
     } else {
-      setOkFirPassword(false);
+      e.currentTarget.value = "";
+      return window.alert("Please a make your ID first!");
     }
   };
 
   const handleCheckingPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const secPassword = e.currentTarget.value;
-
-    if (firPassword !== secPassword) {
-      setOkSecPassword(false);
-    }
     //
-    else {
-      setOkSecPassword(true);
-      setSecPassword(secPassword);
+
+    if (okFirPassword === true) {
+      const secPassword = e.currentTarget.value;
+      if (firPassword !== secPassword) {
+        setOkSecPassword(false);
+      } else {
+        setOkSecPassword(true);
+        setSecPassword(secPassword);
+      }
+    } else {
+      e.currentTarget.value = "";
+      return window.alert("Please you enter first password!");
+    }
+  };
+
+  const handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //
+    if (okSecPassword === true) {
+      const emailValue = e.currentTarget.value;
+      const emailReg = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@gmail*.com$/i;
+
+      const test = emailReg.test(emailValue);
+
+      if (test === true) {
+        setOnEmailValidationBtn(true);
+        setCheckingEmail(emailValue);
+      } else {
+        setOnEmailValidationBtn(false);
+      }
+    } else {
+      e.currentTarget.value = "";
+      return window.alert("Please check your password set first!");
+    }
+  };
+
+  const handleChangeNickname = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //
+    if (saveEmail) {
+      const nickValue = e.currentTarget.value;
+      const nicknameReg = /^([a-zA-Z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]).{2,8}$/;
+
+      const test = nicknameReg.test(nickValue);
+
+      if (test === true) {
+        SetOnNicknameValidationBtn(true);
+        setCheckingNick(nickValue);
+      } else {
+        SetOnNicknameValidationBtn(false);
+      }
+    } else {
+      e.currentTarget.value = "";
+      return window.alert("Please check your email first!");
     }
   };
 
@@ -71,8 +142,36 @@ const SignUpPage = () => {
 
     await axios.post("http://localhost:5000/users/validation/id", checkingId);
 
-    window.alert(`Success validation to you ID: ${checkingId}`);
+    window.alert(`Success validation to your ID: ${checkingId}`);
     setSaveId(checkingId);
+  };
+
+  const handleOnEmailValBtn = async (
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    //
+    e.preventDefault();
+
+    await axios.post(
+      "http://localhost:5000/users/validation/email",
+      checkingEmail
+    );
+
+    window.alert(`Success validation to your email: ${checkingEmail}`);
+    SetSaveEmail(checkingEmail);
+  };
+
+  const handleOnNickValBtn = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    //
+    e.preventDefault();
+
+    await axios.post(
+      "http://localhost:5000/users/validation/nick",
+      checkingNick
+    );
+
+    window.alert(`Success validation to your email: ${checkingNick}`);
+    setSaveNickname(checkingNick);
   };
 
   return (
@@ -135,7 +234,7 @@ const SignUpPage = () => {
               theme={theme}
               type="password"
               id="password2"
-              name="password"
+              name="password2"
               placeholder="Password"
               autoComplete="off"
               onChange={handleCheckingPassword}
@@ -157,10 +256,27 @@ const SignUpPage = () => {
               type="email"
               id="email"
               name="email"
-              placeholder="Please enter an email to verify"
+              placeholder="Please enter an gmail to verify"
               autoComplete="off"
+              onChange={handleChangeEmail}
             />
-            <ValidationBtn theme={theme}>Email Validation</ValidationBtn>
+            {onEmailValidationBtn ? (
+              <>
+                {saveEmail ? (
+                  <SuccessValidation theme={theme}>
+                    OK Validation
+                  </SuccessValidation>
+                ) : (
+                  <ValidationBtn onClick={handleOnEmailValBtn} theme={theme}>
+                    Email Validation
+                  </ValidationBtn>
+                )}
+              </>
+            ) : (
+              <NotValidationBtn theme={theme}>
+                Email Validation
+              </NotValidationBtn>
+            )}
           </Label>
           <Label htmlFor="nickname">
             <Name theme={theme}>Nickname</Name>
@@ -171,15 +287,42 @@ const SignUpPage = () => {
               name="nickname"
               placeholder="Create a unique nickname."
               autoComplete="off"
+              onChange={handleChangeNickname}
             />
-            <ValidationBtn theme={theme}>Nickname Validation</ValidationBtn>
+            {onNicknameValidationBtn ? (
+              <>
+                {saveNickname ? (
+                  <SuccessValidation theme={theme}>
+                    OK Validation
+                  </SuccessValidation>
+                ) : (
+                  <ValidationBtn onClick={handleOnNickValBtn} theme={theme}>
+                    Nickname Validation
+                  </ValidationBtn>
+                )}
+              </>
+            ) : (
+              <NotValidationBtn theme={theme}>
+                Nickname Validation
+              </NotValidationBtn>
+            )}
+            {onNicknameValidationBtn ? (
+              <NicknameSuccessSign theme={theme}>
+                * OK Check validation
+              </NicknameSuccessSign>
+            ) : (
+              <NicknameGuide theme={theme}>
+                Enter a nickname of 2 to 8 characters excluding special
+                characters
+              </NicknameGuide>
+            )}
           </Label>
+          {okSign ? (
+            <SignUpBtn theme={theme}>Sign up</SignUpBtn>
+          ) : (
+            <NotSignUpBtn theme={theme}>Not Sign</NotSignUpBtn>
+          )}
         </Form>
-        {okSign ? (
-          <SignUpBtn theme={theme}>Sign up</SignUpBtn>
-        ) : (
-          <NotSignUpBtn theme={theme}>Not Sign</NotSignUpBtn>
-        )}
       </SignFormSection>
     </>
   );
@@ -189,6 +332,7 @@ const Title = styled.header`
   border-radius: 10px;
   padding: 1rem;
   padding-bottom: 2.5rem;
+  margin-top: 100px;
   margin-bottom: 1rem;
   text-align: center;
   background: #4c7cd6;
@@ -201,6 +345,7 @@ const Title = styled.header`
 `;
 
 const SignFormSection = styled.section`
+  height: 100%;
   width: 100%;
   text-align: center;
   margin-top: 1rem;
@@ -209,6 +354,7 @@ const SignFormSection = styled.section`
 const Form = styled.form`
   display: flex;
   flex-direction: column;
+  align-items: center;
 `;
 
 const Label = styled.label`
@@ -291,6 +437,8 @@ const SignUpBtn = styled.button`
 `;
 
 const NotSignUpBtn = styled.span`
+  margin-top: 3rem;
+  width: 60px;
   padding: 5px;
   border-radius: 5px;
   border: none;
@@ -345,6 +493,27 @@ const FirPassWordSign = styled.span`
 `;
 
 const SecPassWordSign = styled.span`
+  margin-top: 3px;
+  padding: 0;
+  font-size: 11px;
+  font-weight: bold;
+  color: #4c7cd6;
+  @media ${({ theme }) => theme.device.mobile} {
+    font-size: 5px;
+  }
+`;
+
+const NicknameGuide = styled.div`
+  margin-top: 3px;
+  padding: 0;
+  font-size: 11px;
+  color: #4a4d53;
+  @media ${({ theme }) => theme.device.mobile} {
+    font-size: 5px;
+  }
+`;
+
+const NicknameSuccessSign = styled.div`
   margin-top: 3px;
   padding: 0;
   font-size: 11px;

@@ -18,4 +18,30 @@ export class UsersController {
 
     return res.status(HttpStatus.OK).send('OK');
   }
+
+  @Post('validation/email')
+  async emailValidation(@Res() res: Response, @Req() req: Request) {
+    const { email }: { email: string } = req.body;
+
+    const checking = await this.userService.validationEmail(email);
+
+    if (checking === true) {
+      return res.send(`${email} has already to exists`);
+    }
+
+    return res.status(HttpStatus.OK).send('OK');
+  }
+
+  @Post('validation/nick')
+  async nickValidation(@Res() res: Response, @Req() req: Request) {
+    const { nickname }: { nickname: string } = req.body;
+
+    const checking = await this.userService.validationNick(nickname);
+
+    if (checking === true) {
+      return res.send(`${nickname} has already to exists`);
+    }
+
+    return res.status(HttpStatus.OK).send('OK');
+  }
 }

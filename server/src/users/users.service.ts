@@ -12,4 +12,12 @@ export class UsersService {
   async validationId(idValue: string) {
     return await this.userModel.exists({ userId: idValue });
   }
+
+  async validationEmail(emailValue: string) {
+    return await this.userModel.exists({ email: emailValue });
+  }
+
+  async validationNick(nickValue: string) {
+    return await this.userModel.exists({ nickname: nickValue });
+  }
 }

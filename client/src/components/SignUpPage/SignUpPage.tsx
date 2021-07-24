@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import theme from "../../mediaQuery";
 import { SignUpUserData } from "../../types/signUp.type";
+import axios from "axios";
 
 const SignUpPage = () => {
   const [signUpData, setSignUpData] = useState<SignUpUserData>({
@@ -13,7 +14,8 @@ const SignUpPage = () => {
     nickname: "www",
   });
 
-  const [signUpId, setSignUpId] = useState<string>("");
+  const [checkingId, setCheckingId] = useState<string>("");
+  const [saveId, setSaveId] = useState<string>("");
   const [okSign, setOkSign] = useState<boolean>(false);
 
   const [onIdValidationBtn, setOnValidationBtn] = useState<boolean>(false);
@@ -26,16 +28,19 @@ const SignUpPage = () => {
 
     if (test === true) {
       setOnValidationBtn(true);
+      setCheckingId(idValue);
     } else {
       setOnValidationBtn(false);
     }
   };
 
-  const handleOnIdValBtn = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleOnIdValBtn = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
-    //Call API
-    console.log("Success ID format, call by API");
+    await axios.post("http://localhost:5000/users/validation/id", checkingId);
+
+    window.alert(`Success validation to you ID: ${checkingId}`);
+    setSaveId(checkingId);
   };
 
   return (
@@ -230,7 +235,6 @@ const NotSignUpBtn = styled.button`
   margin-top: 3rem;
   padding: 0 20px 0 20px;
   height: 28px;
-  cursor: pointer;
   border-radius: 5px;
   border: none;
   outline: none;

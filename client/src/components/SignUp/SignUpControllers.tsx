@@ -1,5 +1,7 @@
 import React from "react";
 import { useContext } from "react";
+import { useHistory } from "react-router-dom";
+import { PostSignUp } from "./api/signUp";
 import {
   SignUpDispatchContext,
   SignUpStateContext,
@@ -8,7 +10,7 @@ import {
 import SignUpView from "./SignUpView";
 
 const SignUpControllers = () => {
-  //
+  const history = useHistory();
   const dispatch = useContext(SignUpDispatchContext);
   const state = useContext(SignUpStateContext);
 
@@ -31,6 +33,12 @@ const SignUpControllers = () => {
   ) => {
     //
     e.preventDefault();
+    try {
+      await PostSignUp(state!);
+      history.push("/");
+    } catch (error) {
+      window.alert(`This user id or email or nickname is already taken.`);
+    }
   };
 
   return (

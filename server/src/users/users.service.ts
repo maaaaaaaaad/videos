@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { UserDocument } from 'src/schemas/user.schema';
+import { PostSignUpType } from './types/postSignUp.type';
 
 @Injectable()
 export class UsersService {
@@ -9,15 +10,27 @@ export class UsersService {
     @InjectModel('UserData') private userModel: Model<UserDocument>,
   ) {}
   //
-  async validationId(idValue: string) {
-    return await this.userModel.exists({ userId: idValue });
-  }
+  async signUpUserData(signUpData: PostSignUpType) {
+    //
+    const { id, pass1, pass2, email, nickname } = signUpData;
 
-  async validationEmail(emailValue: string) {
-    return await this.userModel.exists({ email: emailValue });
-  }
+    const checkExists: boolean = await this.userModel.exists({
+      $or: [{ id }, { email }, { nickname }],
+    });
 
-  async validationNick(nickValue: string) {
-    return await this.userModel.exists({ nickname: nickValue });
+    if (checkExists) {
+      throw new Error(`This user id or email or nickname is already taken.`);
+    }
+
+    if (pass1 !== pass2) {
+      throw new Error(`Password does not match`);
+    }
+
+    return await this.userModel.create({
+      userId: id,
+      pass1,
+      email,
+      nickname,
+    });
   }
 }

@@ -12,7 +12,7 @@ const SignUpControllers = () => {
   const dispatch = useContext(SignUpDispatchContext);
   const state = useContext(SignUpStateContext);
 
-  const handleChange: React.ChangeEventHandler<HTMLInputElement> = async (
+  const handleChange: React.ChangeEventHandler<HTMLInputElement> = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     const { name, value } = e.currentTarget;
@@ -26,7 +26,16 @@ const SignUpControllers = () => {
     });
   };
 
-  return <SignUpView handleChange={handleChange} />;
+  const handleSignUpBtn: React.FormEventHandler<HTMLFormElement> = async (
+    e: React.FormEvent<HTMLFormElement>
+  ) => {
+    //
+    e.preventDefault();
+  };
+
+  return (
+    <SignUpView handleChange={handleChange} handleSignUpBtn={handleSignUpBtn} />
+  );
 };
 
 export default SignUpControllers;

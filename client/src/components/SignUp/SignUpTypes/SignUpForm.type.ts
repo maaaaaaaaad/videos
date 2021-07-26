@@ -10,11 +10,8 @@ export type SignUpForm = {
 
 export type State = {
   formInfo: SignUpForm;
-  toggle: boolean;
 };
 
-export type Action =
-  | { type: "SET_FORM"; formInfo: SignUpForm }
-  | { type: "TOGGLE" };
+export type Action = { type: "SET_FORM"; formInfo: SignUpForm };
 
 export type SignUpFormDispatch = Dispatch<Action>;

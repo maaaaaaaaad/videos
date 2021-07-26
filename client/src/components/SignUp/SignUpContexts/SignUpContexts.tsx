@@ -19,12 +19,6 @@ function signUpReducer(state: State, action: Action): State {
         ...state,
         formInfo: action.formInfo,
       };
-    case "TOGGLE":
-      return {
-        ...state,
-        toggle: state.toggle,
-      };
-
     default:
       throw new Error("Unhandle actions");
   }
@@ -38,7 +32,6 @@ const intiSignUpForm: State = {
     email: "",
     nickname: "",
   },
-  toggle: false,
 };
 
 const SignUpContexts: React.FC = ({ children }) => {

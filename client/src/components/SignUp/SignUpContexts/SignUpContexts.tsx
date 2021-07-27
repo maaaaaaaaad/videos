@@ -19,11 +19,7 @@ function signUpReducer(state: State, action: Action): State {
         ...state,
         formInfo: action.formInfo,
       };
-    case "SAVE_FORM":
-      return {
-        ...state,
-        signUpData: action.signUpData,
-      };
+
     default:
       throw new Error("Unhandle actions");
   }
@@ -36,11 +32,6 @@ const intiSignUpForm: State = {
     pass2: "",
     email: "",
     nickname: "",
-  },
-  signUpData: {
-    userId: "",
-    userEmail: "",
-    userNickname: "",
   },
 };
 

@@ -18,12 +18,10 @@ const Navigators = () => {
           <Link to="/notes">Notes</Link>
         </li>
         <li>
-          {/*Toogle /login or /profile*/}
-          <Link to="/login">Login|Profile</Link>
+          <Link to="/login">Login</Link>
         </li>
         <li>
-          {/*Toogle /signup or /logout*/}
-          <Link to="/signup">SignUp|Logout</Link>
+          <Link to="/signup">SignUp</Link>
         </li>
       </ul>
     </section>

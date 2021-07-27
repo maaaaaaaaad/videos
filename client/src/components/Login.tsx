@@ -1,7 +1,8 @@
 import React from "react";
+import LoginControllers from "./Login/LoginControllers";
 
 const Login = () => {
-  return <section>Login</section>;
+  return <LoginControllers />;
 };
 
 export default Login;

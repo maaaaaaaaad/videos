@@ -35,7 +35,7 @@ const SignUpControllers = () => {
     e.preventDefault();
     try {
       await PostSignUp(state!);
-      history.push("/");
+      history.push("/login");
     } catch (error) {
       window.alert(`This user id or email or nickname is already taken.`);
     }

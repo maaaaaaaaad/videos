@@ -1,14 +1,28 @@
 import React from "react";
+import { ChangeHandler } from "../../SignTypes/Sign.interface";
 
-const LoginView = () => {
+const LoginView: React.FC<ChangeHandler> = ({
+  handleChange,
+  handleSubmitBtn,
+}) => {
   return (
     <section>
-      <form>
+      <form onSubmit={(e) => handleSubmitBtn(e)}>
         <li>
-          <input type="text" name="id" placeholder="Enter your ID" />
+          <input
+            type="text"
+            name="id"
+            placeholder="Enter your ID"
+            onChange={(e) => handleChange(e)}
+          />
         </li>
         <li>
-          <input type="password" name="password" placeholder="Password" />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            onChange={(e) => handleChange(e)}
+          />
         </li>
         <li>
           <input type="submit" name="submit" value="SIGN IN" />

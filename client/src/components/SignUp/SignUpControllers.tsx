@@ -14,9 +14,18 @@ const SignUpControllers = () => {
   const dispatch = useContext(SignUpDispatchContext);
   const state = useContext(SignUpStateContext);
 
-  const handleChange: React.ChangeEventHandler<HTMLInputElement> = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const handleSubmitBtn = async (e: React.FormEvent<HTMLFormElement>) => {
+    //
+    e.preventDefault();
+    try {
+      await PostSignUp(state!);
+      history.push("/login");
+    } catch (error) {
+      window.alert(`This user id or email or nickname is already taken.`);
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.currentTarget;
 
     dispatch!({
@@ -28,21 +37,8 @@ const SignUpControllers = () => {
     });
   };
 
-  const handleSignUpBtn: React.FormEventHandler<HTMLFormElement> = async (
-    e: React.FormEvent<HTMLFormElement>
-  ) => {
-    //
-    e.preventDefault();
-    try {
-      await PostSignUp(state!);
-      history.push("/login");
-    } catch (error) {
-      window.alert(`This user id or email or nickname is already taken.`);
-    }
-  };
-
   return (
-    <SignUpView handleChange={handleChange} handleSignUpBtn={handleSignUpBtn} />
+    <SignUpView handleChange={handleChange} handleSubmitBtn={handleSubmitBtn} />
   );
 };
 

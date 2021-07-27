@@ -1,5 +1,5 @@
 import axios from "axios";
-import { State } from "../SignUpTypes/SignUpForm.type";
+import { State } from "../../../SignTypes/SignUpForm.type";
 
 export const PostSignUp = async (signUpData: State) => {
   return await axios.post(

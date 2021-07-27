@@ -1,13 +1,13 @@
 import React from "react";
-import { ChangeHandler } from "./SignUpTypes/SignUp.interface";
+import { ChangeHandler } from "../../SignTypes/Sign.interface";
 
 const SignUpView: React.FC<ChangeHandler> = ({
   handleChange,
-  handleSignUpBtn,
+  handleSubmitBtn,
 }) => {
   return (
     <section>
-      <form onSubmit={(e) => handleSignUpBtn(e)}>
+      <form onSubmit={(e) => handleSubmitBtn(e)}>
         <li>
           <input
             type="text"

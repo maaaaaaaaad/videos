@@ -7,8 +7,8 @@ import {
   UserSignInDispatch,
 } from "../../../SignTypes/SignInData.type";
 
-const SignInStateContext = createContext<State | null>(null);
-const SignInDispatch = createContext<UserSignInDispatch | null>(null);
+export const SignInStateContext = createContext<State | null>(null);
+export const SignInDispatch = createContext<UserSignInDispatch | null>(null);
 
 function loginReducer(state: State, action: Action) {
   switch (action.type) {

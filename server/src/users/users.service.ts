@@ -27,12 +27,14 @@ export class UsersService {
       throw new Error(`Password does not match`);
     }
 
-    return await this.userModel.create({
+    const user = new this.userModel({
       userId: id,
       password: pass2,
       email,
       nickname,
     });
+
+    return await user.save();
   }
 
   async signInUser(signInData: PostSignIn) {

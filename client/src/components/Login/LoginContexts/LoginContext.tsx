@@ -30,8 +30,7 @@ function loginReducer(state: State, action: Action) {
 const initSignState: State = {
   userSignInData: {
     id: "",
-    pass1: "",
-    pass2: "",
+    pass: "",
   },
   userSignInToggle: {
     toggle: false,

@@ -2,8 +2,7 @@ import { Dispatch } from "react";
 
 export type SignInData = {
   id: string;
-  pass1: string;
-  pass2: string;
+  pass: string;
 };
 
 export type SignInToggle = {

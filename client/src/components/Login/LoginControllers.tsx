@@ -15,16 +15,6 @@ const LoginControllers = () => {
 
   const handleSubmitBtn = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (
-      state?.userSignInData.id === "" ||
-      (state?.userSignInData.pass1 === "" && state.userSignInData.pass2 === "")
-    ) {
-      window.alert("Please fill sign in data");
-    }
-
-    if (state?.userSignInData.pass1 !== state?.userSignInData.pass2) {
-      window.alert("Password does not match");
-    }
 
     try {
       const res = await PostLogin(state!.userSignInData);
@@ -35,6 +25,7 @@ const LoginControllers = () => {
           nickname: res.data.result.nickname,
         },
       });
+
       history.push("/");
     } catch (error) {
       const ERROR_MESSAGE = "The user id or password do not match";

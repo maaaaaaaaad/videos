@@ -20,21 +20,13 @@ const LoginView: React.FC<ChangeHandler> = ({
         <li>
           <input
             type="password"
-            name="pass1"
+            name="pass"
             placeholder="Password"
             onChange={(e) => handleChange(e)}
             autoComplete="off"
           />
         </li>
-        <li>
-          <input
-            type="password"
-            name="pass2"
-            placeholder="Confirm password"
-            onChange={(e) => handleChange(e)}
-            autoComplete="off"
-          />
-        </li>
+
         <li>
           <input type="submit" name="submit" value="SIGN IN" />
         </li>

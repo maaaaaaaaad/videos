@@ -13,12 +13,17 @@ export class UsersController {
     //
     const body: PostSignUpType = req.body;
 
-    const result = await this.userService.signUpUserData(body);
-
-    return res.status(HttpStatus.OK).json({
-      message: 'Create new Account!',
-      data: result,
-    });
+    try {
+      const result = await this.userService.signUpUserData(body);
+      return res.status(HttpStatus.OK).json({
+        message: 'Create new Account!',
+        data: result,
+      });
+    } catch (error) {
+      return res.status(500).json({
+        message: error.message,
+      });
+    }
   }
 
   @Post('login')
@@ -26,11 +31,16 @@ export class UsersController {
     //
     const body: PostSignIn = req.body;
 
-    const result = await this.userService.signInUser(body);
-
-    return res.status(HttpStatus.OK).json({
-      message: 'Success load user!',
-      user: result,
-    });
+    try {
+      const result = await this.userService.signInUser(body);
+      return res.status(200).json({
+        message: 'Success Login!',
+        result,
+      });
+    } catch (error) {
+      return res.status(500).json({
+        message: error.message,
+      });
+    }
   }
 }

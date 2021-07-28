@@ -14,6 +14,7 @@ const LoginView: React.FC<ChangeHandler> = ({
             name="id"
             placeholder="Enter your ID"
             onChange={(e) => handleChange(e)}
+            autoComplete="off"
           />
         </li>
         <li>
@@ -22,6 +23,7 @@ const LoginView: React.FC<ChangeHandler> = ({
             name="pass1"
             placeholder="Password"
             onChange={(e) => handleChange(e)}
+            autoComplete="off"
           />
         </li>
         <li>
@@ -30,6 +32,7 @@ const LoginView: React.FC<ChangeHandler> = ({
             name="pass2"
             placeholder="Confirm password"
             onChange={(e) => handleChange(e)}
+            autoComplete="off"
           />
         </li>
         <li>

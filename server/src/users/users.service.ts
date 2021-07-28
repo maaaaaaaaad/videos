@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { UserDocument } from 'src/schemas/user.schema';
@@ -29,7 +29,7 @@ export class UsersService {
 
     return await this.userModel.create({
       userId: id,
-      pass1,
+      password: pass2,
       email,
       nickname,
     });
@@ -45,10 +45,9 @@ export class UsersService {
 
     const checkExists = await this.userModel.findOne({ userId: id });
 
-    if (!checkExists) {
-      throw new NotFoundException(`${id} is Not Found`);
+    if (checkExists.password !== pass2) {
+      throw new Error(`Password does not match`);
     }
-
     return checkExists;
   }
 }

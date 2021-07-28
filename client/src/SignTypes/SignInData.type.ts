@@ -6,10 +6,17 @@ export type SignInData = {
   pass2: string;
 };
 
-export type State = {
-  userSignInData: SignInData;
+export type SignInToggle = {
+  toggle: boolean;
 };
 
-export type Action = { type: "SET_LOGIN"; userSignInData: SignInData };
+export type State = {
+  userSignInData: SignInData;
+  userSignInToggle: SignInToggle;
+};
+
+export type Action =
+  | { type: "SET_LOGIN"; userSignInData: SignInData }
+  | { type: "SET_TOGGLE"; userSignInToggle: SignInToggle };
 
 export type UserSignInDispatch = Dispatch<Action>;

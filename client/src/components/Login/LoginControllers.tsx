@@ -23,7 +23,6 @@ const LoginControllers = () => {
         userSignInToggle: {
           toggle: true,
           nickname: res.data.result.nickname,
-          sessionId: res.data.session,
         },
       });
       history.push("/");

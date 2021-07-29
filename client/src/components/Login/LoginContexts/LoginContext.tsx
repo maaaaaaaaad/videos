@@ -35,7 +35,6 @@ const initSignState: State = {
   userSignInToggle: {
     toggle: false,
     nickname: "",
-    sessionId: null,
   },
 };
 

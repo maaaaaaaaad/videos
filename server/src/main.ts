@@ -5,7 +5,7 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors({
-    origin: 'http://localhost:3000',
+    origin: true,
     credentials: true,
   });
   app.use(
@@ -15,8 +15,7 @@ async function bootstrap() {
       saveUninitialized: true,
       cookie: {
         httpOnly: true,
-        sameSite: 'none',
-        secure: true,
+        secure: false,
       },
     }),
   );

@@ -46,7 +46,7 @@ export class UsersService {
     const checkPassword = await bcrypt.compare(pass, checkExists.password);
 
     if (!checkPassword) {
-      throw new NotFoundException('Not found password');
+      throw new NotFoundException('Password does not match');
     }
 
     return checkExists;

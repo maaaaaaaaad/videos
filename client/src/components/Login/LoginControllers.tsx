@@ -23,9 +23,9 @@ const LoginControllers = () => {
         userSignInToggle: {
           toggle: true,
           nickname: res.data.result.nickname,
+          sessionId: res.data.session,
         },
       });
-
       history.push("/");
     } catch (error) {
       const ERROR_MESSAGE = "The user id or password do not match";

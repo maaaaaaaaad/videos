@@ -20,7 +20,7 @@ export class UsersController {
         data: result,
       });
     } catch (error) {
-      return res.status(500).json({
+      return res.status(400).json({
         message: error.message,
       });
     }
@@ -36,9 +36,10 @@ export class UsersController {
       return res.status(200).json({
         message: 'Success Login!',
         result,
+        session: req.session.id,
       });
     } catch (error) {
-      return res.status(500).json({
+      return res.status(400).json({
         message: error.message,
       });
     }

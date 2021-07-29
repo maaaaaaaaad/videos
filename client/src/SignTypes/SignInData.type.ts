@@ -8,6 +8,7 @@ export type SignInData = {
 export type SignInToggle = {
   toggle: boolean;
   nickname: string;
+  sessionId: string | null;
 };
 
 export type State = {

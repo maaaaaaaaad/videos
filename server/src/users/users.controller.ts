@@ -30,14 +30,15 @@ export class UsersController {
   async postSignInData(@Req() req: Request, @Res() res: Response) {
     //
     const body: PostSignIn = req.body;
-    const sessionId = req.session.id;
 
     try {
       const result = await this.userService.signInUser(body);
+      if (result.userId) {
+        res.cookie('Hello', `${result.userId}`);
+      }
       return res.status(200).json({
         message: 'Success Login!',
         result,
-        session: sessionId,
       });
     } catch (error) {
       return res.status(400).json({

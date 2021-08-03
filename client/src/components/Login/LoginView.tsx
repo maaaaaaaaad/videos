@@ -1,5 +1,5 @@
 import React from "react";
-import { ChangeHandler } from "../../types/SignTypes/Sign.interface";
+import { ChangeHandler } from "../../types/Sign/Sign.interface";
 
 const LoginView: React.FC<ChangeHandler> = ({
   handleChange,

@@ -1,5 +1,5 @@
 import React from "react";
-import SignUpContexts from "./SignUp/SignUpContexts/SignUpContexts";
+import SignUpContexts from "../contexts/SignUpContexts";
 import SignUpControllers from "./SignUp/SignUpControllers";
 
 const SignUp = () => {

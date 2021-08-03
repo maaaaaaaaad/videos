@@ -1,7 +1,7 @@
 import React from "react";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { SignInStateContext } from "../components/Login/LoginContexts/LoginContext";
+import { SignInStateContext } from "../contexts/LoginContext";
 
 const Navigators = () => {
   const loginState = useContext(SignInStateContext);

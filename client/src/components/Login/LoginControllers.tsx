@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
-import { PostLogin } from "./api/signIn";
+import { PostLogin } from "../../api/user/signIn";
 import {
   SignInDispatch,
   SignInStateContext,
-} from "./LoginContexts/LoginContext";
+} from "../../contexts/LoginContext";
 import LoginView from "./LoginView";
 
 const LoginControllers = () => {

@@ -1,11 +1,11 @@
 import React from "react";
 import { useContext } from "react";
 import { useHistory } from "react-router-dom";
-import { PostSignUp } from "./api/signUp";
+import { PostSignUp } from "../../api/user/signUp";
 import {
   SignUpDispatchContext,
   SignUpStateContext,
-} from "./SignUpContexts/SignUpContexts";
+} from "../../contexts/SignUpContexts";
 
 import SignUpView from "./SignUpView";
 

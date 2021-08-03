@@ -34,7 +34,6 @@ const initSignState: State = {
   },
   userSignInToggle: {
     toggle: false,
-    nickname: "",
   },
 };
 

@@ -1,15 +1,7 @@
-import React, { useContext } from "react";
-import { SignInStateContext } from "./Login/LoginContexts/LoginContext";
+import React from "react";
 
 const Home = () => {
-  const loginState = useContext(SignInStateContext);
-  const userOnState: boolean = loginState!.userSignInToggle.toggle;
-
-  return (
-    <section>
-      {userOnState ? `Hello ${loginState?.userSignInToggle.nickname}` : "Home"}
-    </section>
-  );
+  return <section>Home</section>;
 };
 
 export default Home;

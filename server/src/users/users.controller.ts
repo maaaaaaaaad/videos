@@ -1,4 +1,4 @@
-import { Controller, HttpStatus, Post, Req, Res } from '@nestjs/common';
+import { Body, Controller, HttpStatus, Post, Req, Res } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { PostSignIn } from './types/postSignIn.type';
 import { PostSignUpType } from './types/postSignUp.type';
@@ -7,6 +7,22 @@ import { UsersService } from './users.service';
 @Controller('users')
 export class UsersController {
   constructor(private userService: UsersService) {}
+
+  @Post()
+  async getUserSession(
+    @Req() req: Request,
+    @Res() res: Response,
+    @Body() text: string,
+  ) {
+    //
+    const userText = text;
+    const userSession = req.session;
+    return res.status(200).json({
+      message: 'Success',
+      userSession,
+      userText,
+    });
+  }
 
   @Post('signup')
   async postSignUpData(@Req() req: Request, @Res() res: Response) {
@@ -33,9 +49,12 @@ export class UsersController {
 
     try {
       const result = await this.userService.signInUser(body);
-      if (result.userId) {
-        res.cookie('Hello', `${result.userId}`);
+
+      if (result) {
+        req.session.user = result; //need to save this session into the DB
+        req.session.save();
       }
+
       return res.status(200).json({
         message: 'Success Login!',
         result,

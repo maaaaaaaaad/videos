@@ -5,7 +5,7 @@ import {
   Action,
   SignUpFormDispatch,
   State,
-} from "../SignTypes/SignUpForm.type";
+} from "../types/SignTypes/SignUpForm.type";
 
 export const SignUpStateContext = createContext<State | null>(null);
 export const SignUpDispatchContext = createContext<SignUpFormDispatch | null>(

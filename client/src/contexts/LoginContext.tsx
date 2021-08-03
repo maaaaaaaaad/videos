@@ -5,7 +5,7 @@ import {
   Action,
   State,
   UserSignInDispatch,
-} from "../SignTypes/SignInData.type";
+} from "../types/SignTypes/SignInData.type";
 
 export const SignInStateContext = createContext<State | null>(null);
 export const SignInDispatch = createContext<UserSignInDispatch | null>(null);

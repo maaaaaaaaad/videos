@@ -17,11 +17,6 @@ function loginReducer(state: State, action: Action) {
         ...state,
         userSignInData: action.userSignInData,
       };
-    case "SET_TOGGLE":
-      return {
-        ...state,
-        userSignInToggle: action.userSignInToggle,
-      };
     default:
       throw new Error("Unhandle actions");
   }
@@ -31,9 +26,6 @@ const initSignState: State = {
   userSignInData: {
     id: "",
     pass: "",
-  },
-  userSignInToggle: {
-    toggle: false,
   },
 };
 

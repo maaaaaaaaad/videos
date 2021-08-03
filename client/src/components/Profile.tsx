@@ -2,10 +2,10 @@ import React from "react";
 import { useContext } from "react";
 import { ResUserDataContext } from "../App";
 
-const Home = () => {
+const Profile = () => {
   const isUser = useContext(ResUserDataContext);
 
-  return <section>Hello {isUser?.nickname}</section>;
+  return <section>Profile {isUser?.nickname}</section>;
 };
 
-export default Home;
+export default Profile;

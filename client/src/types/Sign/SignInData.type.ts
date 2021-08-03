@@ -5,17 +5,10 @@ export type SignInData = {
   pass: string;
 };
 
-export type SignInToggle = {
-  toggle: boolean;
-};
-
 export type State = {
   userSignInData: SignInData;
-  userSignInToggle: SignInToggle;
 };
 
-export type Action =
-  | { type: "SET_LOGIN"; userSignInData: SignInData }
-  | { type: "SET_TOGGLE"; userSignInToggle: SignInToggle };
+export type Action = { type: "SET_LOGIN"; userSignInData: SignInData };
 
 export type UserSignInDispatch = Dispatch<Action>;

@@ -17,12 +17,6 @@ const LoginControllers = () => {
 
     try {
       await PostLogin(state!.userSignInData);
-      dispatch!({
-        type: "SET_TOGGLE",
-        userSignInToggle: {
-          toggle: true,
-        },
-      });
 
       window.location.href = "/";
     } catch (error) {

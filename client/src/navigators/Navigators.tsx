@@ -1,11 +1,11 @@
 import React from "react";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { SignInStateContext } from "../contexts/LoginContext";
+import { ResUserDataContext } from "../App";
 
 const Navigators = () => {
-  const loginState = useContext(SignInStateContext);
-  const userOnState: boolean = loginState!.userSignInToggle.toggle;
+  //
+  const isUser = useContext(ResUserDataContext);
 
   return (
     <section>
@@ -22,8 +22,20 @@ const Navigators = () => {
         <li>
           <Link to="/notes">Notes</Link>
         </li>
-        <li>{userOnState ? "Profile" : <Link to="/login">Login</Link>}</li>
-        <li>{userOnState ? "Logout" : <Link to="/signup">SignUp</Link>}</li>
+        <li>
+          {isUser ? (
+            <Link to="/profile">{isUser.nickname}'s profile</Link>
+          ) : (
+            <Link to="/login">Login</Link>
+          )}
+        </li>
+        <li>
+          {isUser ? (
+            <Link to="/logout">Logout</Link>
+          ) : (
+            <Link to="/signup">SignUp</Link>
+          )}
+        </li>
       </ul>
     </section>
   );

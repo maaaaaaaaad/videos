@@ -1,18 +1,18 @@
 import React, { useContext } from "react";
 import { ResUserDataContext } from "../../App";
+import { ChangeHandler } from "../../types/Sign/Sign.interface";
 
-const EditProfile = () => {
+const EditView: React.FC<ChangeHandler> = ({
+  handleChange,
+  handleSubmitBtn,
+}) => {
   //
   const isUser = useContext(ResUserDataContext);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.currentTarget.value);
-  };
 
   return (
     <section>
       <h1>{isUser?.nickname}'s Edit page</h1>
-      <form>
+      <form onSubmit={(e) => handleSubmitBtn(e)}>
         <input
           type="text"
           autoComplete="off"
@@ -20,7 +20,7 @@ const EditProfile = () => {
           name="nickname"
           value={isUser?.nickname || ""}
           pattern="^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$"
-          onChange={handleChange}
+          onChange={(e) => handleChange(e)}
         />
         <input
           type="email"
@@ -29,7 +29,7 @@ const EditProfile = () => {
           name="email"
           value={isUser?.email || ""}
           pattern="^([a-zA-Z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]).{2,8}$"
-          onChange={handleChange}
+          onChange={(e) => handleChange(e)}
         />
         <input type="submit" value="Update" />
       </form>
@@ -37,4 +37,4 @@ const EditProfile = () => {
   );
 };
 
-export default EditProfile;
+export default EditView;

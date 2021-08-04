@@ -7,7 +7,7 @@ import Logout from "../components/Logout";
 import Notes from "../components/Notes";
 import Profile from "../components/Profile";
 import ChangePassword from "../components/Profile/ChangePassword";
-import EditProfile from "../components/Profile/Edit";
+import EditController from "../components/Profile/EditController";
 import SignUp from "../components/SignUp";
 import Videos from "../components/Videos";
 
@@ -23,7 +23,7 @@ const Routers = () => {
       <Route path="/login" exact component={Login} />
       <Route path="/signup" exact component={SignUp} />
       <Route path="/profile/:id" exact component={Profile} />
-      <Route path="/profile/:id/edit" exact component={EditProfile} />
+      <Route path="/profile/:id/edit" exact component={EditController} />
       <Route
         path="/profile/:id/change-password"
         exact

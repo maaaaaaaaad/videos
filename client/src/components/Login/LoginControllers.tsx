@@ -17,7 +17,6 @@ const LoginControllers = () => {
 
     try {
       await PostLogin(state!.userSignInData);
-
       window.location.href = "/";
     } catch (error) {
       const ERROR_MESSAGE = "The user id or password do not match";

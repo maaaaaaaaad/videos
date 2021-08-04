@@ -24,7 +24,9 @@ const Navigators = () => {
         </li>
         <li>
           {isUser ? (
-            <Link to="/profile">{isUser.nickname}'s profile</Link>
+            <Link to={`/profile/${isUser._id}`}>
+              {isUser.nickname}'s profile
+            </Link>
           ) : (
             <Link to="/login">Login</Link>
           )}

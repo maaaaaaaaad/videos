@@ -19,6 +19,7 @@ const App = () => {
     const resUserData: ResponseUserData = res.data.userSession.user;
 
     console.log("User Nickname:", resUserData?.nickname ?? "Not logged in");
+    console.log("User data:", resUserData);
     setResUserData(resUserData);
   };
 

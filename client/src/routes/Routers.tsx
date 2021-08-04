@@ -1,19 +1,18 @@
 import React from "react";
-import { useContext } from "react";
 import { Route } from "react-router-dom";
-import { ResUserDataContext } from "../App";
 import Books from "../components/Books";
 import Home from "../components/Home";
 import Login from "../components/Login";
 import Logout from "../components/Logout";
 import Notes from "../components/Notes";
 import Profile from "../components/Profile";
+import ChangePassword from "../components/Profile/ChangePassword";
+import EditProfile from "../components/Profile/Edit";
 import SignUp from "../components/SignUp";
 import Videos from "../components/Videos";
 
 const Routers = () => {
   //
-  const isUser = useContext(ResUserDataContext);
 
   return (
     <React.Fragment>
@@ -23,7 +22,13 @@ const Routers = () => {
       <Route path="/notes" exact component={Notes} />
       <Route path="/login" exact component={Login} />
       <Route path="/signup" exact component={SignUp} />
-      <Route path={`/profile/:${isUser?._id}`} exact component={Profile} />
+      <Route path="/profile/:id" exact component={Profile} />
+      <Route path="/profile/:id/edit" exact component={EditProfile} />
+      <Route
+        path="/profile/:id/change-password"
+        exact
+        component={ChangePassword}
+      />
       <Route path="/logout" exact component={Logout} />
     </React.Fragment>
   );

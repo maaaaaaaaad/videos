@@ -46,7 +46,9 @@ export class UsersController {
     try {
       const result = await this.userService.signInUser(body);
 
-      if (result) req.session.user = result; //need to save this session into the DB
+      if (result) {
+        req.session.user = result;
+      }
 
       return res.status(200).json({
         message: 'Success Login!',

@@ -5,6 +5,7 @@ import { UserDocument } from 'src/schemas/user.schema';
 import * as bcrypt from 'bcrypt';
 import { UserSignDataDto } from './dto/userForm.dto';
 import UserSignInDto from './dto/signIn.dto';
+import UpdateUserDataDto from './dto/updateUser.dto';
 
 @Injectable()
 export class UsersService {
@@ -50,5 +51,26 @@ export class UsersService {
     }
 
     return checkExists;
+  }
+
+  async updateUser(_id: string, updataData: UpdateUserDataDto) {
+    //
+    const { nickname, email } = updataData;
+    const checkExistsInfo: boolean = await this.userModel.exists({
+      $or: [{ email }, { nickname }],
+    });
+
+    if (checkExistsInfo) {
+      throw new Error(`This email or nickname is already taken.`);
+    }
+
+    return await this.userModel.findByIdAndUpdate(
+      _id,
+      {
+        email,
+        nickname,
+      },
+      { new: true },
+    );
   }
 }

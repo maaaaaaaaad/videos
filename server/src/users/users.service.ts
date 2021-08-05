@@ -2,9 +2,9 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { UserDocument } from 'src/schemas/user.schema';
-import { PostSignIn } from './types/postSignIn.type';
-import { PostSignUpType } from './types/postSignUp.type';
 import * as bcrypt from 'bcrypt';
+import { UserSignDataDto } from './dto/userForm.dto';
+import UserSignInDto from './dto/signIn.dto';
 
 @Injectable()
 export class UsersService {
@@ -12,12 +12,12 @@ export class UsersService {
     @InjectModel('UserData') private userModel: Model<UserDocument>,
   ) {}
   //
-  async signUpUserData(signUpData: PostSignUpType) {
+  async signUpUserData(signUpData: UserSignDataDto) {
     //
-    const { id, pass1, pass2, email, nickname } = signUpData;
+    const { userId, pass1, pass2, email, nickname } = signUpData;
 
     const checkExists: boolean = await this.userModel.exists({
-      $or: [{ id }, { email }, { nickname }],
+      $or: [{ userId }, { email }, { nickname }],
     });
 
     if (checkExists) {
@@ -29,7 +29,7 @@ export class UsersService {
     }
 
     const user = new this.userModel({
-      userId: id,
+      userId,
       password: pass2,
       email,
       nickname,
@@ -38,12 +38,12 @@ export class UsersService {
     return await user.save();
   }
 
-  async signInUser(signInData: PostSignIn) {
+  async signInUser(signInData: UserSignInDto) {
     //
-    const { id, pass } = signInData;
+    const { userId, pass2 } = signInData;
 
-    const checkExists = await this.userModel.findOne({ userId: id });
-    const checkPassword = await bcrypt.compare(pass, checkExists.password);
+    const checkExists = await this.userModel.findOne({ userId });
+    const checkPassword = await bcrypt.compare(pass2, checkExists.password);
 
     if (!checkPassword) {
       throw new NotFoundException('Password does not match');

@@ -24,8 +24,8 @@ function loginReducer(state: State, action: Action) {
 
 const initSignState: State = {
   userSignInData: {
-    id: "",
-    pass: "",
+    userId: "",
+    pass2: "",
   },
 };
 

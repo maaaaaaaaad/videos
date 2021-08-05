@@ -11,7 +11,7 @@ const SignUpView: React.FC<ChangeHandler> = ({
         <li>
           <input
             type="text"
-            name="id"
+            name="userId"
             placeholder="Please enter a 5 to 15 digit ID."
             autoComplete="off"
             pattern="^[A-za-z0-9]{5,15}$"

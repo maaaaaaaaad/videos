@@ -27,7 +27,7 @@ function signUpReducer(state: State, action: Action): State {
 
 const intiSignUpForm: State = {
   formInfo: {
-    id: "",
+    userId: "",
     pass1: "",
     pass2: "",
     email: "",

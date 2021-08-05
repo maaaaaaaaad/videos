@@ -1,8 +1,8 @@
 import { Dispatch } from "react";
 
 export type SignInData = {
-  id: string;
-  pass: string;
+  userId: string;
+  pass2: string;
 };
 
 export type State = {

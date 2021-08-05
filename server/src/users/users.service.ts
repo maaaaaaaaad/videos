@@ -64,6 +64,10 @@ export class UsersService {
       throw new Error(`This email or nickname is already taken.`);
     }
 
+    if (email === '' || nickname === '') {
+      throw new Error(`Plase fill user data.`);
+    }
+
     return await this.userModel.findByIdAndUpdate(
       _id,
       {

@@ -7,7 +7,9 @@ import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://localhost/vbn'),
+    MongooseModule.forRoot('mongodb://localhost/vbn', {
+      useFindAndModify: false,
+    }),
     UsersModule,
     ConfigModule.forRoot(),
   ],

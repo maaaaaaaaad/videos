@@ -1,8 +1,6 @@
 import React from "react";
-import { useContext } from "react";
 import { useReducer } from "react";
 import { createContext } from "react";
-import { ResUserDataContext } from "../App";
 import { Action, State, UpdateFormDispatch } from "../types/User/ProfileUpdate";
 
 export const ProfileUpdateStateContext = createContext<State | null>(null);
@@ -21,12 +19,11 @@ function profileUpdateReducer(state: State, action: Action) {
 
 const UpdateUserContext: React.FC = ({ children }) => {
   //
-  const currentUserData = useContext(ResUserDataContext);
 
   const initCurrentUser: State = {
     formInfo: {
-      email: currentUserData!.email!,
-      nickname: currentUserData!.nickname!,
+      email: "",
+      nickname: "",
     },
   };
 

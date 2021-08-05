@@ -8,8 +8,8 @@ const EditController = () => {
     console.log(e.currentTarget.value);
   };
 
-  const handleSubmitBtn = (e: React.FormEvent<HTMLFormElement>) => {
-    console.log(e);
+  const handleSubmitBtn = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
   };
 
   return (

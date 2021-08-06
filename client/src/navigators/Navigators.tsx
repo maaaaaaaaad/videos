@@ -31,13 +31,7 @@ const Navigators = () => {
             <Link to="/login">Login</Link>
           )}
         </li>
-        <li>
-          {isUser ? (
-            <Link to="/logout">Logout</Link>
-          ) : (
-            <Link to="/signup">SignUp</Link>
-          )}
-        </li>
+        <li>{!isUser && <Link to="/signup">SignUp</Link>}</li>
       </ul>
     </section>
   );

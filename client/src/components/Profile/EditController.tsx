@@ -1,6 +1,6 @@
-import axios from "axios";
 import React from "react";
 import { useContext } from "react";
+import { UpdateProfile } from "../../api/user/profileUpdate";
 import {
   ProfileUpdateDispatchContext,
   ProfileUpdateStateContext,
@@ -20,10 +20,7 @@ const EditController = () => {
     }
 
     try {
-      await axios.patch("http://localhost:5000/users/update", state?.formInfo, {
-        withCredentials: true,
-      });
-
+      await UpdateProfile(state!.formInfo);
       window.location.href = "/";
     } catch (error) {
       const ERROR_MESSAGE = "The user email or nickname already taken";

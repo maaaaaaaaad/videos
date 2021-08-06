@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { Link, RouteComponentProps } from "react-router-dom";
+import { userLogout } from "../api/user/logout";
 import { ResUserDataContext } from "../App";
 import { ResponseUserData } from "../types/User/LoggedIn";
 
@@ -8,6 +9,16 @@ const Profile: React.FC<RouteComponentProps<ResponseUserData>> = ({
 }) => {
   //
   const isUser = useContext(ResUserDataContext);
+
+  const handleLogout = async () => {
+    //
+    const confirm = window.confirm("Are you sure?");
+
+    if (confirm) {
+      await userLogout();
+      window.location.href = "/";
+    }
+  };
 
   return (
     <>
@@ -20,6 +31,9 @@ const Profile: React.FC<RouteComponentProps<ResponseUserData>> = ({
             </li>
             <li>
               <Link to={`${match.url}/change-password`}>Change password</Link>
+            </li>
+            <li>
+              <button onClick={handleLogout}>Logout</button>
             </li>
           </ul>
         </section>

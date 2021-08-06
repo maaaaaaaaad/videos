@@ -21,7 +21,6 @@ export class UsersController {
   @Get()
   async getUserSession(@Req() req: Request, @Res() res: Response) {
     //
-
     const userSession = req.session;
 
     return res.status(200).json({
@@ -93,5 +92,15 @@ export class UsersController {
         message: error.message,
       });
     }
+  }
+
+  @Get('logout')
+  userLogout(@Req() req: Request, @Res() res: Response) {
+    //
+    req.session.destroy((error) => console.log(error));
+
+    return res.status(200).json({
+      message: 'Success logout!',
+    });
   }
 }

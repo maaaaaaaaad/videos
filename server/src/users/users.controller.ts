@@ -2,12 +2,14 @@ import {
   Body,
   Controller,
   Get,
-  HttpStatus,
   Patch,
   Post,
   Req,
   Res,
+  UploadedFile,
+  UseInterceptors,
 } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 import { Request, Response } from 'express';
 import UserSignInDto from './dto/signIn.dto';
 import UpdateUserDataDto from './dto/updateUser.dto';
@@ -17,6 +19,17 @@ import { UsersService } from './users.service';
 @Controller('users')
 export class UsersController {
   constructor(private userService: UsersService) {}
+
+  @Post('upload')
+  @UseInterceptors(FileInterceptor('image'))
+  async uploadFile(@UploadedFile() file: Express.Multer.File) {
+    const res = {
+      originalname: file.originalname,
+      filename: file.filename,
+    };
+    console.log(res);
+    return res;
+  }
 
   @Get()
   async getUserSession(@Req() req: Request, @Res() res: Response) {
@@ -35,7 +48,7 @@ export class UsersController {
 
     try {
       const result = await this.userService.signUpUserData(body);
-      return res.status(HttpStatus.OK).json({
+      return res.status(200).json({
         message: 'Create new Account!',
         data: result,
       });

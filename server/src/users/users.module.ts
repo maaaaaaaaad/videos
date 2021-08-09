@@ -3,6 +3,7 @@ import { UsersService } from './users.service';
 import { UsersController } from './users.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UserSchema } from 'src/schemas/user.schema';
+import { MulterModule } from '@nestjs/platform-express';
 
 @Module({
   imports: [
@@ -13,6 +14,9 @@ import { UserSchema } from 'src/schemas/user.schema';
         collection: 'vbnusers',
       },
     ]),
+    MulterModule.register({
+      dest: 'AvatarImages/',
+    }),
   ],
   providers: [UsersService],
   controllers: [UsersController],

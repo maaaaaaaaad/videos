@@ -7,7 +7,15 @@ const SignUpView: React.FC<ChangeHandler> = ({
 }) => {
   return (
     <section>
-      <form onSubmit={(e) => handleSubmitBtn(e)}>
+      <form encType="multipart/form-data" onSubmit={(e) => handleSubmitBtn(e)}>
+        <li>
+          <input
+            type="file"
+            name="avatar"
+            accept="image/*"
+            onChange={(e) => handleChange(e)}
+          />
+        </li>
         <li>
           <input
             type="text"
@@ -17,7 +25,6 @@ const SignUpView: React.FC<ChangeHandler> = ({
             pattern="^[A-za-z0-9]{5,15}$"
             onChange={(e) => handleChange(e)}
           />
-          <div></div>
         </li>
         <li>
           <input

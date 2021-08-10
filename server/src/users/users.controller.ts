@@ -6,7 +6,6 @@ import {
   Post,
   Req,
   Res,
-  UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
@@ -20,17 +19,6 @@ import { UsersService } from './users.service';
 export class UsersController {
   constructor(private userService: UsersService) {}
 
-  @Post('upload')
-  @UseInterceptors(FileInterceptor('image'))
-  async uploadFile(@UploadedFile() file: Express.Multer.File) {
-    const res = {
-      originalname: file.originalname,
-      filename: file.filename,
-    };
-    console.log(res);
-    return res;
-  }
-
   @Get()
   async getUserSession(@Req() req: Request, @Res() res: Response) {
     //
@@ -43,9 +31,9 @@ export class UsersController {
   }
 
   @Post('signup')
+  @UseInterceptors(FileInterceptor('avatar'))
   async postSignUpData(@Body() body: UserSignDataDto, @Res() res: Response) {
     //
-
     try {
       const result = await this.userService.signUpUserData(body);
       return res.status(200).json({

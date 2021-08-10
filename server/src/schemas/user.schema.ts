@@ -10,17 +10,20 @@ export type UserDocument = UserInformation & Document;
 
 @Schema()
 export class UserInformation {
-  @Prop()
+  @Prop({ required: true })
   readonly userId: string;
 
-  @Prop()
+  @Prop({ required: true })
   readonly password: string;
 
-  @Prop()
-  public email: string;
+  @Prop({ required: true })
+  readonly email: string;
 
-  @Prop()
-  public nickname: string;
+  @Prop({ required: true })
+  readonly nickname: string;
+
+  @Prop({ required: false })
+  readonly avatar?: string | null;
 }
 
 export const UserSchema = SchemaFactory.createForClass(

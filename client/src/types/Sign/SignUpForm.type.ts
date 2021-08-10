@@ -6,6 +6,7 @@ export type SignUpForm = {
   pass2: string;
   email: string;
   nickname: string;
+  avatarImg?: File | null;
 };
 
 export type State = {

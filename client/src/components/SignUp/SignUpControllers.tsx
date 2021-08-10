@@ -17,8 +17,20 @@ const SignUpControllers = () => {
   const handleSubmitBtn = async (e: React.FormEvent<HTMLFormElement>) => {
     //
     e.preventDefault();
+
+    const signUpFormData = new FormData();
+    signUpFormData.append("userId", state!.formInfo.userId);
+    signUpFormData.append("pass1", state!.formInfo.pass1);
+    signUpFormData.append("pass1", state!.formInfo.pass2);
+    signUpFormData.append("email", state!.formInfo.email);
+    signUpFormData.append("nickname", state!.formInfo.nickname);
+
+    state?.formInfo.avatarImg &&
+      signUpFormData.append("avatar", state!.formInfo.avatarImg);
+
     try {
-      await PostSignUp(state!);
+      const res = await PostSignUp(signUpFormData);
+      console.log(res.data);
       history.push("/login");
     } catch (error) {
       window.alert(`This user id or email or nickname is already taken.`);
@@ -26,15 +38,18 @@ const SignUpControllers = () => {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.currentTarget;
+    const { name, value, files } = e.currentTarget;
 
     dispatch!({
       type: "SET_FORM",
       formInfo: {
         ...state!.formInfo,
         [name]: value,
+        avatarImg: files ? files[0] : null,
       },
     });
+
+    console.log(state?.formInfo);
   };
 
   return (

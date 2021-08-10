@@ -1,4 +1,4 @@
-import { IsString } from 'class-validator';
+import { IsEmail, IsString, ValidateNested } from 'class-validator';
 
 export class UserSignDataDto {
   @IsString()
@@ -10,9 +10,12 @@ export class UserSignDataDto {
   @IsString()
   pass2: string;
 
-  @IsString()
+  @IsEmail()
   email: string;
 
   @IsString()
   nickname: string;
+
+  @ValidateNested()
+  avatar?: Express.Multer.File | null;
 }

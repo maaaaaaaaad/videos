@@ -1,7 +1,6 @@
 import { Dispatch } from "react";
 
 export type ProfileUpdateForm = {
-  email: string;
   nickname: string;
 };
 

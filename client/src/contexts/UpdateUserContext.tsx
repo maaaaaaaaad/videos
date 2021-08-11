@@ -22,7 +22,6 @@ const UpdateUserContext: React.FC = ({ children }) => {
 
   const initCurrentUser: State = {
     formInfo: {
-      email: "",
       nickname: "",
     },
   };

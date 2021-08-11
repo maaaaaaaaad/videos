@@ -6,6 +6,7 @@ import {
   Post,
   Req,
   Res,
+  UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
@@ -30,9 +31,23 @@ export class UsersController {
     });
   }
 
-  @Post('signup')
+  @Post()
   @UseInterceptors(FileInterceptor('avatar'))
-  async postSignUpData(@Body() body: UserSignDataDto, @Res() res: Response) {
+  async testUpload(
+    @UploadedFile() file: Express.Multer.File,
+    @Res() res: Response,
+  ) {
+    return res.status(200).json({
+      file,
+    });
+  }
+
+  @Post('signup')
+  async postSignUpData(
+    @Body()
+    body: UserSignDataDto,
+    @Res() res: Response,
+  ) {
     //
     try {
       const result = await this.userService.signUpUserData(body);

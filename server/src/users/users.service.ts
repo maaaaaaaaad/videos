@@ -15,7 +15,7 @@ export class UsersService {
   //
   async signUpUserData(signUpData: UserSignDataDto) {
     //
-    const { userId, pass1, pass2, email, nickname, avatar } = signUpData;
+    const { userId, pass1, pass2, email, nickname } = signUpData;
 
     const checkExists: boolean = await this.userModel.exists({
       $or: [{ userId }, { email }, { nickname }],
@@ -34,7 +34,6 @@ export class UsersService {
       password: pass2,
       email,
       nickname,
-      avatar: avatar ? avatar.path : null,
     });
 
     return await user.save();
@@ -56,23 +55,22 @@ export class UsersService {
 
   async updateUser(_id: string, updataData: UpdateUserDataDto) {
     //
-    const { nickname, email } = updataData;
+    const { nickname } = updataData;
     const checkExistsInfo: boolean = await this.userModel.exists({
-      $or: [{ email }, { nickname }],
+      $or: [{ nickname }],
     });
 
     if (checkExistsInfo) {
       throw new Error(`This email or nickname is already taken.`);
     }
 
-    if (email === '' || nickname === '') {
+    if (nickname === '') {
       throw new Error(`Plase fill user data.`);
     }
 
     return await this.userModel.findByIdAndUpdate(
       _id,
       {
-        email,
         nickname,
       },
       { new: true },

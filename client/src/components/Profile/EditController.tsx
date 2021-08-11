@@ -15,7 +15,7 @@ const EditController = () => {
   const handleSubmitBtn = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (state?.formInfo.email === "" || state?.formInfo.nickname === "") {
+    if (state?.formInfo.nickname === "") {
       return window.alert("Please fill data");
     }
 
@@ -23,7 +23,7 @@ const EditController = () => {
       await UpdateProfile(state!.formInfo);
       window.location.href = "/";
     } catch (error) {
-      const ERROR_MESSAGE = "The user email or nickname already taken";
+      const ERROR_MESSAGE = "The user nickname already taken";
       window.alert(`Information error: ${ERROR_MESSAGE}`);
     }
   };

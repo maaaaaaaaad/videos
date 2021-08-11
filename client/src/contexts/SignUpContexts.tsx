@@ -16,7 +16,7 @@ function signUpReducer(state: State, action: Action): State {
   switch (action.type) {
     case "SET_FORM":
       return {
-        ...state,
+        ...state.formInfo,
         formInfo: action.formInfo,
       };
 
@@ -32,7 +32,6 @@ const intiSignUpForm: State = {
     pass2: "",
     email: "",
     nickname: "",
-    avatarImg: null,
   },
 };
 

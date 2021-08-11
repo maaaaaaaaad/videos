@@ -28,20 +28,6 @@ const EditView: React.FC<ChangeHandler> = ({
           </label>
         </li>
         <li>
-          <label htmlFor="email">
-            Email
-            <input
-              id="email"
-              type="email"
-              autoComplete="off"
-              placeholder={isUser?.email}
-              name="email"
-              pattern="^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,8}$"
-              onChange={(e) => handleChange(e)}
-            />
-          </label>
-        </li>
-        <li>
           <input type="submit" value="Update" />
         </li>
       </form>

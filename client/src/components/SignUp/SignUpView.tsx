@@ -19,6 +19,7 @@ const SignUpView: React.FC<ChangeHandler> = ({
         <li>
           <input
             type="text"
+            required
             name="userId"
             placeholder="Please enter a 5 to 15 digit ID."
             autoComplete="off"
@@ -29,6 +30,7 @@ const SignUpView: React.FC<ChangeHandler> = ({
         <li>
           <input
             type="password"
+            required
             name="pass1"
             placeholder="Password containing 8-15 special characters"
             autoComplete="off"
@@ -39,6 +41,7 @@ const SignUpView: React.FC<ChangeHandler> = ({
         <li>
           <input
             type="password"
+            required
             name="pass2"
             placeholder="Confirm password"
             autoComplete="off"
@@ -48,6 +51,7 @@ const SignUpView: React.FC<ChangeHandler> = ({
         <li>
           <input
             type="email"
+            required
             name="email"
             placeholder="Email"
             autoComplete="off"
@@ -58,6 +62,7 @@ const SignUpView: React.FC<ChangeHandler> = ({
         <li>
           <input
             type="text"
+            required
             name="nickname"
             placeholder="Please enter a 2-8 digit nickname."
             autoComplete="off"

@@ -18,14 +18,12 @@ const SignUpControllers = () => {
     //
     e.preventDefault();
 
-    const signUpFormData = state?.formInfo;
+    const signUpFormData = state!.formInfo;
 
     try {
-      if (signUpFormData) {
-        const res = await PostSignUp(signUpFormData);
-        console.log(res.data);
-        history.push("/login");
-      }
+      const res = await PostSignUp(signUpFormData);
+      console.log(res.data);
+      history.push("/login");
     } catch (error) {
       window.alert(`This user id or email or nickname is already taken.`);
     }

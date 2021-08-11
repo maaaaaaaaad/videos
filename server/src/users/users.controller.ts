@@ -31,7 +31,7 @@ export class UsersController {
     });
   }
 
-  @Post()
+  @Post('add-avatar')
   @UseInterceptors(FileInterceptor('avatar'))
   async testUpload(
     @UploadedFile() file: Express.Multer.File,

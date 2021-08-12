@@ -15,7 +15,7 @@ export class UsersService {
   //
   async signUpUserData(signUpData: UserSignDataDto) {
     //
-    const { userId, pass1, pass2, email, nickname } = signUpData;
+    const { userId, pass1, pass2, email, nickname, avatar } = signUpData;
 
     const checkExists: boolean = await this.userModel.exists({
       $or: [{ userId }, { email }, { nickname }],
@@ -34,6 +34,7 @@ export class UsersService {
       password: pass2,
       email,
       nickname,
+      avatarUrl: avatar.path,
     });
 
     return await user.save();
@@ -50,7 +51,9 @@ export class UsersService {
       throw new NotFoundException('Password does not match');
     }
 
-    return checkExists;
+    if (checkExists) {
+      return checkExists;
+    }
   }
 
   async updateUser(_id: string, updataData: UpdateUserDataDto) {

@@ -7,7 +7,11 @@ const SignUpView: React.FC<ChangeHandler> = ({
 }) => {
   return (
     <section>
-      <form encType="multipart/form-data" onSubmit={(e) => handleSubmitBtn(e)}>
+      <form
+        method="POST"
+        encType="multipart/form-data"
+        onSubmit={(e) => handleSubmitBtn(e)}
+      >
         <li>
           <input
             type="file"

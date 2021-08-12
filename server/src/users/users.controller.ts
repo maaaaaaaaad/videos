@@ -31,23 +31,18 @@ export class UsersController {
     });
   }
 
-  @Post('add-avatar')
-  @UseInterceptors(FileInterceptor('avatar'))
-  async testUpload(
-    @UploadedFile() file: Express.Multer.File,
-    @Res() res: Response,
-  ) {
-    return res.status(200).json({
-      file,
-    });
-  }
-
   @Post('signup')
+  @UseInterceptors(FileInterceptor('avatar'))
   async postSignUpData(
+    @UploadedFile() file: Express.Multer.File,
     @Body()
     body: UserSignDataDto,
     @Res() res: Response,
   ) {
+    //
+    if (file !== undefined) {
+      body.avatar = file;
+    }
     //
     try {
       const result = await this.userService.signUpUserData(body);
@@ -72,9 +67,7 @@ export class UsersController {
     try {
       const result = await this.userService.signInUser(body);
 
-      if (result) {
-        req.session.user = result;
-      }
+      req.session.user = result;
 
       return res.status(200).json({
         message: 'Success Login!',

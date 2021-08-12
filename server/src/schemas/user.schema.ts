@@ -23,7 +23,7 @@ export class UserInformation {
   readonly nickname: string;
 
   @Prop({ required: false })
-  readonly avatar?: string | null;
+  readonly avatarUrl: string;
 }
 
 export const UserSchema = SchemaFactory.createForClass(

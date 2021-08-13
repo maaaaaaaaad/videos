@@ -3,4 +3,5 @@ export interface ResponseUserData {
   readonly userId?: string;
   readonly email?: string;
   readonly nickname?: string;
+  readonly avatarUrl?: string;
 }

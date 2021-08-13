@@ -16,7 +16,7 @@ function signUpReducer(state: State, action: Action): State {
   switch (action.type) {
     case "SET_FORM":
       return {
-        ...state.formInfo,
+        ...state,
         formInfo: action.formInfo,
       };
 

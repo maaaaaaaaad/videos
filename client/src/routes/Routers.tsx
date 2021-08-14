@@ -9,6 +9,7 @@ import ChangePassword from "../components/Profile/ChangePassword";
 import ProfileEdit from "../components/Profile/ProfileEdit";
 import SignUp from "../components/SignUp";
 import Videos from "../components/Videos";
+import SignUpContexts from "../contexts/SignUpContexts";
 
 const Routers = () => {
   //
@@ -20,7 +21,11 @@ const Routers = () => {
       <Route path="/books" exact component={Books} />
       <Route path="/notes" exact component={Notes} />
       <Route path="/login" exact component={Login} />
-      <Route path="/signup" exact component={SignUp} />
+
+      <SignUpContexts>
+        <Route path="/signup" exact component={SignUp} />
+      </SignUpContexts>
+
       <Route path="/profile/:id" exact component={Profile} />
       <Route path="/profile/:id/edit" exact component={ProfileEdit} />
       <Route

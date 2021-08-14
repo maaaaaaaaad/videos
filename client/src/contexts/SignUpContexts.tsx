@@ -32,6 +32,7 @@ const intiSignUpForm: State = {
     pass2: "",
     email: "",
     nickname: "",
+    avatar: undefined,
   },
 };
 

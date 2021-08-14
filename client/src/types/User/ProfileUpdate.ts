@@ -2,6 +2,8 @@ import { Dispatch } from "react";
 
 export type ProfileUpdateForm = {
   nickname: string;
+  email: string;
+  avatar?: File;
 };
 
 export type State = {

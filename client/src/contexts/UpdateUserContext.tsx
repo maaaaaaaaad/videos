@@ -19,10 +19,10 @@ function profileUpdateReducer(state: State, action: Action) {
 
 const UpdateUserContext: React.FC = ({ children }) => {
   //
-
   const initCurrentUser: State = {
     formInfo: {
       nickname: "",
+      email: "",
     },
   };
 

@@ -1,5 +1,4 @@
 import React from "react";
-import { useState } from "react";
 import { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { PostSignUp } from "../../api/user/signUp";
@@ -14,7 +13,6 @@ const SignUpControllers = () => {
   const history = useHistory();
   const dispatch = useContext(SignUpDispatchContext);
   const state = useContext(SignUpStateContext);
-  const [avatarImg, setAvatarImg] = useState<File | undefined>(undefined);
 
   const handleSubmitBtn = async (e: React.FormEvent<HTMLFormElement>) => {
     //
@@ -42,18 +40,13 @@ const SignUpControllers = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, files } = e.currentTarget;
 
-    files && setAvatarImg(files[0]);
-
     dispatch!({
       type: "SET_FORM",
       formInfo: {
         ...state!.formInfo,
-        [name]: value,
-        avatar: avatarImg ? avatarImg : undefined,
+        [name]: files ? files[0] : value,
       },
     });
-
-    console.log(state?.formInfo);
   };
 
   return (

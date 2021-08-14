@@ -2,22 +2,19 @@ import React from "react";
 import { useContext } from "react";
 import { UpdateProfile } from "../../api/user/profileUpdate";
 import {
-  ProfileUpdateDispatchContext,
-  ProfileUpdateStateContext,
-} from "../../contexts/UpdateUserContext";
+  SignUpDispatchContext,
+  SignUpStateContext,
+} from "../../contexts/SignUpContexts";
+import { UpdateForm } from "../../types/Sign/SignUpForm.type";
 import EditView from "./EditView";
 
 const EditController = () => {
   //
-  const state = useContext(ProfileUpdateStateContext);
-  const dispatch = useContext(ProfileUpdateDispatchContext);
+  const state = useContext(SignUpStateContext);
+  const dispatch = useContext(SignUpDispatchContext);
 
   const handleSubmitBtn = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    if (state?.formInfo.nickname === "") {
-      return window.alert("Please fill data");
-    }
 
     try {
       await UpdateProfile(state!.formInfo);
@@ -29,11 +26,14 @@ const EditController = () => {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //
+    const { name, value, files } = e.currentTarget;
+
     dispatch!({
-      type: "EDIT_FORM",
+      type: "SET_FORM",
       formInfo: {
         ...state!.formInfo,
-        [e.currentTarget.name]: e.currentTarget.value,
+        [name]: files ? files[0] : value,
       },
     });
   };

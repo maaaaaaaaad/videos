@@ -6,6 +6,7 @@ import {
   SignUpDispatchContext,
   SignUpStateContext,
 } from "../../contexts/SignUpContexts";
+import { SignUpForm } from "../../types/Sign/SignUpForm.type";
 
 import SignUpView from "./SignUpView";
 
@@ -20,12 +21,12 @@ const SignUpControllers = () => {
 
     if (state?.formInfo) {
       const formData = new FormData();
-      formData.append("userId", state.formInfo.userId);
-      formData.append("pass1", state.formInfo.pass1);
-      formData.append("pass2", state.formInfo.pass2);
-      formData.append("email", state.formInfo.email);
-      formData.append("nickname", state.formInfo.nickname);
-      formData.append("avatar", state.formInfo.avatar!);
+      formData.append("userId", (state.formInfo! as SignUpForm).userId);
+      formData.append("pass1", (state.formInfo! as SignUpForm).pass1);
+      formData.append("pass2", (state.formInfo! as SignUpForm).pass2);
+      formData.append("email", (state.formInfo! as SignUpForm).email);
+      formData.append("nickname", (state.formInfo! as SignUpForm).nickname);
+      formData.append("avatar", (state.formInfo! as SignUpForm).avatar!);
 
       try {
         const res = await PostSignUp(formData);

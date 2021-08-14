@@ -14,18 +14,32 @@ const EditView: React.FC<ChangeHandler> = ({
       <h1>{isUser?.nickname}'s Edit page</h1>
       <form onSubmit={(e) => handleSubmitBtn(e)}>
         <li>
-          <label htmlFor="nickname">
-            Nickname
-            <input
-              id="nickname"
-              type="text"
-              autoComplete="off"
-              placeholder={isUser?.nickname}
-              name="nickname"
-              pattern="^([a-zA-Z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]).{2,8}$"
-              onChange={(e) => handleChange(e)}
-            />
-          </label>
+          <input
+            type="file"
+            name="avatar"
+            accept="image/*"
+            onChange={(e) => handleChange(e)}
+          />
+        </li>
+        <li>
+          <input
+            type="email"
+            autoComplete="off"
+            placeholder={isUser?.nickname}
+            name="email"
+            pattern="^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$"
+            onChange={(e) => handleChange(e)}
+          />
+        </li>
+        <li>
+          <input
+            type="text"
+            autoComplete="off"
+            placeholder={isUser?.nickname}
+            name="nickname"
+            pattern="^([a-zA-Z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]).{2,8}$"
+            onChange={(e) => handleChange(e)}
+          />
         </li>
         <li>
           <input type="submit" value="Update" />

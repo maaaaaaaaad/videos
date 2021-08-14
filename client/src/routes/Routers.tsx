@@ -24,10 +24,10 @@ const Routers = () => {
 
       <SignUpContexts>
         <Route path="/signup" exact component={SignUp} />
+        <Route path="/profile/:id/edit" exact component={ProfileEdit} />
       </SignUpContexts>
 
       <Route path="/profile/:id" exact component={Profile} />
-      <Route path="/profile/:id/edit" exact component={ProfileEdit} />
       <Route
         path="/profile/:id/change-password"
         exact

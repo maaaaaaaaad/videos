@@ -1,6 +1,7 @@
 import React from "react";
 import { useContext } from "react";
 import { UpdateProfile } from "../../api/user/profileUpdate";
+import { ResUserDataContext } from "../../App";
 import {
   SignUpDispatchContext,
   SignUpStateContext,
@@ -12,19 +13,22 @@ const EditController = () => {
   //
   const state = useContext(SignUpStateContext);
   const dispatch = useContext(SignUpDispatchContext);
+  const isUser = useContext(ResUserDataContext);
 
   const handleSubmitBtn = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const formData = new FormData();
+
     formData.append("email", (state!.formInfo as UpdateForm).email);
     formData.append("nickname", (state!.formInfo as UpdateForm).nickname);
 
     state?.formInfo.avatar &&
-      formData.append("avatar", (state.formInfo as UpdateForm).avatar!);
+      formData.append("avatar", (state!.formInfo as UpdateForm).avatar!);
 
     try {
-      await UpdateProfile(formData);
+      const res = await UpdateProfile(formData);
+      console.log(res.data);
       window.location.href = "/";
     } catch (error) {
       //
@@ -41,9 +45,13 @@ const EditController = () => {
       type: "SET_FORM",
       formInfo: {
         ...state!.formInfo,
+        nickname: isUser!.nickname!,
+        email: isUser!.email!,
         [name]: files ? files[0] : value,
       },
     });
+
+    console.log(state?.formInfo);
   };
 
   return (

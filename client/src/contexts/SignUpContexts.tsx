@@ -25,7 +25,7 @@ function signUpReducer(state: State, action: Action): State {
   }
 }
 
-const intiSignUpForm: State = {
+const initSignUpForm: State = {
   formInfo: {
     userId: "",
     pass1: "",
@@ -38,7 +38,7 @@ const intiSignUpForm: State = {
 
 const SignUpContexts: React.FC = ({ children }) => {
   //
-  const [state, dispatch] = useReducer(signUpReducer, intiSignUpForm);
+  const [state, dispatch] = useReducer(signUpReducer, initSignUpForm);
 
   return (
     <SignUpStateContext.Provider value={state}>

@@ -46,6 +46,7 @@ export class UsersController {
     //
     try {
       const result = await this.userService.signUpUserData(body);
+
       return res.status(200).json({
         message: 'Create new Account!',
         data: result,

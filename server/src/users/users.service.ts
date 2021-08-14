@@ -55,16 +55,18 @@ export class UsersService {
       return checkExists;
     }
   }
-
   async updateUser(session: UserDocument, updataData: UpdateUserDataDto) {
     //
     const { email, nickname, avatar } = updataData;
-    const checkExistsInfo: boolean = await this.userModel.exists({
-      $or: [{ email, nickname }],
-    });
 
-    if (checkExistsInfo) {
-      throw new Error(`This email or nickname is already taken.`);
+    if (email !== session.email || nickname !== session.nickname) {
+      const checkExistsInfo: boolean = await this.userModel.exists({
+        $or: [{ email, nickname }],
+      });
+      //
+      if (checkExistsInfo) {
+        throw new Error(`This email or nickname is already taken.`);
+      }
     }
 
     return await this.userModel.findByIdAndUpdate(

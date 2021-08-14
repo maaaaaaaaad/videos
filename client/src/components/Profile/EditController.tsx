@@ -16,11 +16,19 @@ const EditController = () => {
   const handleSubmitBtn = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    const formData = new FormData();
+    formData.append("email", (state!.formInfo as UpdateForm).email);
+    formData.append("nickname", (state!.formInfo as UpdateForm).nickname);
+
+    state?.formInfo.avatar &&
+      formData.append("avatar", (state.formInfo as UpdateForm).avatar!);
+
     try {
-      await UpdateProfile(state!.formInfo);
+      await UpdateProfile(formData);
       window.location.href = "/";
     } catch (error) {
-      const ERROR_MESSAGE = "The user nickname already taken";
+      //
+      const ERROR_MESSAGE = "The user email or nickname already taken";
       window.alert(`Information error: ${ERROR_MESSAGE}`);
     }
   };

@@ -81,15 +81,22 @@ export class UsersController {
   }
 
   @Patch('update')
+  @UseInterceptors(FileInterceptor('avatar'))
   async patchUserData(
+    @UploadedFile() file: Express.Multer.File,
     @Body() body: UpdateUserDataDto,
     @Req() req: Request,
     @Res() res: Response,
   ) {
-    const serialId: string = req.session.user._id;
     //
+    if (file !== undefined) {
+      body.avatar = file;
+    }
+
+    const userSession = req.session.user;
+
     try {
-      const updated = await this.userService.updateUser(serialId, body);
+      const updated = await this.userService.updateUser(userSession, body);
       req.session.user = updated;
 
       return res.status(200).json({

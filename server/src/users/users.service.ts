@@ -56,25 +56,23 @@ export class UsersService {
     }
   }
 
-  async updateUser(_id: string, updataData: UpdateUserDataDto) {
+  async updateUser(session: UserDocument, updataData: UpdateUserDataDto) {
     //
-    const { nickname } = updataData;
+    const { email, nickname, avatar } = updataData;
     const checkExistsInfo: boolean = await this.userModel.exists({
-      $or: [{ nickname }],
+      $or: [{ email, nickname }],
     });
 
     if (checkExistsInfo) {
       throw new Error(`This email or nickname is already taken.`);
     }
 
-    if (nickname === '') {
-      throw new Error(`Plase fill user data.`);
-    }
-
     return await this.userModel.findByIdAndUpdate(
-      _id,
+      session._id,
       {
-        nickname,
+        email: email ?? session.email,
+        nickname: nickname ?? session.nickname,
+        avatarUrl: avatar ? avatar.path : session.avatarUrl,
       },
       { new: true },
     );

@@ -25,7 +25,7 @@ const EditView: React.FC<ChangeHandler> = ({
           <input
             type="email"
             autoComplete="off"
-            placeholder={isUser?.nickname}
+            placeholder={isUser!.email}
             name="email"
             pattern="^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$"
             onChange={(e) => handleChange(e)}
@@ -35,7 +35,7 @@ const EditView: React.FC<ChangeHandler> = ({
           <input
             type="text"
             autoComplete="off"
-            placeholder={isUser?.nickname}
+            placeholder={isUser!.nickname}
             name="nickname"
             pattern="^([a-zA-Z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]).{2,8}$"
             onChange={(e) => handleChange(e)}

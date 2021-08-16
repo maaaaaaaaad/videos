@@ -1,6 +1,6 @@
 import React from "react";
 import { useContext } from "react";
-import { ResUserDataContext } from "../../App";
+import { ResUserDataContext } from "../../../App";
 import EditController from "./EditController";
 
 const ProfileEdit = () => {

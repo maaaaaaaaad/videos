@@ -1,12 +1,12 @@
 import React from "react";
 import { useContext } from "react";
-import { UpdateProfile } from "../../api/user/profileUpdate";
-import { ResUserDataContext } from "../../App";
+import { UpdateProfile } from "../../../api/user/profileUpdate";
+import { ResUserDataContext } from "../../../App";
 import {
   SignUpDispatchContext,
   SignUpStateContext,
-} from "../../contexts/SignUpContexts";
-import { UpdateForm } from "../../types/Sign/SignUpForm.type";
+} from "../../../contexts/SignUpContexts";
+import { UpdateForm } from "../../../types/Sign/SignUpForm.type";
 import EditView from "./EditView";
 
 const EditController = () => {
@@ -20,10 +20,10 @@ const EditController = () => {
 
     const formData = new FormData();
 
-    formData.append("email", (state!.formInfo as UpdateForm).email);
-    formData.append("nickname", (state!.formInfo as UpdateForm).nickname);
+    formData.append("email", (state?.formInfo as UpdateForm).email);
+    formData.append("nickname", (state?.formInfo as UpdateForm).nickname);
 
-    state?.formInfo.avatar &&
+    (state?.formInfo as UpdateForm).avatar &&
       formData.append("avatar", (state!.formInfo as UpdateForm).avatar!);
 
     try {

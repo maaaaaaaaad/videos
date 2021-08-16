@@ -5,8 +5,9 @@ import Home from "../components/Home";
 import Login from "../components/Login";
 import Notes from "../components/Notes";
 import Profile from "../components/Profile";
-import ChangePassword from "../components/Profile/ChangePassword";
-import ProfileEdit from "../components/Profile/ProfileEdit";
+import ProfileEdit from "../components/Profile/information/ProfileEdit";
+import ChangePassword from "../components/Profile/password/ChangePassword";
+
 import SignUp from "../components/SignUp";
 import Videos from "../components/Videos";
 import SignUpContexts from "../contexts/SignUpContexts";

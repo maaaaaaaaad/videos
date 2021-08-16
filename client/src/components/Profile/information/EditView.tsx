@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import { ResUserDataContext } from "../../App";
-import { ChangeHandler } from "../../types/Sign/Sign.interface";
+import { ResUserDataContext } from "../../../App";
+import { ChangeHandler } from "../../../types/Sign/Sign.interface";
 
 const EditView: React.FC<ChangeHandler> = ({
   handleChange,

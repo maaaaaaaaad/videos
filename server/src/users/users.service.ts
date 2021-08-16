@@ -55,6 +55,7 @@ export class UsersService {
       return checkExists;
     }
   }
+
   async updateUser(session: UserDocument, updataData: UpdateUserDataDto) {
     //
     const { email, nickname, avatar } = updataData;
@@ -75,6 +76,23 @@ export class UsersService {
         email: email ?? session.email,
         nickname: nickname ?? session.nickname,
         avatarUrl: avatar ? avatar.path : session.avatarUrl,
+      },
+      { new: true },
+    );
+  }
+
+  async passwordChanger(session: UserDocument, password: UpdateUserDataDto) {
+    //
+    const { pass1, pass2 } = password;
+
+    if (pass1 !== pass2) {
+      throw new Error(`Password does not match`);
+    }
+
+    return await this.userModel.findByIdAndUpdate(
+      session._id,
+      {
+        password: pass2,
       },
       { new: true },
     );

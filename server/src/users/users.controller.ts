@@ -111,6 +111,30 @@ export class UsersController {
     }
   }
 
+  @Patch('change-password')
+  async patchPassword(
+    @Req() req: Request,
+    @Res() res: Response,
+    @Body() body: UpdateUserDataDto,
+  ) {
+    //
+    const userSession = req.session.user;
+
+    try {
+      const updated = await this.userService.passwordChanger(userSession, body);
+      req.session.user = updated;
+
+      return res.status(200).json({
+        message: 'Success Change!',
+        updated,
+      });
+    } catch (error) {
+      return res.status(400).json({
+        message: error.message,
+      });
+    }
+  }
+
   @Get('logout')
   userLogout(@Req() req: Request, @Res() res: Response) {
     //

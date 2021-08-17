@@ -11,9 +11,11 @@ import {
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Request, Response } from 'express';
+import { diskStorage } from 'multer';
 import UserSignInDto from './dto/signIn.dto';
 import UpdateUserDataDto from './dto/updateUser.dto';
 import { UserSignDataDto } from './dto/userForm.dto';
+import { Helper } from './shared/helper';
 import { UsersService } from './users.service';
 
 @Controller('users')
@@ -32,7 +34,14 @@ export class UsersController {
   }
 
   @Post('signup')
-  @UseInterceptors(FileInterceptor('avatar'))
+  @UseInterceptors(
+    FileInterceptor('avatar', {
+      storage: diskStorage({
+        destination: Helper.destinationPath,
+        filename: Helper.customFileName,
+      }),
+    }),
+  )
   async postSignUpData(
     @UploadedFile() file: Express.Multer.File,
     @Body()
@@ -82,7 +91,14 @@ export class UsersController {
   }
 
   @Patch('update')
-  @UseInterceptors(FileInterceptor('avatar'))
+  @UseInterceptors(
+    FileInterceptor('avatar', {
+      storage: diskStorage({
+        destination: Helper.destinationPath,
+        filename: Helper.customFileName,
+      }),
+    }),
+  )
   async patchUserData(
     @UploadedFile() file: Express.Multer.File,
     @Body() body: UpdateUserDataDto,

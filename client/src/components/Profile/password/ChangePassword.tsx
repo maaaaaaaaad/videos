@@ -15,23 +15,25 @@ const ChangePassword = () => {
   const handleSubmitBtn = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    try {
-      const password = state!.formInfo! as ChangePasswordForm;
+    if (state?.formInfo as ChangePasswordForm) {
+      try {
+        const password = state!.formInfo as ChangePasswordForm;
 
-      if (
-        password.pass1 !== password.pass2 ||
-        (password.pass1 === "" && password.pass2)
-      ) {
-        return;
+        if (
+          password.pass1 !== password.pass2 ||
+          (password.pass1 === "" && password.pass2 === "")
+        ) {
+          return;
+        }
+
+        const res = await ChangePass(password);
+
+        console.log(res.data);
+
+        window.location.href = "/";
+      } catch (error) {
+        console.log(error.message);
       }
-
-      const res = await ChangePass(password);
-
-      console.log(res.data);
-
-      window.location.href = "/";
-    } catch (error) {
-      console.log(error.message);
     }
   };
 
@@ -66,7 +68,7 @@ const ChangePassword = () => {
         pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,15}$"
         onChange={handleChange}
       />
-      <input type="submit" />
+      <input type="submit" value="Save Change" />
     </form>
   );
 };

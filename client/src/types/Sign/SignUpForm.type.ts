@@ -14,7 +14,8 @@ export type SignInForm = Pick<SignUpForm, "userId" | "pass2">;
 export type ChangePasswordForm = Pick<SignUpForm, "pass1" | "pass2">;
 
 export type State = {
-  formInfo: SignUpForm | SignInForm | UpdateForm | ChangePasswordForm;
+  formInfo?: SignUpForm | UpdateForm | ChangePasswordForm;
+  login?: SignInForm;
 };
 
 export type Action =
@@ -24,7 +25,7 @@ export type Action =
     }
   | {
       type: "SET_SIGNIN_FORM";
-      formInfo: SignInForm;
+      login: SignInForm;
     }
   | {
       type: "SET_UPDATE_FORM";

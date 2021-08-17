@@ -27,7 +27,7 @@ function signUpReducer(state: State, action: Action): State {
     case "SET_SIGNIN_FORM":
       return {
         ...(state.formInfo as SignInForm),
-        formInfo: action.formInfo,
+        login: action.login,
       };
 
     case "SET_UPDATE_FORM":

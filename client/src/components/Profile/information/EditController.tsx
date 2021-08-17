@@ -50,8 +50,6 @@ const EditController = () => {
         [name]: files ? files[0] : value,
       },
     });
-
-    console.log(state?.formInfo);
   };
 
   return (

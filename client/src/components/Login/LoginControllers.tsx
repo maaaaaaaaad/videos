@@ -9,24 +9,20 @@ import LoginView from "./LoginView";
 
 const LoginControllers = () => {
   //
-
   const state = useContext(SignUpStateContext);
   const dispatch = useContext(SignUpDispatchContext);
 
   const handleSubmitBtn = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    //
+    const signIn = state!.login! as SignInForm;
 
-    if (state?.formInfo) {
-      //
-      const signIn = state!.formInfo as SignInForm;
-
-      try {
-        await PostLogin(signIn);
-        window.location.href = "/";
-      } catch (error) {
-        const ERROR_MESSAGE = "The user id or password do not match";
-        window.alert(`Information error: ${ERROR_MESSAGE}`);
-      }
+    try {
+      await PostLogin(signIn);
+      window.location.href = "/";
+    } catch (error) {
+      const ERROR_MESSAGE = "The user id or password do not match";
+      window.alert(`Information error: ${ERROR_MESSAGE}`);
     }
   };
 
@@ -37,8 +33,8 @@ const LoginControllers = () => {
 
     dispatch!({
       type: "SET_SIGNIN_FORM",
-      formInfo: {
-        ...(state?.formInfo as SignInForm),
+      login: {
+        ...(state?.login as SignInForm),
         [name]: value,
       },
     });

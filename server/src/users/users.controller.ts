@@ -40,7 +40,7 @@ export class UsersController {
     @Res() res: Response,
   ) {
     //
-    if (file !== undefined) {
+    if (file !== null) {
       body.avatar = file;
     }
     //
@@ -115,7 +115,7 @@ export class UsersController {
   async patchPassword(
     @Req() req: Request,
     @Res() res: Response,
-    @Body() body: UpdateUserDataDto,
+    @Body() body: Pick<UpdateUserDataDto, 'pass1' | 'pass2'>,
   ) {
     //
     const userSession = req.session.user;

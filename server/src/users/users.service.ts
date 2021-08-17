@@ -81,7 +81,10 @@ export class UsersService {
     );
   }
 
-  async passwordChanger(session: UserDocument, password: UpdateUserDataDto) {
+  async passwordChanger(
+    session: UserDocument,
+    password: Pick<UpdateUserDataDto, 'pass1' | 'pass2'>,
+  ) {
     //
     const { pass1, pass2 } = password;
     const findUser = await this.userModel.findById(session._id);
@@ -92,8 +95,6 @@ export class UsersService {
 
     findUser.password = pass2;
 
-    await findUser.save();
-
-    return findUser;
+    return await findUser.save();
   }
 }

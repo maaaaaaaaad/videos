@@ -26,7 +26,6 @@ const LoginView: React.FC<ChangeHandler> = ({
             autoComplete="off"
           />
         </li>
-
         <li>
           <input type="submit" name="submit" value="SIGN IN" />
         </li>

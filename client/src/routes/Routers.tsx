@@ -25,6 +25,7 @@ const Routers = () => {
       <SignUpContexts>
         <Route path="/signup" exact component={SignUp} />
         <Route path="/login" exact component={Login} />
+        <Route path="/profile/:id" exact component={Profile} />
         <Route path="/profile/:id/edit" exact component={ProfileEdit} />
         <Route
           path="/profile/:id/change-password"
@@ -32,8 +33,6 @@ const Routers = () => {
           component={ChangePassword}
         />
       </SignUpContexts>
-
-      <Route path="/profile/:id" exact component={Profile} />
     </React.Fragment>
   );
 };

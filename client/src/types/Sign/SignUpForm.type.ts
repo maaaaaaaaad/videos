@@ -10,16 +10,21 @@ export type SignUpForm = {
 };
 
 export type UpdateForm = Pick<SignUpForm, "email" | "nickname" | "avatar">;
+export type SignInForm = Pick<SignUpForm, "userId" | "pass2">;
 export type ChangePasswordForm = Pick<SignUpForm, "pass1" | "pass2">;
 
 export type State = {
-  formInfo: SignUpForm | UpdateForm | ChangePasswordForm;
+  formInfo: SignUpForm | SignInForm | UpdateForm | ChangePasswordForm;
 };
 
 export type Action =
   | {
       type: "SET_SIGNUP_FORM";
       formInfo: SignUpForm;
+    }
+  | {
+      type: "SET_SIGNIN_FORM";
+      formInfo: SignInForm;
     }
   | {
       type: "SET_UPDATE_FORM";

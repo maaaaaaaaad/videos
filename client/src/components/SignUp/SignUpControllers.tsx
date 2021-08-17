@@ -42,7 +42,7 @@ const SignUpControllers = () => {
     const { name, value, files } = e.currentTarget;
 
     dispatch!({
-      type: "SET_FORM",
+      type: "SET_SIGNUP_FORM",
       formInfo: {
         ...(state!.formInfo! as SignUpForm),
         [name]: files ? files[0] : value,

@@ -49,11 +49,7 @@ const ChangePassword = () => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmitBtn}
-      method="POST"
-      encType="multipart/form-data"
-    >
+    <form onSubmit={handleSubmitBtn}>
       <input
         name="pass1"
         type="password"

@@ -4,6 +4,7 @@ import { createContext } from "react";
 import {
   Action,
   ChangePasswordForm,
+  SignInForm,
   SignUpForm,
   SignUpFormDispatch,
   State,
@@ -20,6 +21,12 @@ function signUpReducer(state: State, action: Action): State {
     case "SET_SIGNUP_FORM":
       return {
         ...(state.formInfo as SignUpForm),
+        formInfo: action.formInfo,
+      };
+
+    case "SET_SIGNIN_FORM":
+      return {
+        ...(state.formInfo as SignInForm),
         formInfo: action.formInfo,
       };
 

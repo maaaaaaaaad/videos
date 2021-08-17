@@ -21,10 +21,10 @@ const Routers = () => {
       <Route path="/videos" exact component={Videos} />
       <Route path="/books" exact component={Books} />
       <Route path="/notes" exact component={Notes} />
-      <Route path="/login" exact component={Login} />
 
       <SignUpContexts>
         <Route path="/signup" exact component={SignUp} />
+        <Route path="/login" exact component={Login} />
         <Route path="/profile/:id/edit" exact component={ProfileEdit} />
         <Route
           path="/profile/:id/change-password"

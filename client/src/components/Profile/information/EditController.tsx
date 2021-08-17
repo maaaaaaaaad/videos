@@ -42,9 +42,9 @@ const EditController = () => {
     const { name, value, files } = e.currentTarget;
 
     dispatch!({
-      type: "SET_FORM",
+      type: "SET_UPDATE_FORM",
       formInfo: {
-        ...state!.formInfo,
+        ...(state!.formInfo! as UpdateForm),
         nickname: isUser!.nickname!,
         email: isUser!.email!,
         [name]: files ? files[0] : value,

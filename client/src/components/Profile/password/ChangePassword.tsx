@@ -16,14 +16,20 @@ const ChangePassword = () => {
     e.preventDefault();
 
     try {
-      const formData = new FormData();
+      const password = state!.formInfo! as ChangePasswordForm;
 
-      formData.append("pass1", (state?.formInfo! as ChangePasswordForm).pass1);
-      formData.append("pass2,", (state?.formInfo! as ChangePasswordForm).pass2);
+      if (
+        password.pass1 !== password.pass2 ||
+        (password.pass1 === "" && password.pass2)
+      ) {
+        return;
+      }
 
-      const res = await ChangePass(formData);
+      const res = await ChangePass(password);
 
       console.log(res.data);
+
+      window.location.href = "/";
     } catch (error) {
       console.log(error.message);
     }
@@ -34,26 +40,34 @@ const ChangePassword = () => {
     const { name, value } = e.currentTarget;
 
     dispatch!({
-      type: "SET_FORM",
+      type: "SET_CHANGE_PASSWORD",
       formInfo: {
-        ...state!.formInfo,
+        ...(state!.formInfo! as ChangePasswordForm),
         [name]: value,
       },
     });
   };
 
   return (
-    <form onSubmit={handleSubmitBtn}>
+    <form
+      onSubmit={handleSubmitBtn}
+      method="POST"
+      encType="multipart/form-data"
+    >
       <input
         name="pass1"
-        type="pass1"
+        type="password"
         placeholder="New password"
+        autoComplete="off"
+        pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,15}$"
         onChange={handleChange}
       />
       <input
         name="pass2"
-        type="pass2"
+        type="password"
         placeholder="Confirm password"
+        autoComplete="off"
+        pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,15}$"
         onChange={handleChange}
       />
       <input type="submit" />

@@ -84,17 +84,16 @@ export class UsersService {
   async passwordChanger(session: UserDocument, password: UpdateUserDataDto) {
     //
     const { pass1, pass2 } = password;
+    const findUser = await this.userModel.findById(session._id);
 
     if (pass1 !== pass2) {
       throw new Error(`Password does not match`);
     }
 
-    return await this.userModel.findByIdAndUpdate(
-      session._id,
-      {
-        password: pass2,
-      },
-      { new: true },
-    );
+    findUser.password = pass2;
+
+    await findUser.save();
+
+    return findUser;
   }
 }

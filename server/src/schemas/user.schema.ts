@@ -14,16 +14,16 @@ export class UserInformation {
   readonly userId: string;
 
   @Prop({ required: true })
-  readonly password: string;
+  public password: string;
 
   @Prop({ required: true })
-  readonly email: string;
+  public email: string;
 
   @Prop({ required: true })
-  readonly nickname: string;
+  public nickname: string;
 
   @Prop({ required: false })
-  readonly avatarUrl: string;
+  public avatarUrl: string;
 }
 
 export const UserSchema = SchemaFactory.createForClass(

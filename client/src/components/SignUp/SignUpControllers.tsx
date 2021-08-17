@@ -44,7 +44,7 @@ const SignUpControllers = () => {
     dispatch!({
       type: "SET_FORM",
       formInfo: {
-        ...state!.formInfo,
+        ...(state!.formInfo! as SignUpForm),
         [name]: files ? files[0] : value,
       },
     });

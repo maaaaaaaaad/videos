@@ -3,8 +3,11 @@ import { useReducer } from "react";
 import { createContext } from "react";
 import {
   Action,
+  ChangePasswordForm,
+  SignUpForm,
   SignUpFormDispatch,
   State,
+  UpdateForm,
 } from "../types/Sign/SignUpForm.type";
 
 export const SignUpStateContext = createContext<State | null>(null);
@@ -14,9 +17,21 @@ export const SignUpDispatchContext = createContext<SignUpFormDispatch | null>(
 
 function signUpReducer(state: State, action: Action): State {
   switch (action.type) {
-    case "SET_FORM":
+    case "SET_SIGNUP_FORM":
       return {
-        ...state.formInfo,
+        ...(state.formInfo as SignUpForm),
+        formInfo: action.formInfo,
+      };
+
+    case "SET_UPDATE_FORM":
+      return {
+        ...(state.formInfo as UpdateForm),
+        formInfo: action.formInfo,
+      };
+
+    case "SET_CHANGE_PASSWORD":
+      return {
+        ...(state.formInfo as ChangePasswordForm),
         formInfo: action.formInfo,
       };
 

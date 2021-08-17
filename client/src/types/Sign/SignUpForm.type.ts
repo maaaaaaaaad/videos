@@ -16,9 +16,18 @@ export type State = {
   formInfo: SignUpForm | UpdateForm | ChangePasswordForm;
 };
 
-export type Action = {
-  type: "SET_FORM";
-  formInfo: SignUpForm | UpdateForm | ChangePasswordForm;
-};
+export type Action =
+  | {
+      type: "SET_SIGNUP_FORM";
+      formInfo: SignUpForm;
+    }
+  | {
+      type: "SET_UPDATE_FORM";
+      formInfo: UpdateForm;
+    }
+  | {
+      type: "SET_CHANGE_PASSWORD";
+      formInfo: ChangePasswordForm;
+    };
 
 export type SignUpFormDispatch = Dispatch<Action>;

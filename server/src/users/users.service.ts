@@ -34,7 +34,7 @@ export class UsersService {
       password: pass2,
       email,
       nickname,
-      avatarUrl: avatar ? avatar.path : 'Not Avatar',
+      avatarUrl: avatar ? avatar.path : null,
     });
 
     return await user.save();

@@ -6,7 +6,7 @@ export type SignUpForm = {
   pass2: string;
   email: string;
   nickname: string;
-  avatar: File | undefined;
+  avatar: File | null;
 };
 
 export type UpdateForm = Pick<SignUpForm, "email" | "nickname" | "avatar">;

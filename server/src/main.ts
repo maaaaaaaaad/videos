@@ -38,6 +38,11 @@ async function bootstrap() {
     prefix: '/avatar',
   });
 
+  app.useStaticAssets(join(__dirname, '..', 'assets'), {
+    index: false,
+    prefix: '/assets',
+  });
+
   await app.listen(5000);
 }
 bootstrap();

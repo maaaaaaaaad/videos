@@ -108,7 +108,7 @@ export class UsersController {
     @Res() res: Response,
   ) {
     //
-    if (file !== undefined) {
+    if (file !== null) {
       body.avatar = file;
     }
 

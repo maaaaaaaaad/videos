@@ -54,7 +54,7 @@ const initSignUpForm: State = {
     pass2: "",
     email: "",
     nickname: "",
-    avatar: undefined,
+    avatar: null,
   },
 };
 

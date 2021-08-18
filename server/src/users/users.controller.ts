@@ -18,6 +18,8 @@ import { UserSignDataDto } from './dto/userForm.dto';
 import { Helper } from './shared/helper';
 import { UsersService } from './users.service';
 
+//Try to get avatar image how use sendFile?? first search it is..🚀
+
 @Controller('users')
 export class UsersController {
   constructor(private userService: UsersService) {}

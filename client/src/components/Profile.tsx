@@ -24,12 +24,15 @@ const Profile: React.FC<RouteComponentProps<ResponseUserData>> = ({
     <>
       {isUser ? (
         <section>
-          <img
-            src={`../../../server/${isUser.avatarUrl}`}
-            width={300}
-            height={400}
-            alt="avatar"
-          />
+          {isUser.avatarUrl && (
+            <img
+              src={`http://localhost:5000/${isUser.avatarUrl}`}
+              width={300}
+              height={300}
+              alt="avatar"
+            />
+          )}
+
           <h1>{isUser?.nickname}'s Profile</h1>
           <ul>
             <li>

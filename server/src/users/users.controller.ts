@@ -26,10 +26,15 @@ export class UsersController {
     private readonly emailService: MailService,
   ) {}
 
-  @Get('email-authentication')
-  async emailAuthService() {
-    await this.emailService.emailAuth('roma5698@naver.com');
-    return 'ok';
+  @Post('email-authentication')
+  async emailAuthService(@Body() body: UserSignInDto, @Res() res: Response) {
+    //
+    const email = body.email;
+
+    await this.emailService.emailAuth(email);
+    return res.status(200).json({
+      message: 'Successfully send email!',
+    });
   }
 
   @Get()

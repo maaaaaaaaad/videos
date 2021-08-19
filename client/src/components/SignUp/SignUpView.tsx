@@ -4,6 +4,8 @@ import { ChangeHandler } from "../../types/Sign/Sign.interface";
 const SignUpView: React.FC<ChangeHandler> = ({
   handleChange,
   handleSubmitBtn,
+  handleCheckEmail,
+  loadingSpanner,
 }) => {
   return (
     <section>
@@ -62,6 +64,11 @@ const SignUpView: React.FC<ChangeHandler> = ({
             pattern="^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$"
             onChange={(e) => handleChange(e)}
           />
+          {loadingSpanner ? (
+            "Loading...🕐"
+          ) : (
+            <button onClick={(e) => handleCheckEmail!(e)}>Check Email</button>
+          )}
         </li>
         <li>
           <input

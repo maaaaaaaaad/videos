@@ -22,9 +22,14 @@ export class MailService {
   }
 
   async emailAuth(to: string) {
-    await this._send([to], 'Email Authentication', 'email-authentication.ejs', {
-      email: to,
-      date: new Date(),
-    });
+    await this._send(
+      [to],
+      'Email Authentication from Woong',
+      'email-authentication.ejs',
+      {
+        email: to,
+        date: new Date(),
+      },
+    );
   }
 }

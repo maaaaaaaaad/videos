@@ -1,4 +1,6 @@
+import axios from "axios";
 import React from "react";
+import { useState } from "react";
 import { useContext } from "react";
 import { PostSignUp } from "../../api/user/signUp";
 import {
@@ -13,6 +15,7 @@ const SignUpControllers = () => {
   //
   const dispatch = useContext(SignUpDispatchContext);
   const state = useContext(SignUpStateContext);
+  const [loadingSpanner, setLoadingSpanner] = useState<boolean>(false);
 
   const handleSubmitBtn = async (e: React.FormEvent<HTMLFormElement>) => {
     //
@@ -37,6 +40,38 @@ const SignUpControllers = () => {
     }
   };
 
+  const handleCheckEmail = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    const userEmail = (state!.formInfo as SignUpForm).email;
+    const RegExp =
+      /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{3}$/;
+
+    const emailInspect = RegExp.test(userEmail);
+
+    if (emailInspect === true) {
+      const body = {
+        email: userEmail,
+      };
+
+      try {
+        setLoadingSpanner(true);
+        const res = await axios.post(
+          "http://localhost:5000/users/email-authentication",
+          body,
+          { withCredentials: true }
+        );
+        setLoadingSpanner(false);
+
+        console.log(res.data);
+      } catch (error) {
+        console.log(error.message);
+      }
+    } else {
+      window.alert("Please you check email format");
+    }
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, files } = e.currentTarget;
 
@@ -50,7 +85,12 @@ const SignUpControllers = () => {
   };
 
   return (
-    <SignUpView handleChange={handleChange} handleSubmitBtn={handleSubmitBtn} />
+    <SignUpView
+      handleChange={handleChange}
+      handleSubmitBtn={handleSubmitBtn}
+      handleCheckEmail={handleCheckEmail}
+      loadingSpanner={loadingSpanner}
+    />
   );
 };
 

@@ -27,7 +27,10 @@ export class UsersController {
   ) {}
 
   @Post('email-authentication')
-  async emailAuthService(@Body() body: UserSignInDto, @Res() res: Response) {
+  async emailAuthService(
+    @Body() body: Pick<UserSignInDto, 'email'>,
+    @Res() res: Response,
+  ) {
     //
     const email = body.email;
 
@@ -84,7 +87,7 @@ export class UsersController {
 
   @Post('login')
   async postSignInData(
-    @Body() body: UserSignInDto,
+    @Body() body: Pick<UserSignInDto, 'userId' | 'pass2'>,
     @Req() req: Request,
     @Res() res: Response,
   ) {
@@ -116,7 +119,7 @@ export class UsersController {
   )
   async patchUserData(
     @UploadedFile() file: Express.Multer.File,
-    @Body() body: UpdateUserDataDto,
+    @Body() body: Omit<UpdateUserDataDto, 'pass1' | 'pass2'>,
     @Req() req: Request,
     @Res() res: Response,
   ) {

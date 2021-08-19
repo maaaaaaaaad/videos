@@ -14,7 +14,7 @@ export class MailService {
     await this.emailService.sendMail({
       to: tos.join(', '),
       subject,
-      template: `${templateName}`,
+      template: `./${templateName}`,
       context,
     });
 

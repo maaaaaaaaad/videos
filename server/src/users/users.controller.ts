@@ -12,6 +12,7 @@ import {
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Request, Response } from 'express';
 import { diskStorage } from 'multer';
+import { MailService } from 'src/mail/mail.service';
 import UserSignInDto from './dto/signIn.dto';
 import UpdateUserDataDto from './dto/updateUser.dto';
 import { UserSignDataDto } from './dto/userForm.dto';
@@ -20,7 +21,16 @@ import { UsersService } from './users.service';
 
 @Controller('users')
 export class UsersController {
-  constructor(private userService: UsersService) {}
+  constructor(
+    private userService: UsersService,
+    private readonly emailService: MailService,
+  ) {}
+
+  @Get('email-authentication')
+  async emailAuthService() {
+    await this.emailService.emailAuth('roma5698@naver.com');
+    return 'ok';
+  }
 
   @Get()
   async getUserSession(@Req() req: Request, @Res() res: Response) {

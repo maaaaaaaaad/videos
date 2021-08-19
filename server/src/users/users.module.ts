@@ -4,6 +4,7 @@ import { UsersController } from './users.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UserSchema } from 'src/schemas/user.schema';
 import { MulterModule } from '@nestjs/platform-express';
+import { MailModule } from 'src/mail/mail.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { MulterModule } from '@nestjs/platform-express';
     MulterModule.register({
       dest: 'avatar/',
     }),
+    MailModule,
   ],
   providers: [UsersService],
   controllers: [UsersController],

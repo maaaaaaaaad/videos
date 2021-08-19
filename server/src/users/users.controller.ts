@@ -34,9 +34,10 @@ export class UsersController {
     //
     const email = body.email;
 
-    await this.emailService.emailAuth(email);
+    const result: number = await this.emailService.emailAuth(email);
     return res.status(200).json({
       message: 'Successfully send email!',
+      secret_key: result,
     });
   }
 

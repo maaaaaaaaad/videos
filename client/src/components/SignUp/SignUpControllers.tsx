@@ -67,7 +67,7 @@ const SignUpControllers = () => {
         window.alert(`Send message you email: ${userEmail}`);
 
         setIsEmail(true);
-        console.log(res.data);
+        console.log("User secret key: " + res.data.secret_key);
       } catch (error) {
         console.log(error.message);
         setIsEmail(false);

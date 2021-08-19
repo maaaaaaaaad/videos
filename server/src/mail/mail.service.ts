@@ -10,26 +10,30 @@ export class MailService {
     subject: string,
     templateName: string,
     context: any = {},
-  ): Promise<boolean> {
+  ) {
     await this.emailService.sendMail({
       to: tos.join(', '),
       subject,
       template: `./${templateName}`,
       context,
     });
-
-    return true;
   }
 
-  async emailAuth(to: string) {
+  async emailAuth(to: string): Promise<number> {
+    //
+    const container = {
+      email: to,
+      date: new Date(),
+      secret_key: Math.floor(Math.random() * 100000) + 100000,
+    };
+
     await this._send(
       [to],
       'Email Authentication from Woong',
       'email-authentication.ejs',
-      {
-        email: to,
-        date: new Date(),
-      },
+      container,
     );
+
+    return container.secret_key;
   }
 }

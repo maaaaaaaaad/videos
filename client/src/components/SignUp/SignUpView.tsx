@@ -1,11 +1,15 @@
 import React from "react";
-import { ChangeHandler } from "../../types/Sign/Sign.interface";
+import { SignUpHandler } from "../../types/Sign/Sign.interface";
 
-const SignUpView: React.FC<ChangeHandler> = ({
+const SignUpView: React.FC<SignUpHandler> = ({
   handleChange,
   handleSubmitBtn,
-  handleCheckEmail,
+  handleSendEmail,
+  handleEmailKey,
+  handleSignEmail,
   loadingSpanner,
+  emailKey,
+  okEmail,
 }) => {
   return (
     <section>
@@ -67,7 +71,31 @@ const SignUpView: React.FC<ChangeHandler> = ({
           {loadingSpanner ? (
             "Loading...🕐"
           ) : (
-            <button onClick={(e) => handleCheckEmail!(e)}>Check Email</button>
+            <>
+              {emailKey ? (
+                <span>
+                  <input
+                    type="text"
+                    placeholder="Enter you email key"
+                    autoComplete="off"
+                    onChange={(e) => handleEmailKey(e)}
+                  />
+                  <button onClick={(e) => handleSignEmail(e)}>
+                    Sign Email
+                  </button>
+                </span>
+              ) : (
+                <>
+                  {okEmail ? (
+                    <span>OK</span>
+                  ) : (
+                    <button onClick={(e) => handleSendEmail(e)}>
+                      Send Email
+                    </button>
+                  )}
+                </>
+              )}
+            </>
           )}
         </li>
         <li>

@@ -17,7 +17,9 @@ const SignUpControllers = () => {
   const dispatch = useContext(SignUpDispatchContext);
   const state = useContext(SignUpStateContext);
   const [loadingSpanner, setLoadingSpanner] = useState<boolean>(false);
-  const [isEmail, setIsEmail] = useState<boolean>(false);
+  const [emailKey, setEmailKey] = useState<string | null>(null);
+  const [inputEmailKey, setInputEmailKey] = useState<string | null>(null);
+  const [okEmail, setOkEmail] = useState<boolean>(false);
 
   const handleSubmitBtn = async (e: React.FormEvent<HTMLFormElement>) => {
     //
@@ -33,7 +35,7 @@ const SignUpControllers = () => {
       formData.append("avatar", (state.formInfo! as SignUpForm).avatar!);
 
       try {
-        if (!isEmail) {
+        if (!okEmail) {
           return window.alert("Please authentication your email");
         }
         const res = await PostSignUp(formData);
@@ -45,7 +47,7 @@ const SignUpControllers = () => {
     }
   };
 
-  const handleCheckEmail = async (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleSendEmail = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
     const userEmail = (state!.formInfo as SignUpForm).email;
@@ -66,15 +68,34 @@ const SignUpControllers = () => {
 
         window.alert(`Send message you email: ${userEmail}`);
 
-        setIsEmail(true);
         console.log("User secret key: " + res.data.secret_key);
+        setEmailKey(String(res.data.secret_key));
+        console.log(typeof res.data.secret_key);
       } catch (error) {
         console.log(error.message);
-        setIsEmail(false);
+        setEmailKey(null);
       }
     } else {
       window.alert("Please you check email format");
     }
+  };
+
+  const handleSignEmail = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if (emailKey !== inputEmailKey) {
+      return window.alert("Email key does not match");
+    }
+
+    setEmailKey(null);
+    setOkEmail(true);
+  };
+
+  const handleEmailKey = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //
+    const value = e.currentTarget.value;
+    setInputEmailKey(value);
+
+    console.log(value === emailKey);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -93,8 +114,12 @@ const SignUpControllers = () => {
     <SignUpView
       handleChange={handleChange}
       handleSubmitBtn={handleSubmitBtn}
-      handleCheckEmail={handleCheckEmail}
+      handleSendEmail={handleSendEmail}
+      handleEmailKey={handleEmailKey}
+      handleSignEmail={handleSignEmail}
       loadingSpanner={loadingSpanner}
+      emailKey={emailKey}
+      okEmail={okEmail}
     />
   );
 };

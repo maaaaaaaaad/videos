@@ -9,6 +9,10 @@ import ProfileEdit from "../components/Profile/information/ProfileEdit";
 import ChangePassword from "../components/Profile/password/ChangePassword";
 
 import SignUp from "../components/SignUp";
+import Upload from "../components/Upload";
+import UploadBook from "../components/Upload/UploadBook";
+import UploadNote from "../components/Upload/UploadNote";
+import UploadVideo from "../components/Upload/UploadVideo";
 import Videos from "../components/Videos";
 import SignUpContexts from "../contexts/SignUpContexts";
 
@@ -25,6 +29,7 @@ const Routers = () => {
       <SignUpContexts>
         <Route path="/signup" exact component={SignUp} />
         <Route path="/login" exact component={Login} />
+
         <Route path="/profile/:id" exact component={Profile} />
         <Route path="/profile/:id/edit" exact component={ProfileEdit} />
         <Route
@@ -32,6 +37,11 @@ const Routers = () => {
           exact
           component={ChangePassword}
         />
+
+        <Route path="/upload/:id" exact component={Upload} />
+        <Route path="/upload/:id/video" exact component={UploadVideo} />
+        <Route path="/upload/:id/book" exact component={UploadBook} />
+        <Route path="/upload/:id/note" exact component={UploadNote} />
       </SignUpContexts>
     </React.Fragment>
   );

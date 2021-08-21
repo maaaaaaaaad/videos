@@ -70,7 +70,6 @@ const SignUpControllers = () => {
 
         console.log("User secret key: " + res.data.secret_key);
         setEmailKey(String(res.data.secret_key));
-        console.log(typeof res.data.secret_key);
       } catch (error) {
         console.log(error.message);
         setEmailKey(null);
@@ -94,8 +93,6 @@ const SignUpControllers = () => {
     //
     const value = e.currentTarget.value;
     setInputEmailKey(value);
-
-    console.log(value === emailKey);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

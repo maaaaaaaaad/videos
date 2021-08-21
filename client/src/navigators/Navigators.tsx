@@ -31,7 +31,13 @@ const Navigators = () => {
             <Link to="/login">Login</Link>
           )}
         </li>
-        <li>{!isUser && <Link to="/signup">SignUp</Link>}</li>
+        <li>
+          {isUser ? (
+            <Link to={`/upload/${isUser._id}`}>Upload</Link>
+          ) : (
+            <Link to="/signup">SignUp</Link>
+          )}
+        </li>
       </ul>
     </section>
   );

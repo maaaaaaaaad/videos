@@ -120,7 +120,7 @@ export class UsersController {
   )
   async patchUserData(
     @UploadedFile() file: Express.Multer.File,
-    @Body() body: Omit<UpdateUserDataDto, 'pass1' | 'pass2'>,
+    @Body() body: Pick<UpdateUserDataDto, 'email' | 'nickname' | 'avatar'>,
     @Req() req: Request,
     @Res() res: Response,
   ) {

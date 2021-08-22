@@ -13,16 +13,36 @@ export class UsersService {
     @InjectModel('UserData') private userModel: Model<UserDocument>,
   ) {}
   //
+  async checkingId(id: string) {
+    const idExist: boolean = await this.userModel.exists({
+      userId: id,
+    });
+
+    if (idExist) {
+      return {
+        userId: id,
+        duplicate: idExist,
+        message: 'Already taken',
+      };
+    }
+
+    return {
+      userId: id,
+      duplicate: idExist,
+      message: 'Successfully',
+    };
+  }
+
   async signUpUserData(signUpData: UserSignDataDto) {
     //
     const { userId, pass1, pass2, email, nickname, avatar } = signUpData;
 
     const checkExists: boolean = await this.userModel.exists({
-      $or: [{ userId }, { email }, { nickname }],
+      $or: [{ email }, { nickname }],
     });
 
     if (checkExists) {
-      throw new Error(`This user id or email or nickname is already taken.`);
+      throw new Error(`This email or nickname is already taken.`);
     }
 
     if (pass1 !== pass2) {

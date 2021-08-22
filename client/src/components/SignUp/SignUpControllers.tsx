@@ -8,6 +8,7 @@ import {
   SignUpStateContext,
 } from "../../contexts/SignUpContexts";
 import { Email } from "../../types/auth/email.type";
+import { idCheck } from "../../types/auth/id.auth";
 import { SignUpForm } from "../../types/Sign/SignUpForm.type";
 
 import SignUpView from "./SignUpView";
@@ -17,12 +18,12 @@ const SignUpControllers = () => {
   const dispatch = useContext(SignUpDispatchContext);
   const state = useContext(SignUpStateContext);
   const [loadingSpanner, setLoadingSpanner] = useState<boolean>(false);
+  const [checkId, setCheckId] = useState<string | null>(null);
   const [emailKey, setEmailKey] = useState<string | null>(null);
   const [inputEmailKey, setInputEmailKey] = useState<string | null>(null);
   const [okEmail, setOkEmail] = useState<boolean>(false);
 
   const handleSubmitBtn = async (e: React.FormEvent<HTMLFormElement>) => {
-    //
     e.preventDefault();
 
     if (state?.formInfo) {
@@ -38,28 +39,16 @@ const SignUpControllers = () => {
         if (!okEmail) {
           return window.alert("Please authentication your email");
         }
-        const res = await PostSignUp(formData);
-        console.log(res.data);
-        window.location.href = "/login";
+
+        if (checkId === "Successfully") {
+          const res = await PostSignUp(formData);
+          console.log(res.data);
+          window.location.href = "/login";
+        }
       } catch (error) {
-        window.alert(`This user id or email or nickname is already taken.`);
+        window.alert(error.message);
       }
     }
-  };
-
-  const handleCheckId = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-
-    const idFormat = /^[A-Za-z0-9]{5,15}$/;
-    const id = (state!.formInfo as SignUpForm).userId;
-
-    const checkId: boolean = idFormat.test(id);
-
-    if (!checkId) {
-      return window.alert("Please check id format");
-    }
-
-    //api
   };
 
   const handleSendEmail = async (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -110,8 +99,15 @@ const SignUpControllers = () => {
     setInputEmailKey(value);
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, files } = e.currentTarget;
+
+    switch (name) {
+      case "userId":
+        const res = await idCheck(value);
+        setCheckId(res);
+        break;
+    }
 
     dispatch!({
       type: "SET_SIGNUP_FORM",
@@ -126,7 +122,7 @@ const SignUpControllers = () => {
     <SignUpView
       handleChange={handleChange}
       handleSubmitBtn={handleSubmitBtn}
-      handleCheckId={handleCheckId}
+      checkId={checkId}
       handleSendEmail={handleSendEmail}
       handleEmailKey={handleEmailKey}
       handleSignEmail={handleSignEmail}

@@ -1,8 +1,7 @@
-import axios from "axios";
 import React from "react";
 import { useState } from "react";
 import { useContext } from "react";
-import { authUserEmail } from "../../api/auth/email";
+import { authUserEmail, checkingEmail } from "../../api/auth/email";
 import { PostSignUp } from "../../api/user/signUp";
 import {
   SignUpDispatchContext,
@@ -68,15 +67,10 @@ const SignUpControllers = () => {
         email: userEmail,
       };
 
-      const checkingEmail = await axios.post(
-        "http://localhost:5000/users/check-email",
-        body,
-        {
-          withCredentials: true,
-        }
-      );
+      const emailExsit = await checkingEmail(body);
+      const emailChecked: boolean = emailExsit.data.result;
 
-      if (checkingEmail.data.result === true) {
+      if (emailChecked === true) {
         return window.alert(`This email: ${userEmail} is already taken.`);
       }
 

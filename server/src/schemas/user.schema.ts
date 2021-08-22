@@ -32,7 +32,10 @@ export const UserSchema = SchemaFactory.createForClass(
   //
   if (this.isModified('password')) {
     //
-    this.password = await bcrypt.hash(this.password, 5);
+    this.password = await bcrypt.hash(
+      this.password,
+      Number(process.env.HASH_PASSWORD),
+    );
   }
   next();
 });

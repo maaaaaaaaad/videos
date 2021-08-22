@@ -9,6 +9,7 @@ import {
 } from "../../contexts/SignUpContexts";
 import { Email } from "../../types/auth/email.type";
 import { idCheck } from "../../types/auth/id.auth";
+import { nickCheck } from "../../types/auth/nick.auth";
 import { SignUpForm } from "../../types/Sign/SignUpForm.type";
 
 import SignUpView from "./SignUpView";
@@ -19,6 +20,7 @@ const SignUpControllers = () => {
   const state = useContext(SignUpStateContext);
   const [loadingSpanner, setLoadingSpanner] = useState<boolean>(false);
   const [checkId, setCheckId] = useState<string | null>(null);
+  const [checkNick, setCheckNick] = useState<string | null>(null);
   const [emailKey, setEmailKey] = useState<string | null>(null);
   const [inputEmailKey, setInputEmailKey] = useState<string | null>(null);
   const [okEmail, setOkEmail] = useState<boolean>(false);
@@ -46,7 +48,7 @@ const SignUpControllers = () => {
           window.location.href = "/login";
         }
       } catch (error) {
-        window.alert(error.message);
+        window.alert("This email is already taken.");
       }
     }
   };
@@ -104,8 +106,13 @@ const SignUpControllers = () => {
 
     switch (name) {
       case "userId":
-        const res = await idCheck(value);
-        setCheckId(res);
+        const resId = await idCheck(value);
+        setCheckId(resId);
+        break;
+
+      case "nickname":
+        const resNick = await nickCheck(value);
+        setCheckNick(resNick);
         break;
     }
 
@@ -123,6 +130,7 @@ const SignUpControllers = () => {
       handleChange={handleChange}
       handleSubmitBtn={handleSubmitBtn}
       checkId={checkId}
+      checkNick={checkNick}
       handleSendEmail={handleSendEmail}
       handleEmailKey={handleEmailKey}
       handleSignEmail={handleSignEmail}

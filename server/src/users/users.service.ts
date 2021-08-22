@@ -33,16 +33,36 @@ export class UsersService {
     };
   }
 
+  async checkingNick(nickname: string) {
+    const nickExist: boolean = await this.userModel.exists({
+      nickname,
+    });
+
+    if (nickExist) {
+      return {
+        userId: nickname,
+        duplicate: nickExist,
+        message: 'Already taken',
+      };
+    }
+
+    return {
+      userId: nickname,
+      duplicate: nickExist,
+      message: 'Successfully',
+    };
+  }
+
   async signUpUserData(signUpData: UserSignDataDto) {
     //
     const { userId, pass1, pass2, email, nickname, avatar } = signUpData;
 
     const checkExists: boolean = await this.userModel.exists({
-      $or: [{ email }, { nickname }],
+      email,
     });
 
     if (checkExists) {
-      throw new Error(`This email or nickname is already taken.`);
+      throw new Error(`This email is already taken.`);
     }
 
     if (pass1 !== pass2) {

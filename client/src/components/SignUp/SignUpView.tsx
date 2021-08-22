@@ -8,6 +8,7 @@ const SignUpView: React.FC<SignUpHandler> = ({
   handleEmailKey,
   handleSignEmail,
   checkId,
+  checkNick,
   loadingSpanner,
   emailKey,
   okEmail,
@@ -110,6 +111,7 @@ const SignUpView: React.FC<SignUpHandler> = ({
             pattern="^([a-zA-Z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]).{2,8}$"
             onChange={(e) => handleChange(e)}
           />
+          <span>{checkNick}</span>
         </li>
         <li>
           <input type="submit" value="Sign up" name="signup" />

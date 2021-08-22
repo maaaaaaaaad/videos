@@ -6,6 +6,7 @@ export interface ChangeHandler {
 export interface SignUpHandler extends ChangeHandler {
   loadingSpanner: boolean;
   checkId: string | null;
+  checkNick: string | null;
   emailKey: string | null;
   okEmail: boolean;
   handleSendEmail: (e: React.MouseEvent<HTMLButtonElement>) => void;

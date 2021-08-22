@@ -38,6 +38,18 @@ export class UsersController {
     });
   }
 
+  @Post('check-nick')
+  async checkNickname(
+    @Body() body: Pick<UserSignDataDto, 'nickname'>,
+    @Res() res: Response,
+  ) {
+    //
+    const result = await this.userService.checkingNick(body.nickname);
+    return res.status(200).json({
+      response: result,
+    });
+  }
+
   @Post('email-authentication')
   async emailAuthService(
     @Body() body: Pick<UserSignInDto, 'email'>,

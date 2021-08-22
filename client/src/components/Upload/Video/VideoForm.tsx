@@ -5,9 +5,18 @@ const VideoForm = () => {
     console.log(e.currentTarget.value);
   };
 
+  const handleVideoSeleted = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.currentTarget.files && console.log(e.currentTarget.files[0]);
+  };
+
   return (
     <form id="video-uploader">
-      <input type="file" accept="video/*" name="video" />
+      <input
+        onChange={handleVideoSeleted}
+        type="file"
+        accept="video/*"
+        name="video"
+      />
       <input type="text" autoComplete="off" placeholder="Title" />
       <input type="text" autoComplete="off" placeholder="Description" />
       <select onChange={onChange} name="theme" form="video-uploader">

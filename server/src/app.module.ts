@@ -6,6 +6,7 @@ import configEmail from './config/email';
 import { MailerModule } from '@nestjs-modules/mailer';
 import * as path from 'path';
 import { EjsAdapter } from '@nestjs-modules/mailer/dist/adapters/ejs.adapter';
+import { VideosModule } from './videos/videos.module';
 
 @Module({
   imports: [
@@ -33,6 +34,7 @@ import { EjsAdapter } from '@nestjs-modules/mailer/dist/adapters/ejs.adapter';
       },
     }),
     UsersModule,
+    VideosModule,
   ],
 })
 export class AppModule {}

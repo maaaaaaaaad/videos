@@ -4,6 +4,7 @@ import { SignUpHandler } from "../../types/Sign/Sign.interface";
 const SignUpView: React.FC<SignUpHandler> = ({
   handleChange,
   handleSubmitBtn,
+  handleCheckId,
   handleSendEmail,
   handleEmailKey,
   handleSignEmail,
@@ -36,6 +37,7 @@ const SignUpView: React.FC<SignUpHandler> = ({
             pattern="^[A-za-z0-9]{5,15}$"
             onChange={(e) => handleChange(e)}
           />
+          <button onClick={(e) => handleCheckId(e)}>Check ID</button>
         </li>
         <li>
           <input

@@ -47,6 +47,21 @@ const SignUpControllers = () => {
     }
   };
 
+  const handleCheckId = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    const idFormat = /^[A-Za-z0-9]{5,15}$/;
+    const id = (state!.formInfo as SignUpForm).userId;
+
+    const checkId: boolean = idFormat.test(id);
+
+    if (!checkId) {
+      return window.alert("Please check id format");
+    }
+
+    //api
+  };
+
   const handleSendEmail = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
@@ -111,6 +126,7 @@ const SignUpControllers = () => {
     <SignUpView
       handleChange={handleChange}
       handleSubmitBtn={handleSubmitBtn}
+      handleCheckId={handleCheckId}
       handleSendEmail={handleSendEmail}
       handleEmailKey={handleEmailKey}
       handleSignEmail={handleSignEmail}

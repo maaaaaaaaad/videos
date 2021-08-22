@@ -50,6 +50,18 @@ export class UsersController {
     });
   }
 
+  @Post('check-email')
+  async checkEmail(
+    @Body() body: Pick<UserSignDataDto, 'email'>,
+    @Res() res: Response,
+  ) {
+    //
+    const result = await this.userService.checkingEmail(body.email);
+    return res.status(200).json({
+      result,
+    });
+  }
+
   @Post('email-authentication')
   async emailAuthService(
     @Body() body: Pick<UserSignInDto, 'email'>,

@@ -1,3 +1,4 @@
+import axios from "axios";
 import React from "react";
 import { useState } from "react";
 import { useContext } from "react";
@@ -66,6 +67,18 @@ const SignUpControllers = () => {
       const body: Email = {
         email: userEmail,
       };
+
+      const checkingEmail = await axios.post(
+        "http://localhost:5000/users/check-email",
+        body,
+        {
+          withCredentials: true,
+        }
+      );
+
+      if (checkingEmail.data.result === true) {
+        return window.alert(`This email: ${userEmail} is already taken.`);
+      }
 
       try {
         setLoadingSpanner(true);

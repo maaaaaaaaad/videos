@@ -53,6 +53,14 @@ export class UsersService {
     };
   }
 
+  async checkingEmail(email: string): Promise<boolean> {
+    const emailExist: boolean = await this.userModel.exists({
+      email,
+    });
+
+    return emailExist;
+  }
+
   async signUpUserData(signUpData: UserSignDataDto) {
     //
     const { userId, pass1, pass2, email, nickname, avatar } = signUpData;

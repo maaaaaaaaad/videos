@@ -1,22 +1,76 @@
+import axios from "axios";
 import React from "react";
+import { useContext } from "react";
+import {
+  VideoDispatchContext,
+  VideoStateContext,
+} from "../../../contexts/VideoContexts";
 import VideoForm from "./VideoForm";
 
 const VideoControllers = () => {
-  const handleSubmitBtn = (e: React.FormEvent<HTMLFormElement>) => {
+  const state = useContext(VideoStateContext);
+  const dispatch = useContext(VideoDispatchContext);
+
+  const handleSubmitBtn = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (state?.uploadForm) {
+      const formData = new FormData();
+      formData.append("video", state!.uploadForm.video!);
+      formData.append("title", state!.uploadForm.title!);
+      formData.append("description", state!.uploadForm.description!);
+      formData.append("theme", state!.uploadForm.theme!);
+
+      const res = await axios.post(
+        "http://localhost:5000/videos/upload",
+        formData,
+        {
+          withCredentials: true,
+        }
+      );
+
+      console.log(res.data);
+    }
+
+    return window.alert("Please fill video upload data.");
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.currentTarget.value);
+    const { name, value, files } = e.currentTarget;
+
+    dispatch!({
+      type: "VIDEO_UPLOAD",
+
+      uploadForm: {
+        ...state!.uploadForm,
+        [name]: files ? files[0] : value,
+      },
+    });
   };
 
   const handleChangeTextArea = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    console.log(e.currentTarget.value);
+    dispatch!({
+      type: "VIDEO_UPLOAD",
+
+      uploadForm: {
+        ...state!.uploadForm,
+        description: e.currentTarget.value,
+      },
+    });
   };
 
   const handleSelectedChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    console.log(e.currentTarget.value);
+    dispatch!({
+      type: "VIDEO_UPLOAD",
+
+      uploadForm: {
+        ...state!.uploadForm,
+        theme: e.currentTarget.value,
+      },
+    });
   };
+
+  console.log(state?.uploadForm);
 
   return (
     <VideoForm

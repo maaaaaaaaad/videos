@@ -8,12 +8,17 @@ const VideoForm: React.FC<ChangeHandler> = ({
   handleChangeTextArea,
 }) => {
   return (
-    <form id="video-uploader" onSubmit={(e) => handleSubmitBtn(e)}>
+    <form
+      id="video-uploader"
+      method="POST"
+      encType="multipart/form-data"
+      onSubmit={(e) => handleSubmitBtn(e)}
+    >
       <input
-        onChange={(e) => handleChange(e)}
+        name="video"
         type="file"
         accept="video/*"
-        name="video"
+        onChange={(e) => handleChange(e)}
       />
       <input
         name="title"
@@ -29,8 +34,8 @@ const VideoForm: React.FC<ChangeHandler> = ({
         onChange={(e) => handleChangeTextArea!(e)}
       />
       <select
-        onChange={(e) => handleSelectedChange!(e)}
         name="theme"
+        onChange={(e) => handleSelectedChange!(e)}
         form="video-uploader"
       >
         <option value="default">Default</option>

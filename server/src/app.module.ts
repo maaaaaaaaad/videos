@@ -11,6 +11,9 @@ import { VideosModule } from './videos/videos.module';
 @Module({
   imports: [
     MongooseModule.forRoot('mongodb://localhost/vbn', {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true,
       useFindAndModify: false,
     }),
     ConfigModule.forRoot({

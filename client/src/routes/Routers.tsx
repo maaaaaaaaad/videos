@@ -15,6 +15,7 @@ import UploadNote from "../components/Upload/UploadNote";
 import UploadVideo from "../components/Upload/UploadVideo";
 import Videos from "../components/Videos";
 import SignUpContexts from "../contexts/SignUpContexts";
+import VideoContexts from "../contexts/VideoContexts";
 
 const Routers = () => {
   //
@@ -40,7 +41,11 @@ const Routers = () => {
       </SignUpContexts>
 
       <Route path="/upload/:id" exact component={Upload} />
-      <Route path="/upload/:id/video" exact component={UploadVideo} />
+
+      <VideoContexts>
+        <Route path="/upload/:id/video" exact component={UploadVideo} />
+      </VideoContexts>
+
       <Route path="/upload/:id/book" exact component={UploadBook} />
       <Route path="/upload/:id/note" exact component={UploadNote} />
     </React.Fragment>

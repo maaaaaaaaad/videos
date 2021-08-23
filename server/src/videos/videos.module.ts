@@ -9,7 +9,7 @@ import { MulterModule } from '@nestjs/platform-express';
   imports: [
     MongooseModule.forFeature([
       {
-        name: 'VideoData',
+        name: 'Videos',
         schema: VideoSchema,
         collection: 'vbnvideos',
       },

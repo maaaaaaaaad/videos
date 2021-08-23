@@ -26,11 +26,15 @@ export class VideosController {
       body.video = video;
     }
 
-    const result = await this.videoServie.upload(body);
-
-    return res.status(200).json({
-      result,
-      body,
-    });
+    try {
+      const result = await this.videoServie.upload(body);
+      return res.status(200).json({
+        result,
+      });
+    } catch (error) {
+      return res.status(400).json({
+        error: error.message,
+      });
+    }
   }
 }

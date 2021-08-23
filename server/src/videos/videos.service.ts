@@ -13,16 +13,13 @@ export class VideosService {
   async upload(videoData: VideoDto) {
     const { video, title, description, theme } = videoData;
 
-    try {
-      const createVideo = new this.videoModel({
-        video: video ? video.path : null,
-        title,
-        description,
-        theme,
-      });
-      return await createVideo.save();
-    } catch (error) {
-      console.log(error.message);
-    }
+    const createVideo = new this.videoModel({
+      videoUrl: video ? video.path : null,
+      title,
+      description,
+      theme,
+    });
+
+    return await createVideo.save();
   }
 }

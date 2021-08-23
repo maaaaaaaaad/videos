@@ -1,7 +1,4 @@
-export interface ChangeHandler {
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleSubmitBtn: (e: React.FormEvent<HTMLFormElement>) => void;
-}
+import { ChangeHandler } from "../changeHandler/change.interface";
 
 export interface SignUpHandler extends ChangeHandler {
   loadingSpanner: boolean;

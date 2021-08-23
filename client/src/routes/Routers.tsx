@@ -37,12 +37,12 @@ const Routers = () => {
           exact
           component={ChangePassword}
         />
-
-        <Route path="/upload/:id" exact component={Upload} />
-        <Route path="/upload/:id/video" exact component={UploadVideo} />
-        <Route path="/upload/:id/book" exact component={UploadBook} />
-        <Route path="/upload/:id/note" exact component={UploadNote} />
       </SignUpContexts>
+
+      <Route path="/upload/:id" exact component={Upload} />
+      <Route path="/upload/:id/video" exact component={UploadVideo} />
+      <Route path="/upload/:id/book" exact component={UploadBook} />
+      <Route path="/upload/:id/note" exact component={UploadNote} />
     </React.Fragment>
   );
 };

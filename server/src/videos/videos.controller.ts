@@ -3,11 +3,12 @@ import {
   Body,
   Controller,
   Post,
+  Req,
   Res,
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
-import { Response } from 'express';
+import { Request, Response } from 'express';
 import { VideoDto } from './dto/video.dto';
 import { VideosService } from './videos.service';
 
@@ -20,14 +21,15 @@ export class VideosController {
   async uploadVideo(
     @UploadedFile() video: Express.Multer.File,
     @Body() body: VideoDto,
+    @Req() req: Request,
     @Res() res: Response,
   ) {
-    if (video !== null) {
-      body.video = video;
-    }
+    //
+    body.video = video;
+    const userSession = req.session.user;
 
     try {
-      const result = await this.videoServie.upload(body);
+      const result = await this.videoServie.upload(userSession, body);
       return res.status(200).json({
         result,
       });

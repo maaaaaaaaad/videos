@@ -1,6 +1,6 @@
-import axios from "axios";
 import React from "react";
 import { useContext } from "react";
+import { videoUploader } from "../../../api/video/upload";
 import {
   VideoDispatchContext,
   VideoStateContext,
@@ -14,25 +14,15 @@ const VideoControllers = () => {
   const handleSubmitBtn = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (state?.uploadForm) {
-      const formData = new FormData();
-      formData.append("video", state!.uploadForm.video!);
-      formData.append("title", state!.uploadForm.title!);
-      formData.append("description", state!.uploadForm.description!);
-      formData.append("theme", state!.uploadForm.theme!);
+    const formData = new FormData();
+    formData.append("video", state!.uploadForm.video!);
+    formData.append("title", state!.uploadForm.title!);
+    formData.append("description", state!.uploadForm.description!);
+    formData.append("theme", state!.uploadForm.theme!);
 
-      const res = await axios.post(
-        "http://localhost:5000/videos/upload",
-        formData,
-        {
-          withCredentials: true,
-        }
-      );
+    const res = await videoUploader(formData);
 
-      console.log(res.data);
-    }
-
-    return window.alert("Please fill video upload data.");
+    console.log(res.data);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

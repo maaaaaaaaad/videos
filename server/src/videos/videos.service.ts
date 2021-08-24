@@ -11,6 +11,11 @@ export class VideosService {
     @InjectModel('Videos') private videoModel: Model<VideoDocument>,
   ) {}
   //
+
+  async getAllVideos() {
+    return await this.videoModel.find({}).populate('owner');
+  }
+
   async upload(userSession: UserDocument, videoData: VideoDto) {
     const { video, title, description, theme } = videoData;
 

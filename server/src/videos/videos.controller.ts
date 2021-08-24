@@ -2,6 +2,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import {
   Body,
   Controller,
+  Get,
   Post,
   Req,
   Res,
@@ -15,6 +16,21 @@ import { VideosService } from './videos.service';
 @Controller('videos')
 export class VideosController {
   constructor(private videoServie: VideosService) {}
+
+  @Get()
+  async getAllItems(@Res() res: Response) {
+    try {
+      const result = await this.videoServie.getAllVideos();
+      return res.status(200).json({
+        message: 'Loaded to read the all videos',
+        result,
+      });
+    } catch (error) {
+      return res.status(400).json({
+        message: error.message,
+      });
+    }
+  }
 
   @Post('upload')
   @UseInterceptors(FileInterceptor('video'))

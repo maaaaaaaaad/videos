@@ -45,6 +45,11 @@ async function bootstrap() {
     prefix: '/assets',
   });
 
+  app.useStaticAssets(join(__dirname, '..', 'upload/video'), {
+    index: false,
+    prefix: '/upload/video',
+  });
+
   await app.listen(5000);
 }
 bootstrap();

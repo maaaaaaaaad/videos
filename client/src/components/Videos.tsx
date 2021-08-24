@@ -1,7 +1,8 @@
 import React from "react";
+import VideosView from "./Views/VideosView";
 
 const Videos = () => {
-  return <section>Videos</section>;
+  return <VideosView />;
 };
 
 export default Videos;

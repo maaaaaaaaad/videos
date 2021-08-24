@@ -5,7 +5,7 @@ import {
   SignUpStateContext,
 } from "../../contexts/SignUpContexts";
 import { SignInForm } from "../../types/Sign/SignUpForm.type";
-import LoginView from "./LoginView";
+import LoginView from "./LoginForm";
 
 const LoginControllers = () => {
   //

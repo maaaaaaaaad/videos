@@ -23,6 +23,12 @@ const VideoControllers = () => {
     const res = await videoUploader(formData);
 
     console.log(res.data);
+    formData.delete("video");
+    formData.delete("title");
+    formData.delete("description");
+    formData.delete("theme");
+
+    window.location.href = "/videos";
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

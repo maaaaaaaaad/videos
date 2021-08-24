@@ -1,33 +1,28 @@
-import axios from "axios";
-import React, { useState } from "react";
-import { useCallback } from "react";
-import { useEffect } from "react";
-import { GetAllVideos } from "../../api/video/getAll";
-import VideoViewTemplate from "./template/VideoViewTemplate";
+import React from "react";
+import { VideoProps } from "../../api/video/getAll";
 
-const VideosView = () => {
-  const [getVideos, SetGetVideos] = useState<GetAllVideos[] | null>(null);
-
-  const getAllVideos = useCallback(async () => {
-    const res = await axios.get("http://localhost:5000/videos", {
-      withCredentials: true,
-    });
-
-    SetGetVideos(res.data.result);
-  }, []);
-
-  useEffect(() => {
-    getAllVideos();
-  }, [getAllVideos]);
-
+const VideosView: React.FC<VideoProps> = ({ item }) => {
   return (
-    <section>
-      <ul>
-        {getVideos?.map((item) => (
-          <VideoViewTemplate key={Date.now()} item={item} />
-        ))}
-      </ul>
-    </section>
+    <li>
+      <video controls width={400} height={300}>
+        <source src={`http://localhost:5000/${item.videoUrl}`} />
+      </video>
+      <h2>{item.title}</h2>
+      <span>
+        <img
+          src={
+            item.owner.avatarUrl
+              ? `http://localhost:5000/${item.owner.avatarUrl}`
+              : `http://localhost:5000/assets/images/defaultImg.png`
+          }
+          alt="avatar"
+          width={55}
+          height={40}
+        />
+        {item.owner.nickname}
+      </span>
+      <p>Theme {item.theme}</p>
+    </li>
   );
 };
 

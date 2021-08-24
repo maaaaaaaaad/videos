@@ -60,8 +60,6 @@ const VideoControllers = () => {
     });
   };
 
-  console.log(state?.uploadForm);
-
   return (
     <VideoForm
       handleSelectedChange={handleSelectedChange}

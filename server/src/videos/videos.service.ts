@@ -24,6 +24,7 @@ export class VideosService {
       title,
       description,
       theme,
+      date: new Date().toLocaleDateString(),
       owner: userSession._id,
     });
 

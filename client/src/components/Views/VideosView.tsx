@@ -20,7 +20,6 @@ const VideosView = () => {
     getAllVideos();
   }, [getAllVideos]);
 
-  console.log(getVideos);
   return (
     <section>
       <ul>

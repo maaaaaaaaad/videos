@@ -8,9 +8,10 @@ interface Props {
 const VideoViewTemplate: React.FC<Props> = ({ item }) => {
   return (
     <li>
-      <video controls>
+      <video width={400} height={300} controls>
         <source src={"http://localhost:5000/" + item.videoUrl}></source>
       </video>
+      <h1>Title: {item.title}</h1>
       <p>
         <img
           src={
@@ -19,12 +20,12 @@ const VideoViewTemplate: React.FC<Props> = ({ item }) => {
               : "http://localhost:5000/assets/images/defaultImg.png"
           }
           alt="avatar"
-          width={30}
+          width={40}
           height={30}
         />
         <span>{item.owner.nickname}</span>
       </p>
-      <h1>Title: {item.title}</h1>
+      <p>{item.date}</p>
       <p>Description: {item.description}</p>
       <p>Theme: {item.theme}</p>
     </li>

@@ -13,7 +13,7 @@ const HomeView = () => {
             : "http://localhost:5000/assets/images/defaultImg.png"
         }
         alt="avatar"
-        width={50}
+        width={60}
         height={50}
       />
 

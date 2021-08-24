@@ -8,16 +8,19 @@ export type VideoDocument = VideoInformation & Document;
 @Schema()
 export class VideoInformation {
   @Prop({ required: true })
-  public videoUrl: string;
+  videoUrl: string;
 
   @Prop({ required: true })
-  public title: string;
+  title: string;
 
   @Prop({ required: true })
-  public description: string;
+  description: string;
 
   @Prop({ required: true })
-  public theme: string;
+  theme: string;
+
+  @Prop({ required: true })
+  date: Date;
 
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'UserData' })
   owner: UserInformation;

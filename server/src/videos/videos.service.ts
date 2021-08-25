@@ -4,14 +4,15 @@ import { Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { VideoDocument } from 'src/schemas/video.schema';
 import { VideoDto } from './dto/video.dto';
+import { UsersService } from 'src/users/users.service';
 
 @Injectable()
 export class VideosService {
   constructor(
-    @InjectModel('Videos') private videoModel: Model<VideoDocument>,
+    @InjectModel('Videos') private readonly videoModel: Model<VideoDocument>,
+    private readonly usersService: UsersService,
   ) {}
   //
-
   async getAllVideos() {
     return await this.videoModel
       .find({})
@@ -30,6 +31,8 @@ export class VideosService {
       date: new Date(),
       owner: userSession._id,
     });
+
+    await this.usersService.addUserVideos(userSession, createVideo);
 
     return await createVideo.save();
   }

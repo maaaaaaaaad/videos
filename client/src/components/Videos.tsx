@@ -2,7 +2,7 @@ import axios from "axios";
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
-import { AllVideos } from "../api/video/getAll";
+import { AllVideos } from "../types/Video/getAll.type";
 import VideosView from "./Views/VideosView";
 
 const Videos = () => {
@@ -13,7 +13,7 @@ const Videos = () => {
     const res = await axios.get("http://localhost:5000/videos", {
       withCredentials: true,
     });
-
+    console.log("Get videos", res.data.result);
     setVideos(res.data.result);
   };
 

@@ -6,6 +6,7 @@ import * as bcrypt from 'bcrypt';
 import { UserSignDataDto } from './dto/userForm.dto';
 import UserSignInDto from './dto/signIn.dto';
 import UpdateUserDataDto from './dto/updateUser.dto';
+import { VideoDocument } from 'src/schemas/video.schema';
 
 @Injectable()
 export class UsersService {
@@ -89,7 +90,6 @@ export class UsersService {
   }
 
   async signInUser(signInData: UserSignInDto) {
-    //
     const { userId, pass2 } = signInData;
 
     const checkExists = await this.userModel.findOne({ userId });
@@ -105,14 +105,13 @@ export class UsersService {
   }
 
   async updateUser(session: UserDocument, updataData: UpdateUserDataDto) {
-    //
     const { email, nickname, avatar } = updataData;
 
     if (email !== session.email || nickname !== session.nickname) {
       const checkExistsInfo: boolean = await this.userModel.exists({
         $or: [{ email, nickname }],
       });
-      //
+
       if (checkExistsInfo) {
         throw new Error(`This email or nickname is already taken.`);
       }
@@ -133,7 +132,6 @@ export class UsersService {
     session: UserDocument,
     password: Pick<UpdateUserDataDto, 'pass1' | 'pass2'>,
   ) {
-    //
     const { pass1, pass2 } = password;
     const findUser = await this.userModel.findById(session._id);
 
@@ -144,5 +142,12 @@ export class UsersService {
     findUser.password = pass2;
 
     return await findUser.save();
+  }
+
+  async addUserVideos(userSession: UserDocument, video: VideoDocument) {
+    //
+    const user = await this.userModel.findById(userSession._id);
+    user.videos.push(video);
+    await user.save();
   }
 }

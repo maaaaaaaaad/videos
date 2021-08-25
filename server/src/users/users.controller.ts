@@ -22,7 +22,7 @@ import { UsersService } from './users.service';
 @Controller('users')
 export class UsersController {
   constructor(
-    private userService: UsersService,
+    private readonly userService: UsersService,
     private readonly emailService: MailService,
   ) {}
 

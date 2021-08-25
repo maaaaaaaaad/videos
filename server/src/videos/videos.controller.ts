@@ -15,7 +15,7 @@ import { VideosService } from './videos.service';
 
 @Controller('videos')
 export class VideosController {
-  constructor(private videoServie: VideosService) {}
+  constructor(private readonly videoServie: VideosService) {}
 
   @Get()
   async getAllItems(@Res() res: Response) {
@@ -45,9 +45,9 @@ export class VideosController {
     const userSession = req.session.user;
 
     try {
-      const result = await this.videoServie.upload(userSession, body);
+      const upload = await this.videoServie.upload(userSession, body);
       return res.status(200).json({
-        result,
+        result: upload,
       });
     } catch (error) {
       return res.status(400).json({

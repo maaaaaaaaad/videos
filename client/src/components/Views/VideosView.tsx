@@ -1,5 +1,5 @@
 import React from "react";
-import { VideoProps } from "../../api/video/getAll";
+import { VideoProps } from "../../types/Video/getAll.type";
 
 const VideosView: React.FC<VideoProps> = ({ item }) => {
   return (

@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { UsersModule } from './users/users.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import configEmail from './config/email';
 import { MailerModule } from '@nestjs-modules/mailer';
 import * as path from 'path';
 import { EjsAdapter } from '@nestjs-modules/mailer/dist/adapters/ejs.adapter';
 import { VideosModule } from './videos/videos.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [

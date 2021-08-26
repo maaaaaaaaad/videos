@@ -80,7 +80,7 @@ export class UsersController {
   @Get()
   async getUserSession(@Req() req: Request, @Res() res: Response) {
     //
-    const userSession = req.session;
+    const userSession = req.session.user;
 
     return res.status(200).json({
       message: 'Success',

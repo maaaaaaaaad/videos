@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { createContext } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { UserLoggedIn } from "./api/user/userLoggedIn";
@@ -13,19 +13,18 @@ const App = () => {
   //
   const [resUserData, setResUserData] = useState<ResponseUserData | null>(null);
 
-  const getSessionData = async () => {
+  const getSessionData = useCallback(async () => {
     //
     const res = await UserLoggedIn();
-    const resUserData: ResponseUserData = res.data.userSession.user;
-
+    const resUserData: ResponseUserData = res.data.userSession;
     console.log("User Nickname:", resUserData?.nickname ?? "Not logged in");
     console.log("User data:", resUserData);
     setResUserData(resUserData);
-  };
+  }, []);
 
   useEffect(() => {
     getSessionData();
-  }, []);
+  }, [getSessionData]);
 
   return (
     <MediaQuery>

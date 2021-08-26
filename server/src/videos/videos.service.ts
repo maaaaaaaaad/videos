@@ -20,6 +20,17 @@ export class VideosService {
       .sort({ date: 'asc' });
   }
 
+  async getUserVideos(userSession: UserDocument) {
+    const videos = await this.videoModel
+      .find({ owner: userSession._id })
+      .populate('owner')
+      .sort({
+        date: 'asc',
+      });
+
+    return videos;
+  }
+
   async upload(userSession: UserDocument, videoData: VideoDto) {
     const { video, title, description, theme } = videoData;
 

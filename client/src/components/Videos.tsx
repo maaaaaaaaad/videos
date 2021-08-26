@@ -3,7 +3,7 @@ import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { AllVideos } from "../types/Video/getAll.type";
-import VideosView from "./Views/VideosView";
+import VideosView from "./Views/AllVideosView";
 
 const Videos = () => {
   //

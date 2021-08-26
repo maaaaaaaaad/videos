@@ -3,6 +3,7 @@ import {
   Body,
   Controller,
   Get,
+  NotFoundException,
   Post,
   Req,
   Res,
@@ -28,6 +29,23 @@ export class VideosController {
     } catch (error) {
       return res.status(400).json({
         message: error.message,
+      });
+    }
+  }
+
+  @Get('get-videos')
+  async getUserItem(@Req() req: Request, @Res() res: Response) {
+    const userSession = req.session.user;
+
+    try {
+      const result = await this.videoServie.getUserVideos(userSession);
+      return res.status(200).json({
+        message: 'Successfully get user videos',
+        result,
+      });
+    } catch (error) {
+      return res.status(400).json({
+        message: new NotFoundException(`Not found ${error.message}`),
       });
     }
   }

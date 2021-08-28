@@ -1,5 +1,5 @@
 import React from "react";
-import { VideoProps } from "../../types/Video/getAll.type";
+import { VideoProps } from "../../types/Video/edit.type";
 
 const VideosView: React.FC<VideoProps> = ({ item }) => {
   return (
@@ -22,6 +22,8 @@ const VideosView: React.FC<VideoProps> = ({ item }) => {
         {item.owner.nickname}
       </span>
       <p>Theme {item.theme}</p>
+      <p>{item.date}</p>
+      <p>{item.description}</p>
     </li>
   );
 };

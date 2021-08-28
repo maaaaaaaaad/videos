@@ -16,7 +16,6 @@ const Upload: React.FC<RouteComponentProps<ResponseUserData>> = ({ match }) => {
       withCredentials: true,
     });
 
-    console.log(res.data.result);
     setUserVideos(res.data.result);
   }, []);
 

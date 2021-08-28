@@ -1,5 +1,8 @@
 import React from "react";
-import { VideoProps } from "../../types/Video/getAll.type";
+
+import { VideoProps } from "../../types/Video/edit.type";
+import Delete from "../Editor/Video/Delete";
+import Update from "../Editor/Video/Update";
 
 const UserVideosView: React.FC<VideoProps> = ({ item }) => {
   return (
@@ -8,9 +11,11 @@ const UserVideosView: React.FC<VideoProps> = ({ item }) => {
         <source src={`http://localhost:5000/${item.videoUrl}`} />
       </video>
       <h2>{item.title}</h2>
-      <p>Theme {item.theme}</p>
-      <button>Edit</button>
-      <button>Delete</button>
+      <p>{item.theme}</p>
+      <p>{item.date}</p>
+      <p>{item.description}</p>
+      <Update item={item} />
+      <Delete item={item} />
     </li>
   );
 };

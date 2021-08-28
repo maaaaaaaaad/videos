@@ -1,10 +1,11 @@
 export type VideoInfo = {
-  videoUrl: string;
-  title: string;
-  description: string;
-  theme: string;
-  date: Date;
-  owner: {
+  readonly _id: string;
+  readonly videoUrl: string;
+  readonly title: string;
+  readonly description: string;
+  readonly theme: string;
+  readonly date: Date;
+  readonly owner: {
     userId: string;
     nickname: string;
     avatarUrl: string | null;
@@ -12,7 +13,3 @@ export type VideoInfo = {
 };
 
 export type AllVideos = Array<VideoInfo>;
-
-export interface VideoProps {
-  item: VideoInfo;
-}

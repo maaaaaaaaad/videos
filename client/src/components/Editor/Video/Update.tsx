@@ -1,3 +1,4 @@
+import axios from "axios";
 import React from "react";
 import { useContext } from "react";
 import { useState } from "react";
@@ -15,6 +16,30 @@ const Update: React.FC<VideoProps> = ({ item }) => {
 
   const formToggle = () => {
     setEditForm((prev) => !prev);
+  };
+
+  const handleChangeSave = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (state?.updateForm) {
+      const formData = new FormData();
+      formData.append("title", state.updateForm.title);
+      formData.append("description", state.updateForm.description);
+      formData.append("theme", state.updateForm.theme);
+
+      try {
+        const res = await axios.patch(
+          "http://localhost:5000/videos/update",
+          formData,
+          { withCredentials: true }
+        );
+        console.log(res.data);
+      } catch (error) {
+        console.log(error.message);
+      }
+    }
+
+    return;
   };
 
   const handleVideoEdit = (
@@ -39,7 +64,7 @@ const Update: React.FC<VideoProps> = ({ item }) => {
         <button onClick={formToggle}>Change</button>
       ) : (
         <section>
-          <form id="video-editor">
+          <form onSubmit={handleChangeSave} id="video-editor">
             <input
               onChange={handleVideoEdit}
               name="title"

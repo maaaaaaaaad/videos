@@ -22,10 +22,12 @@ const Update: React.FC<VideoProps> = ({ item }) => {
     e.preventDefault();
 
     if (state?.updateForm) {
-      const formData = new FormData();
-      formData.append("title", state.updateForm.title);
-      formData.append("description", state.updateForm.description);
-      formData.append("theme", state.updateForm.theme);
+      const formData = {
+        _id: item._id!,
+        title: state.updateForm.title || item.title,
+        description: state.updateForm.description || item.description,
+        theme: state.updateForm.theme || item.theme,
+      };
 
       try {
         const res = await axios.patch(
@@ -34,6 +36,7 @@ const Update: React.FC<VideoProps> = ({ item }) => {
           { withCredentials: true }
         );
         console.log(res.data);
+        window.location.reload();
       } catch (error) {
         console.log(error.message);
       }
@@ -54,8 +57,6 @@ const Update: React.FC<VideoProps> = ({ item }) => {
         [e.currentTarget.name]: e.currentTarget.value,
       } as Omit<VideoFormState, "video">,
     });
-
-    console.log(state?.updateForm);
   };
 
   return (
@@ -69,21 +70,33 @@ const Update: React.FC<VideoProps> = ({ item }) => {
               onChange={handleVideoEdit}
               name="title"
               type="text"
-              placeholder={item.title}
+              placeholder="title"
+              defaultValue={item.title}
+              autoComplete="off"
             />
             <textarea
               onChange={handleVideoEdit}
               name="description"
-              placeholder={item.description}
+              placeholder="description"
+              defaultValue={item.description}
+              autoComplete="off"
             />
-            <select onChange={handleVideoEdit} name="theme" form="video-editor">
+            <select
+              onChange={handleVideoEdit}
+              name="theme"
+              form="video-editor"
+              placeholder="theme"
+              defaultValue={item.theme}
+              required
+            >
               <option value="default">Default</option>
               <option value="education">Education</option>
               <option value="action">Action</option>
               <option value="comedy">Comedy</option>
             </select>
+            <input type="submit" value="Update" />
           </form>
-          <button onClick={formToggle}>Update</button>
+          <button onClick={formToggle}>Close</button>
         </section>
       )}
     </section>

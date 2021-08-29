@@ -4,12 +4,13 @@ import { useState } from "react";
 import { useCallback } from "react";
 import { useEffect } from "react";
 import { Link, RouteComponentProps } from "react-router-dom";
+import { VideoInfo } from "../types/data/video/info";
 import { ResponseUserData } from "../types/user/LoggedIn";
 import UserVideosView from "./Views/Video/UserVideos";
 
 const Upload: React.FC<RouteComponentProps<ResponseUserData>> = ({ match }) => {
   //
-  const [userVideos, setUserVideos] = useState<[]>([]);
+  const [userVideos, setUserVideos] = useState<VideoInfo[]>([]);
 
   const getUserVideos = useCallback(async () => {
     const res = await axios.get("http://localhost:5000/videos/get-videos", {
@@ -45,8 +46,8 @@ const Upload: React.FC<RouteComponentProps<ResponseUserData>> = ({ match }) => {
 
       <main>
         <ul>
-          {userVideos.map((item, index) => (
-            <UserVideosView key={index} item={item} />
+          {userVideos.map((item) => (
+            <UserVideosView key={item._id} item={item} />
           ))}
         </ul>
       </main>

@@ -5,6 +5,7 @@ import { Model } from 'mongoose';
 import { VideoDocument } from 'src/schemas/video.schema';
 import { VideoDto } from './dto/video.dto';
 import { UsersService } from 'src/users/users.service';
+import UpdateVideoDto from './dto/update.dto';
 
 @Injectable()
 export class VideosService {
@@ -46,5 +47,21 @@ export class VideosService {
     await this.usersService.addUserVideos(userSession, createVideo);
 
     return await createVideo.save();
+  }
+
+  async update(videoId: string, updateData: UpdateVideoDto) {
+    const { title, description, theme } = updateData;
+
+    const update = await this.videoModel.findByIdAndUpdate(
+      videoId,
+      {
+        title,
+        description,
+        theme,
+      },
+      { new: true },
+    );
+
+    return update;
   }
 }

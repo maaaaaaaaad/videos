@@ -4,6 +4,7 @@ import {
   Controller,
   Get,
   NotFoundException,
+  Patch,
   Post,
   Req,
   Res,
@@ -13,6 +14,7 @@ import {
 import { Request, Response } from 'express';
 import { VideoDto } from './dto/video.dto';
 import { VideosService } from './videos.service';
+import UpdateVideoDto from './dto/update.dto';
 
 @Controller('videos')
 export class VideosController {
@@ -70,6 +72,23 @@ export class VideosController {
     } catch (error) {
       return res.status(400).json({
         error: error.message,
+      });
+    }
+  }
+
+  @Patch('update')
+  async updateVideo(@Res() res: Response, @Body() body: UpdateVideoDto) {
+    const videoId: string = body._id;
+
+    try {
+      const result = await this.videoServie.update(videoId, body);
+      return res.status(200).json({
+        message: 'Successfully update vidoe',
+        result,
+      });
+    } catch (error) {
+      return res.status(400).json({
+        message: error.message,
       });
     }
   }

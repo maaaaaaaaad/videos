@@ -5,7 +5,8 @@ import {
   Action,
   State,
   VideoFormDispatch,
-} from "../types/Video/VideoForm.type";
+  VideoFormState,
+} from "../types/data/video/form.type";
 
 export const VideoStateContext = createContext<State | null>(null);
 export const VideoDispatchContext = createContext<VideoFormDispatch | null>(
@@ -16,8 +17,14 @@ function videoReducer(state: State, action: Action): State {
   switch (action.type) {
     case "VIDEO_UPLOAD":
       return {
-        ...state.uploadForm,
+        ...(state.uploadForm! as VideoFormState),
         uploadForm: action.uploadForm,
+      };
+
+    case "VIDEO_UPDATE":
+      return {
+        ...(state.updateForm! as Omit<VideoFormState, "video">),
+        updateForm: action.updateForm,
       };
 
     default:

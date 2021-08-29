@@ -4,8 +4,8 @@ import { useState } from "react";
 import { useCallback } from "react";
 import { useEffect } from "react";
 import { Link, RouteComponentProps } from "react-router-dom";
-import { ResponseUserData } from "../types/User/LoggedIn";
-import UserVideosView from "./Views/UserVideosView";
+import { ResponseUserData } from "../types/user/LoggedIn";
+import UserVideosView from "./Views/Video/UserVideos";
 
 const Upload: React.FC<RouteComponentProps<ResponseUserData>> = ({ match }) => {
   //

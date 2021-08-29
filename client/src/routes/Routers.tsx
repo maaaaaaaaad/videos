@@ -40,12 +40,9 @@ const Routers = () => {
         />
       </SignUpContexts>
 
-      <Route path="/upload/:id" exact component={Upload} />
-
       <VideoContexts>
+        <Route path="/upload/:id" exact component={Upload} />
         <Route path="/upload/:id/video" exact component={UploadVideo} />
-        <Route path="/upload/:id/video/update" exact component={UploadVideo} />
-        <Route path="/upload/:id/video/delete" exact component={UploadVideo} />
       </VideoContexts>
 
       <Route path="/upload/:id/book" exact component={UploadBook} />

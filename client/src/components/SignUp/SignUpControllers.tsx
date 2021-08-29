@@ -10,7 +10,7 @@ import {
 import { Email } from "../../types/auth/email.type";
 import { idCheck } from "../../types/auth/id.auth";
 import { nickCheck } from "../../types/auth/nick.auth";
-import { SignUpForm } from "../../types/Sign/SignUpForm.type";
+import { SignUpForm } from "../../types/sign/SignUpForm.type";
 
 import SignUpView from "./SignUpView";
 

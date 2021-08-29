@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ChangePasswordForm } from "../../types/Sign/SignUpForm.type";
+import { ChangePasswordForm } from "../../types/sign/SignUpForm.type";
 
 export const ChangePass = async (password: ChangePasswordForm) => {
   return await axios.patch(

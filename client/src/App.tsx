@@ -5,7 +5,7 @@ import { UserLoggedIn } from "./api/user/userLoggedIn";
 import MediaQuery from "./MediaQuery";
 import Navigators from "./navigators/Navigators";
 import Routers from "./routes/Routers";
-import { ResponseUserData } from "./types/User/LoggedIn";
+import { ResponseUserData } from "./types/user/LoggedIn";
 
 export const ResUserDataContext = createContext<ResponseUserData | null>(null);
 

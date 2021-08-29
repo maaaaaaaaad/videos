@@ -1,5 +1,5 @@
 import React from "react";
-import VideoControllers from "./Video/VideoControllers";
+import VideoControllers from "./Video/Controllers/VideoControllers";
 
 const UploadVideo = () => {
   return (

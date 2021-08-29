@@ -1,5 +1,5 @@
 import React from "react";
-import { SignUpHandler } from "../../types/Sign/Sign.interface";
+import { SignUpHandler } from "../../types/sign/Sign.interface";
 
 const SignUpView: React.FC<SignUpHandler> = ({
   handleChange,

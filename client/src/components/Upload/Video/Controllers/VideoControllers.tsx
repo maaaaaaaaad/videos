@@ -1,11 +1,12 @@
 import React from "react";
 import { useContext } from "react";
-import { videoUploader } from "../../../api/video/upload";
+import { videoUploader } from "../../../../api/video/upload";
 import {
   VideoDispatchContext,
   VideoStateContext,
-} from "../../../contexts/VideoContexts";
-import VideoForm from "./VideoForm";
+} from "../../../../contexts/VideoContexts";
+import { VideoFormState } from "../../../../types/data/video/form.type";
+import VideoForm from "../Form/VideoForm";
 
 const VideoControllers = () => {
   const state = useContext(VideoStateContext);
@@ -15,10 +16,10 @@ const VideoControllers = () => {
     e.preventDefault();
 
     const formData = new FormData();
-    formData.append("video", state!.uploadForm.video!);
-    formData.append("title", state!.uploadForm.title!);
-    formData.append("description", state!.uploadForm.description!);
-    formData.append("theme", state!.uploadForm.theme!);
+    formData.append("video", state!.uploadForm!.video!);
+    formData.append("title", state!.uploadForm!.title!);
+    formData.append("description", state!.uploadForm!.description!);
+    formData.append("theme", state!.uploadForm!.theme!);
 
     const res = await videoUploader(formData);
 
@@ -35,7 +36,7 @@ const VideoControllers = () => {
       uploadForm: {
         ...state!.uploadForm,
         [name]: files ? files[0] : value,
-      },
+      } as VideoFormState,
     });
   };
 
@@ -46,7 +47,7 @@ const VideoControllers = () => {
       uploadForm: {
         ...state!.uploadForm,
         description: e.currentTarget.value,
-      },
+      } as VideoFormState,
     });
   };
 
@@ -57,7 +58,7 @@ const VideoControllers = () => {
       uploadForm: {
         ...state!.uploadForm,
         theme: e.currentTarget.value,
-      },
+      } as VideoFormState,
     });
   };
 

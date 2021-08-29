@@ -1,5 +1,5 @@
 import React from "react";
-import { VideoProps } from "../../../types/Video/edit.type";
+import { VideoProps } from "../../../types/data/video/props.interface";
 
 const Delete: React.FC<VideoProps> = ({ item }) => {
   return <button>Delete</button>;

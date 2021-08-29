@@ -2,8 +2,8 @@ import axios from "axios";
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
-import { AllVideos } from "../types/Video/getAll.type";
-import VideosView from "./Views/AllVideosView";
+import { AllVideos } from "../types/data/video/info";
+import VideosView from "./Views/Video/AllVideos";
 
 const Videos = () => {
   //

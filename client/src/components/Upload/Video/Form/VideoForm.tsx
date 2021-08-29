@@ -1,5 +1,5 @@
 import React from "react";
-import { ChangeHandler } from "../../../types/changeHandler/change.interface";
+import { ChangeHandler } from "../../../../types/changeHandler/change.interface";
 
 const VideoForm: React.FC<ChangeHandler> = ({
   handleSubmitBtn,

@@ -5,7 +5,7 @@ import {
   SignUpDispatchContext,
   SignUpStateContext,
 } from "../../../contexts/SignUpContexts";
-import { ChangePasswordForm } from "../../../types/Sign/SignUpForm.type";
+import { ChangePasswordForm } from "../../../types/sign/SignUpForm.type";
 
 const ChangePassword = () => {
   //

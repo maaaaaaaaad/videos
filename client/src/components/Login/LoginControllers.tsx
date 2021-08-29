@@ -4,7 +4,7 @@ import {
   SignUpDispatchContext,
   SignUpStateContext,
 } from "../../contexts/SignUpContexts";
-import { SignInForm } from "../../types/Sign/SignUpForm.type";
+import { SignInForm } from "../../types/sign/SignUpForm.type";
 import LoginView from "./LoginForm";
 
 const LoginControllers = () => {

@@ -1,5 +1,5 @@
 import React from "react";
-import { VideoProps } from "../../types/Video/edit.type";
+import { VideoProps } from "../../../types/data/video/props.interface";
 
 const VideosView: React.FC<VideoProps> = ({ item }) => {
   return (
@@ -11,7 +11,7 @@ const VideosView: React.FC<VideoProps> = ({ item }) => {
       <span>
         <img
           src={
-            item.owner.avatarUrl
+            item.owner?.avatarUrl
               ? `http://localhost:5000/${item.owner.avatarUrl}`
               : `http://localhost:5000/assets/images/defaultImg.png`
           }
@@ -19,7 +19,7 @@ const VideosView: React.FC<VideoProps> = ({ item }) => {
           width={55}
           height={40}
         />
-        {item.owner.nickname}
+        {item.owner?.nickname}
       </span>
       <p>Theme {item.theme}</p>
       <p>{item.date}</p>

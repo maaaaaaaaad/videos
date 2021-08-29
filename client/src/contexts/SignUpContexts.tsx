@@ -9,7 +9,7 @@ import {
   SignUpFormDispatch,
   State,
   UpdateForm,
-} from "../types/Sign/SignUpForm.type";
+} from "../types/sign/SignUpForm.type";
 
 export const SignUpStateContext = createContext<State | null>(null);
 export const SignUpDispatchContext = createContext<SignUpFormDispatch | null>(

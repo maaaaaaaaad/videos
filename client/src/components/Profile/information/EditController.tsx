@@ -6,7 +6,7 @@ import {
   SignUpDispatchContext,
   SignUpStateContext,
 } from "../../../contexts/SignUpContexts";
-import { UpdateForm } from "../../../types/Sign/SignUpForm.type";
+import { UpdateForm } from "../../../types/sign/SignUpForm.type";
 import EditView from "./EditForm";
 
 const EditController = () => {

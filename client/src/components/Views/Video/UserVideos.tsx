@@ -1,8 +1,8 @@
 import React from "react";
+import { VideoProps } from "../../../types/data/video/props.interface";
 
-import { VideoProps } from "../../types/Video/edit.type";
-import Delete from "../Editor/Video/Delete";
-import Update from "../Editor/Video/Update";
+import Delete from "../../Editor/Video/Delete";
+import Update from "../../Editor/Video/Update";
 
 const UserVideosView: React.FC<VideoProps> = ({ item }) => {
   return (

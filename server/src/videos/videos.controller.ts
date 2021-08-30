@@ -78,12 +78,28 @@ export class VideosController {
 
   @Patch('update')
   async updateVideo(@Res() res: Response, @Body() body: UpdateVideoDto) {
-    const videoId: string = body._id;
-
     try {
-      const result = await this.videoServie.update(videoId, body);
+      const result = await this.videoServie.update(body);
       return res.status(200).json({
-        message: 'Successfully update vidoe',
+        message: 'Successfully update video',
+        result,
+      });
+    } catch (error) {
+      return res.status(400).json({
+        message: error.message,
+      });
+    }
+  }
+
+  @Post('delete')
+  async deleteUserVideo(
+    @Res() res: Response,
+    @Body() videoId: Pick<UpdateVideoDto, '_id'>,
+  ) {
+    try {
+      const result = await this.videoServie.delete(videoId);
+      return res.status(200).json({
+        message: 'Successfully delete video',
         result,
       });
     } catch (error) {

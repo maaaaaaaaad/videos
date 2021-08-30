@@ -6,7 +6,6 @@ import * as bcrypt from 'bcrypt';
 import { UserSignDataDto } from './dto/userForm.dto';
 import UserSignInDto from './dto/signIn.dto';
 import UpdateUserDataDto from './dto/updateUser.dto';
-import { VideoDocument } from 'src/schemas/video.schema';
 
 @Injectable()
 export class UsersService {
@@ -142,12 +141,5 @@ export class UsersService {
     findUser.password = pass2;
 
     return await findUser.save();
-  }
-
-  async addUserVideos(userSession: UserDocument, video: VideoDocument) {
-    //
-    const user = await this.userModel.findById(userSession._id);
-    user.videos.push(video);
-    await user.save();
   }
 }

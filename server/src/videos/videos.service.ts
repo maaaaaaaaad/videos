@@ -4,21 +4,19 @@ import { Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { VideoDocument } from 'src/schemas/video.schema';
 import { VideoDto } from './dto/video.dto';
-import { UsersService } from 'src/users/users.service';
 import UpdateVideoDto from './dto/update.dto';
 
 @Injectable()
 export class VideosService {
   constructor(
     @InjectModel('Videos') private readonly videoModel: Model<VideoDocument>,
-    private readonly usersService: UsersService,
   ) {}
   //
   async getAllVideos() {
     return await this.videoModel
       .find({})
       .populate('owner')
-      .sort({ date: 'asc' });
+      .sort({ date: 'desc' });
   }
 
   async getUserVideos(userSession: UserDocument) {
@@ -26,7 +24,7 @@ export class VideosService {
       .find({ owner: userSession._id })
       .populate('owner')
       .sort({
-        date: 'asc',
+        date: 'desc',
       });
 
     return videos;
@@ -44,16 +42,14 @@ export class VideosService {
       owner: userSession._id,
     });
 
-    await this.usersService.addUserVideos(userSession, createVideo);
-
     return await createVideo.save();
   }
 
-  async update(videoId: string, updateData: UpdateVideoDto) {
-    const { title, description, theme } = updateData;
+  async update(updateData: UpdateVideoDto) {
+    const { _id, title, description, theme } = updateData;
 
     const update = await this.videoModel.findByIdAndUpdate(
-      videoId,
+      _id,
       {
         title,
         description,
@@ -63,5 +59,9 @@ export class VideosService {
     );
 
     return update;
+  }
+
+  async delete(videoId: Pick<UpdateVideoDto, '_id'>) {
+    return await this.videoModel.findByIdAndDelete(videoId);
   }
 }

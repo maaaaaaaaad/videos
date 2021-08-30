@@ -1,9 +1,7 @@
-import * as mongoose from 'mongoose';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 import * as bcrypt from 'bcrypt';
 import { NextFunction } from 'express';
-import { VideoInformation } from './video.schema';
 
 interface HashPassword extends Document {
   password: string;
@@ -26,9 +24,6 @@ export class UserInformation {
 
   @Prop({ required: false })
   avatarUrl: string;
-
-  @Prop([{ type: mongoose.Schema.Types.ObjectId, ref: 'VideoData' }])
-  videos: VideoInformation[];
 }
 
 export const UserSchema = SchemaFactory.createForClass(

@@ -3,6 +3,7 @@ import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { AllVideos } from "../types/data/video/info";
+import VideoSearchControllers from "./Search/Video/VideoSearchControllers";
 import VideosView from "./Views/Video/AllVideos";
 
 const Videos = () => {
@@ -23,6 +24,7 @@ const Videos = () => {
 
   return (
     <section>
+      <VideoSearchControllers />
       <ul>
         {videos.map((item, index) => (
           <VideosView key={index} item={item} />

@@ -57,7 +57,6 @@ export class VideosService {
       },
       { new: true },
     );
-
     return update;
   }
 

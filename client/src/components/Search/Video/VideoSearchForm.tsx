@@ -9,6 +9,7 @@ const VideoSearchForm: React.FC<SearchHandlers> = ({
     <form onSubmit={(e) => handleSearch(e)}>
       <input
         type="text"
+        name="keyword"
         placeholder="...Search"
         autoComplete="off"
         onChange={(e) => handleKeyword(e)}

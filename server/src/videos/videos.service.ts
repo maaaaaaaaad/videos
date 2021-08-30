@@ -63,4 +63,12 @@ export class VideosService {
   async delete(videoId: Pick<UpdateVideoDto, '_id'>) {
     return await this.videoModel.findByIdAndDelete(videoId);
   }
+
+  async search(keyword: string) {
+    return await this.videoModel.find({
+      title: {
+        $regex: new RegExp(keyword, 'i'),
+      },
+    });
+  }
 }

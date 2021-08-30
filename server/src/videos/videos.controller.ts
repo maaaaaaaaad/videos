@@ -6,6 +6,7 @@ import {
   NotFoundException,
   Patch,
   Post,
+  Query,
   Req,
   Res,
   UploadedFile,
@@ -21,7 +22,7 @@ export class VideosController {
   constructor(private readonly videoServie: VideosService) {}
 
   @Get()
-  async getAllItems(@Res() res: Response) {
+  async getAll(@Res() res: Response) {
     try {
       const result = await this.videoServie.getAllVideos();
       return res.status(200).json({
@@ -36,7 +37,7 @@ export class VideosController {
   }
 
   @Get('get-videos')
-  async getUserItem(@Req() req: Request, @Res() res: Response) {
+  async getOne(@Req() req: Request, @Res() res: Response) {
     const userSession = req.session.user;
 
     try {
@@ -54,7 +55,7 @@ export class VideosController {
 
   @Post('upload')
   @UseInterceptors(FileInterceptor('video'))
-  async uploadVideo(
+  async upload(
     @UploadedFile() video: Express.Multer.File,
     @Body() body: VideoDto,
     @Req() req: Request,
@@ -77,7 +78,7 @@ export class VideosController {
   }
 
   @Patch('update')
-  async updateVideo(@Res() res: Response, @Body() body: UpdateVideoDto) {
+  async update(@Res() res: Response, @Body() body: UpdateVideoDto) {
     try {
       const result = await this.videoServie.update(body);
       return res.status(200).json({
@@ -92,7 +93,7 @@ export class VideosController {
   }
 
   @Post('delete')
-  async deleteUserVideo(
+  async delete(
     @Res() res: Response,
     @Body() videoId: Pick<UpdateVideoDto, '_id'>,
   ) {
@@ -107,5 +108,14 @@ export class VideosController {
         message: error.message,
       });
     }
+  }
+
+  @Get('search')
+  async search(@Query('keyword') keyword: string, @Res() res: Response) {
+    const result = await this.videoServie.search(keyword);
+
+    return res.status(200).json({
+      result,
+    });
   }
 }

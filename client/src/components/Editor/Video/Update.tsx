@@ -1,12 +1,13 @@
-import axios from "axios";
 import React from "react";
 import { useContext } from "react";
 import { useState } from "react";
+import { update } from "../../../api/video/update";
 import {
   VideoDispatchContext,
   VideoStateContext,
 } from "../../../contexts/VideoContexts";
 import { VideoFormState } from "../../../types/data/video/form.type";
+import { VideoInfo } from "../../../types/data/video/info";
 import { VideoProps } from "../../../types/data/video/props.interface";
 
 const Update: React.FC<VideoProps> = ({ item }) => {
@@ -22,7 +23,7 @@ const Update: React.FC<VideoProps> = ({ item }) => {
     e.preventDefault();
 
     if (state?.updateForm) {
-      const formData = {
+      const formData: VideoInfo = {
         _id: item._id!,
         title: state.updateForm.title || item.title,
         description: state.updateForm.description || item.description,
@@ -30,12 +31,7 @@ const Update: React.FC<VideoProps> = ({ item }) => {
       };
 
       try {
-        const res = await axios.patch(
-          "http://localhost:5000/videos/update",
-          formData,
-          { withCredentials: true }
-        );
-        console.log(res.data);
+        await update(formData);
         window.location.reload();
       } catch (error) {
         console.log(error.message);

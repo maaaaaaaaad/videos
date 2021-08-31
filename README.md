@@ -7,3 +7,4 @@
 - Database: MongoDB
 - API fetcher: Axios
 - Design: Styled components
+- State management: React context API

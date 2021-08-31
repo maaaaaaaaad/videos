@@ -2,11 +2,8 @@ import React, { useContext } from "react";
 import { Link, RouteComponentProps } from "react-router-dom";
 import { userLogout } from "../api/user/logout";
 import { ResUserDataContext } from "../App";
-import { ResponseUserData } from "../types/user/LoggedIn";
 
-const Profile: React.FC<RouteComponentProps<ResponseUserData>> = ({
-  match,
-}) => {
+const Profile: React.FC<RouteComponentProps> = ({ match }) => {
   //
   const isUser = useContext(ResUserDataContext);
 

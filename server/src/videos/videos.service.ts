@@ -65,10 +65,13 @@ export class VideosService {
   }
 
   async search(keyword: string) {
-    return await this.videoModel.find({
-      title: {
-        $regex: new RegExp(keyword, 'i'),
-      },
-    });
+    return await this.videoModel
+      .find({
+        title: {
+          $regex: new RegExp(keyword, 'i'),
+        },
+      })
+      .populate('owner')
+      .sort({ date: 'desc' });
   }
 }

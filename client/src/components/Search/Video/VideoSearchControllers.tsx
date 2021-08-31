@@ -1,27 +1,30 @@
-import axios from "axios";
 import React from "react";
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
+import { search } from "../../../api/video/search";
 import VideoSearchForm from "./VideoSearchForm";
 
 const VideoSearchControllers = () => {
   //
+  const history = useHistory();
   const [keyword, setKeyword] = useState<string | null>(null);
 
   const handleSearch = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const res = await axios.get(
-      `http://localhost:5000/videos/search?keyword=${keyword}`,
-      {
-        withCredentials: true,
-      }
-    );
+    if (keyword !== null) {
+      const res = await search(keyword);
 
-    console.log(res.data);
+      history.push({
+        pathname: "/videos",
+        search: `?search=${keyword}`,
+        state: res.data.result,
+      });
+    }
   };
 
   const handleKeyword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const keyword: string = e.currentTarget.value;
-    setKeyword(keyword);
+    const value: string = e.currentTarget.value;
+    setKeyword(value);
   };
 
   return (

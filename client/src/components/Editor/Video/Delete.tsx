@@ -1,16 +1,18 @@
 import React from "react";
-import { deleted } from "../../../api/video/delete";
+import { useContext } from "react";
+import { videosApiContext } from "../../../api/video/VideoClass";
 import { VideoInfo } from "../../../types/data/video/info";
 import { VideoProps } from "../../../types/data/video/props.interface";
 
 const Delete: React.FC<VideoProps> = ({ item }) => {
   //
+  const api = useContext(videosApiContext);
   const handleVideoDelete = async () => {
     //
     const videoId: Pick<VideoInfo, "_id"> = {
       _id: item._id,
     };
-    await deleted(videoId);
+    await api.delete(videoId);
     window.location.reload();
   };
 

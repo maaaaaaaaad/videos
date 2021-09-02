@@ -1,7 +1,7 @@
 import React from "react";
 import { useContext } from "react";
 import { useState } from "react";
-import { update } from "../../../api/video/update";
+import { videosApiContext } from "../../../api/video/VideoClass";
 import {
   VideoDispatchContext,
   VideoStateContext,
@@ -11,6 +11,7 @@ import { VideoInfo } from "../../../types/data/video/info";
 import { VideoProps } from "../../../types/data/video/props.interface";
 
 const Update: React.FC<VideoProps> = ({ item }) => {
+  const api = useContext(videosApiContext);
   const state = useContext(VideoStateContext);
   const dispatch = useContext(VideoDispatchContext);
   const [editForm, setEditForm] = useState<boolean>(true);
@@ -31,7 +32,7 @@ const Update: React.FC<VideoProps> = ({ item }) => {
       };
 
       try {
-        await update(formData);
+        await api.update(formData);
         window.location.reload();
       } catch (error) {
         console.log(error.message);

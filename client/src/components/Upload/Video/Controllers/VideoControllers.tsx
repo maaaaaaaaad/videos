@@ -1,6 +1,6 @@
 import React from "react";
 import { useContext } from "react";
-import { videoUploader } from "../../../../api/video/upload";
+import { videosApiContext } from "../../../../api/video/VideoClass";
 import {
   VideoDispatchContext,
   VideoStateContext,
@@ -9,6 +9,7 @@ import { VideoFormState } from "../../../../types/data/video/form.type";
 import VideoForm from "../Form/VideoForm";
 
 const VideoControllers = () => {
+  const api = useContext(videosApiContext);
   const state = useContext(VideoStateContext);
   const dispatch = useContext(VideoDispatchContext);
 
@@ -21,7 +22,7 @@ const VideoControllers = () => {
     formData.append("description", state!.uploadForm!.description!);
     formData.append("theme", state!.uploadForm!.theme!);
 
-    const res = await videoUploader(formData);
+    const res = await api.upload(formData);
 
     console.log(res.data);
     window.location.href = "/videos";

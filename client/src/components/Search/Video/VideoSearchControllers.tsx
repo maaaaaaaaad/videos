@@ -1,18 +1,20 @@
 import React from "react";
+import { useContext } from "react";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { search } from "../../../api/video/search";
+import { videosApiContext } from "../../../api/video/VideoClass";
 import VideoSearchForm from "./VideoSearchForm";
 
 const VideoSearchControllers = () => {
   //
+  const api = useContext(videosApiContext);
   const history = useHistory();
   const [keyword, setKeyword] = useState<string | null>(null);
 
   const handleSearch = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (keyword !== null) {
-      const res = await search(keyword);
+      const res = await api.search(keyword);
 
       history.push({
         pathname: "/videos",

@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useContext } from "react";
 import { authUserEmail, checkingEmail } from "../../api/auth/email";
-import { PostSignUp } from "../../api/user/signUp";
+import { usersApiContext } from "../../api/user/UserApi";
 import {
   SignUpDispatchContext,
   SignUpStateContext,
@@ -16,6 +16,7 @@ import SignUpView from "./SignUpView";
 
 const SignUpControllers = () => {
   //
+  const api = useContext(usersApiContext);
   const dispatch = useContext(SignUpDispatchContext);
   const state = useContext(SignUpStateContext);
   const [loadingSpanner, setLoadingSpanner] = useState<boolean>(false);
@@ -43,7 +44,7 @@ const SignUpControllers = () => {
         }
 
         if (checkId === "Successfully") {
-          const res = await PostSignUp(formData);
+          const res = await api.signUp(formData);
           console.log(res.data);
           window.location.href = "/login";
         }

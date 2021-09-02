@@ -2,7 +2,7 @@ import React from "react";
 import { useContext } from "react";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { videosApiContext } from "../../../api/video/VideoClass";
+import { videosApiContext } from "../../../api/video/VideoApi";
 import VideoSearchForm from "./VideoSearchForm";
 
 const VideoSearchControllers = () => {

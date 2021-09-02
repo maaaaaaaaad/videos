@@ -12,7 +12,7 @@ const EditView: React.FC<ChangeHandler> = ({
   return (
     <section>
       <h1>{isUser?.nickname}'s Edit page</h1>
-      <form onSubmit={(e) => handleSubmitBtn(e)}>
+      <form onSubmit={(e) => handleSubmitBtn(e)} encType="multipart/form-data">
         <li>
           <input
             type="file"

@@ -1,6 +1,6 @@
 import React from "react";
 import { useContext } from "react";
-import { videosApiContext } from "../../../api/video/VideoClass";
+import { videosApiContext } from "../../../api/video/VideoApi";
 import { VideoInfo } from "../../../types/data/video/info";
 import { VideoProps } from "../../../types/data/video/props.interface";
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { useContext } from "react";
-import { UpdateProfile } from "../../../api/user/profileUpdate";
+import { usersApiContext } from "../../../api/user/UserApi";
 import { ResUserDataContext } from "../../../App";
 import {
   SignUpDispatchContext,
@@ -11,6 +11,7 @@ import EditView from "./EditForm";
 
 const EditController = () => {
   //
+  const api = useContext(usersApiContext);
   const state = useContext(SignUpStateContext);
   const dispatch = useContext(SignUpDispatchContext);
   const isUser = useContext(ResUserDataContext);
@@ -27,7 +28,7 @@ const EditController = () => {
       formData.append("avatar", (state!.formInfo as UpdateForm).avatar!);
 
     try {
-      const res = await UpdateProfile(formData);
+      const res = await api.update(formData);
       console.log(res.data);
       window.location.href = "/";
     } catch (error) {

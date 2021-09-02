@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { PostLogin } from "../../api/user/signIn";
+import { usersApiContext } from "../../api/user/UserApi";
 import {
   SignUpDispatchContext,
   SignUpStateContext,
@@ -9,6 +9,7 @@ import LoginView from "./LoginForm";
 
 const LoginControllers = () => {
   //
+  const api = useContext(usersApiContext);
   const state = useContext(SignUpStateContext);
   const dispatch = useContext(SignUpDispatchContext);
 
@@ -18,7 +19,7 @@ const LoginControllers = () => {
     const signIn = state!.login! as SignInForm;
 
     try {
-      await PostLogin(signIn);
+      await api.login(signIn);
       window.location.href = "/";
     } catch (error) {
       const ERROR_MESSAGE = "The user id or password do not match";

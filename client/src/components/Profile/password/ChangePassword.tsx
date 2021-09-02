@@ -1,6 +1,6 @@
 import React from "react";
 import { useContext } from "react";
-import { ChangePass } from "../../../api/user/changePass";
+import { usersApiContext } from "../../../api/user/UserApi";
 import {
   SignUpDispatchContext,
   SignUpStateContext,
@@ -9,6 +9,7 @@ import { ChangePasswordForm } from "../../../types/sign/SignUpForm.type";
 
 const ChangePassword = () => {
   //
+  const api = useContext(usersApiContext);
   const state = useContext(SignUpStateContext);
   const dispatch = useContext(SignUpDispatchContext);
 
@@ -26,10 +27,8 @@ const ChangePassword = () => {
           return;
         }
 
-        const res = await ChangePass(password);
-
+        const res = await api.changePass(password);
         console.log(res.data);
-
         window.location.href = "/login";
       } catch (error) {
         console.log(error.message);

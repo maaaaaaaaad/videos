@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
 import { Link, RouteComponentProps } from "react-router-dom";
-import { userLogout } from "../api/user/logout";
+import { usersApiContext } from "../api/user/UserApi";
 import { ResUserDataContext } from "../App";
 
 const Profile: React.FC<RouteComponentProps> = ({ match }) => {
   //
+  const api = useContext(usersApiContext);
   const isUser = useContext(ResUserDataContext);
 
   const handleLogout = async () => {
@@ -12,7 +13,7 @@ const Profile: React.FC<RouteComponentProps> = ({ match }) => {
     const confirm = window.confirm("Are you sure?");
 
     if (confirm) {
-      await userLogout();
+      await api.userLogout();
       window.location.href = "/";
     }
   };

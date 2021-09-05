@@ -1,12 +1,19 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { VideoProps } from "../../../types/data/video/props.interface";
 
 const VideosView: React.FC<VideoProps> = ({ item }) => {
+  const location = {
+    pathname: "/player",
+    search: `?vod=${item._id}`,
+    state: {
+      item,
+    },
+  };
+
   return (
     <li>
-      <video controls width={400} height={300}>
-        <source src={`http://localhost:5000/${item.videoUrl}`} />
-      </video>
+      <Link to={location}>{item.title}</Link>
       <h2>{item.title}</h2>
       <span>
         <img

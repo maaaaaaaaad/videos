@@ -31,7 +31,6 @@ export class UsersController {
     @Body() body: Pick<UserSignDataDto, 'userId'>,
     @Res() res: Response,
   ) {
-    //
     const result = await this.userService.checkingId(body.userId);
     return res.status(200).json({
       response: result,
@@ -43,7 +42,6 @@ export class UsersController {
     @Body() body: Pick<UserSignDataDto, 'nickname'>,
     @Res() res: Response,
   ) {
-    //
     const result = await this.userService.checkingNick(body.nickname);
     return res.status(200).json({
       response: result,
@@ -55,7 +53,6 @@ export class UsersController {
     @Body() body: Pick<UserSignDataDto, 'email'>,
     @Res() res: Response,
   ) {
-    //
     const result = await this.userService.checkingEmail(body.email);
     return res.status(200).json({
       result,
@@ -67,7 +64,6 @@ export class UsersController {
     @Body() body: Pick<UserSignInDto, 'email'>,
     @Res() res: Response,
   ) {
-    //
     const email = body.email;
 
     const result: number = await this.emailService.emailAuth(email);
@@ -103,11 +99,10 @@ export class UsersController {
     body: UserSignDataDto,
     @Res() res: Response,
   ) {
-    //
     if (file !== null) {
       body.avatar = file;
     }
-    //
+
     try {
       const result = await this.userService.signUpUserData(body);
 
@@ -128,7 +123,6 @@ export class UsersController {
     @Req() req: Request,
     @Res() res: Response,
   ) {
-    //
     try {
       const result = await this.userService.signInUser(body);
 
@@ -160,7 +154,6 @@ export class UsersController {
     @Req() req: Request,
     @Res() res: Response,
   ) {
-    //
     if (file !== null) {
       body.avatar = file;
     }
@@ -188,7 +181,6 @@ export class UsersController {
     @Res() res: Response,
     @Body() body: Pick<UpdateUserDataDto, 'pass1' | 'pass2'>,
   ) {
-    //
     const userSession = req.session.user;
 
     try {

@@ -12,7 +12,7 @@ export class UsersService {
   constructor(
     @InjectModel('UserData') private userModel: Model<UserDocument>,
   ) {}
-  //
+
   async checkingId(id: string) {
     const idExist: boolean = await this.userModel.exists({
       userId: id,

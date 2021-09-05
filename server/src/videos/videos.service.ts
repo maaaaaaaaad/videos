@@ -11,7 +11,7 @@ export class VideosService {
   constructor(
     @InjectModel('Videos') private readonly videoModel: Model<VideoDocument>,
   ) {}
-  //
+
   async getAllVideos() {
     return await this.videoModel
       .find({})
@@ -26,7 +26,6 @@ export class VideosService {
       .sort({
         date: 'desc',
       });
-
     return videos;
   }
 
@@ -41,7 +40,6 @@ export class VideosService {
       date: new Date(),
       owner: userSession._id,
     });
-
     return await createVideo.save();
   }
 

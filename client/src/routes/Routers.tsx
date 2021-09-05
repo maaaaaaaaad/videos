@@ -14,6 +14,7 @@ import UploadBook from "../components/Upload/UploadBook";
 import UploadNote from "../components/Upload/UploadNote";
 import UploadVideo from "../components/Upload/UploadVideo";
 import Videos from "../components/Videos";
+import Player from "../components/Views/Video/player/Player";
 import SignUpContexts from "../contexts/SignUpContexts";
 import VideoContexts from "../contexts/VideoContexts";
 
@@ -26,6 +27,7 @@ const Routers = () => {
       <Route path="/videos" exact component={Videos} />
       <Route path="/books" exact component={Books} />
       <Route path="/notes" exact component={Notes} />
+      <Route path="/player" exact component={Player} />
 
       <SignUpContexts>
         <Route path="/signup" exact component={SignUp} />

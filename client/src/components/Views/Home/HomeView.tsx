@@ -9,8 +9,8 @@ const HomeView = () => {
       <img
         src={
           isUser?.avatarUrl
-            ? `http://localhost:5000/${isUser.avatarUrl}`
-            : "http://localhost:5000/assets/images/defaultImg.png"
+            ? `${process.env.REACT_APP_SERVER_URL}${isUser.avatarUrl}`
+            : `${process.env.REACT_APP_SERVER_URL}/assets/images/defaultImg.png`
         }
         alt="avatar"
         width={60}

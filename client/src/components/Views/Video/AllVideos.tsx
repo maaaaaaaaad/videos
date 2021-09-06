@@ -14,13 +14,12 @@ const VideosView: React.FC<VideoProps> = ({ item }) => {
   return (
     <li>
       <Link to={location}>{item.title}</Link>
-      <h2>{item.title}</h2>
       <span>
         <img
           src={
             item.owner?.avatarUrl
-              ? `http://localhost:5000/${item.owner.avatarUrl}`
-              : `http://localhost:5000/assets/images/defaultImg.png`
+              ? `${process.env.REACT_APP_SERVER_URL}/${item.owner.avatarUrl}`
+              : `${process.env.REACT_APP_SERVER_URL}/assets/images/defaultImg.png`
           }
           alt="avatar"
           width={55}

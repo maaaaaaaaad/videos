@@ -61,7 +61,6 @@ export class VideosController {
     @Req() req: Request,
     @Res() res: Response,
   ) {
-    //
     body.video = video;
     const userSession = req.session.user;
 

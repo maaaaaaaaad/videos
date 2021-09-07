@@ -38,6 +38,7 @@ const initVideoForm: State = {
     title: "",
     description: "",
     theme: "",
+    age_verification: false,
   },
 };
 

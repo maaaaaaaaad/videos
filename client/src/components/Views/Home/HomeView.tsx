@@ -9,7 +9,7 @@ const HomeView = () => {
       <img
         src={
           isUser?.avatarUrl
-            ? `${process.env.REACT_APP_SERVER_URL}${isUser.avatarUrl}`
+            ? `${process.env.REACT_APP_SERVER_URL}/${isUser.avatarUrl}`
             : `${process.env.REACT_APP_SERVER_URL}/assets/images/defaultImg.png`
         }
         alt="avatar"

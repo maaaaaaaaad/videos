@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { ResUserDataContext } from "../../../App";
 import { ChangeHandler } from "../../../types/changeHandler/change.interface";
 
-const EditView: React.FC<ChangeHandler> = ({
+const EditView: React.FC<Omit<ChangeHandler, "handleAgeCheck">> = ({
   handleChange,
   handleSubmitBtn,
 }) => {

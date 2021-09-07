@@ -1,7 +1,7 @@
 import React from "react";
 import { ChangeHandler } from "../../types/changeHandler/change.interface";
 
-const LoginView: React.FC<ChangeHandler> = ({
+const LoginView: React.FC<Omit<ChangeHandler, "handleAgeCheck">> = ({
   handleChange,
   handleSubmitBtn,
 }) => {

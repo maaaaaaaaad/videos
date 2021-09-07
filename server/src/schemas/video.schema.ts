@@ -22,6 +22,9 @@ export class VideoInformation {
   @Prop({ required: true })
   date: Date;
 
+  @Prop({ required: true })
+  age_verification: string;
+
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'UserData' })
   owner: UserInformation;
 }

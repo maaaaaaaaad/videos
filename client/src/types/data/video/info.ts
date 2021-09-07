@@ -5,6 +5,7 @@ export type VideoInfo = {
   readonly description?: string;
   readonly theme?: string;
   readonly date?: Date;
+  readonly age_verification?: string;
   readonly owner?: {
     userId: string;
     nickname: string;

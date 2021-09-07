@@ -1,11 +1,12 @@
 import React from "react";
-import { ChangeHandler } from "../../../../types/changeHandler/change.interface";
+import { ChangeHandler } from "../../../types/changeHandler/change.interface";
 
 const VideoForm: React.FC<ChangeHandler> = ({
   handleSubmitBtn,
   handleChange,
   handleSelectedChange,
   handleChangeTextArea,
+  handleAgeCheck,
 }) => {
   return (
     <form
@@ -43,6 +44,16 @@ const VideoForm: React.FC<ChangeHandler> = ({
         <option value="action">Action</option>
         <option value="comedy">Comedy</option>
       </select>
+
+      <label htmlFor="age_verification">
+        <input
+          type="checkbox"
+          name="age_verification"
+          id="age_verification"
+          onChange={(e) => handleAgeCheck(e)}
+        />
+        Age verification
+      </label>
       <input type="submit" autoComplete="off" value="Upload" />
     </form>
   );

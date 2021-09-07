@@ -13,7 +13,12 @@ const VideosView: React.FC<VideoProps> = ({ item }) => {
 
   return (
     <li>
-      <Link to={location}>{item.title}</Link>
+      {item.age_verification === "false" ? (
+        <Link to={location}>{item.title}</Link>
+      ) : (
+        "Check age verification"
+      )}
+
       <span>
         <img
           src={

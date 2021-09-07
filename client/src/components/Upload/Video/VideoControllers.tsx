@@ -1,12 +1,12 @@
 import React from "react";
 import { useContext } from "react";
-import { videosApiContext } from "../../../../api/video/VideoApi";
+import { videosApiContext } from "../../../api/video/VideoApi";
 import {
   VideoDispatchContext,
   VideoStateContext,
-} from "../../../../contexts/VideoContexts";
-import { VideoFormState } from "../../../../types/data/video/form.type";
-import VideoForm from "../Form/VideoForm";
+} from "../../../contexts/VideoContexts";
+import { VideoFormState } from "../../../types/data/video/form.type";
+import VideoForm from "./VideoForm";
 
 const VideoControllers = () => {
   const api = useContext(videosApiContext);
@@ -21,6 +21,10 @@ const VideoControllers = () => {
     formData.append("title", state!.uploadForm!.title!);
     formData.append("description", state!.uploadForm!.description!);
     formData.append("theme", state!.uploadForm!.theme!);
+    formData.append(
+      "age_verification",
+      String(state!.uploadForm!.age_verification!)
+    );
 
     const res = await api.upload(formData);
 
@@ -63,12 +67,25 @@ const VideoControllers = () => {
     });
   };
 
+  const handleAgeCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch!({
+      type: "VIDEO_UPLOAD",
+
+      uploadForm: {
+        ...state!.uploadForm,
+        age_verification: e.currentTarget.checked,
+      } as VideoFormState,
+    });
+    console.log(state?.uploadForm?.age_verification);
+  };
+
   return (
     <VideoForm
       handleSelectedChange={handleSelectedChange}
       handleChange={handleChange}
       handleSubmitBtn={handleSubmitBtn}
       handleChangeTextArea={handleChangeTextArea}
+      handleAgeCheck={handleAgeCheck}
     />
   );
 };

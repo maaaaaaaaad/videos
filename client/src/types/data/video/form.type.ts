@@ -4,6 +4,7 @@ export type VideoFormState = {
   title: string;
   description: string;
   theme: string;
+  age_verification: boolean;
 };
 
 export type State = {

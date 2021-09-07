@@ -1,7 +1,7 @@
 import React from "react";
 import { SignUpHandler } from "../../types/sign/Sign.interface";
 
-const SignUpView: React.FC<SignUpHandler> = ({
+const SignUpView: React.FC<Omit<SignUpHandler, "handleAgeCheck">> = ({
   handleChange,
   handleSubmitBtn,
   handleSendEmail,

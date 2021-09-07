@@ -12,4 +12,7 @@ export class VideoDto {
 
   @IsString()
   theme: string;
+
+  @IsString()
+  age_verification: string;
 }

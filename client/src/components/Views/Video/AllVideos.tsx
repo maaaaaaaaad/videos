@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { VideoProps } from "../../../types/data/video/props.interface";
 
 const VideosView: React.FC<VideoProps> = ({ item }) => {
-  const location = {
+  const goToPlayer = {
     pathname: "/player",
     search: `?vod=${item._id}`,
     state: {
@@ -14,9 +14,9 @@ const VideosView: React.FC<VideoProps> = ({ item }) => {
   return (
     <li>
       {item.age_verification === "false" ? (
-        <Link to={location}>{item.title}</Link>
+        <Link to={goToPlayer}>{item.title}</Link>
       ) : (
-        "Check age verification"
+        "Please you checking age verification" // create verification button with api
       )}
 
       <span>

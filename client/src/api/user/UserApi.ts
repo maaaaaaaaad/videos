@@ -6,11 +6,11 @@ import {
 } from "../../types/sign/SignUpForm.type";
 
 export class Users {
-  credential: { withCredentials: boolean };
+  static credential: { withCredentials: boolean };
 
   constructor(readonly baseUrl: string) {
     this.baseUrl = baseUrl;
-    this.credential = {
+    Users.credential = {
       withCredentials: true,
     };
   }
@@ -19,7 +19,7 @@ export class Users {
     return await axios.post(
       `${this.baseUrl}/signup`,
       signUpFormData,
-      this.credential
+      Users.credential
     );
   }
 
@@ -30,26 +30,26 @@ export class Users {
   }
 
   async userLoggedIn() {
-    return await axios.get(`${this.baseUrl}`, this.credential);
+    return await axios.get(`${this.baseUrl}`, Users.credential);
   }
 
   async update(profileUpdateForm: FormData) {
     return await axios.patch(
       `${this.baseUrl}/update`,
       profileUpdateForm,
-      this.credential
+      Users.credential
     );
   }
 
   async userLogout() {
-    await axios.get(`${this.baseUrl}/logout`, this.credential);
+    await axios.get(`${this.baseUrl}/logout`, Users.credential);
   }
 
   async changePass(password: ChangePasswordForm) {
     return await axios.patch(
       `${this.baseUrl}/change-password`,
       password,
-      this.credential
+      Users.credential
     );
   }
 }

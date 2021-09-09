@@ -76,7 +76,6 @@ const VideoControllers = () => {
         age_verification: e.currentTarget.checked,
       } as VideoFormState,
     });
-    console.log(state?.uploadForm?.age_verification);
   };
 
   return (

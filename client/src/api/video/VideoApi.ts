@@ -3,28 +3,28 @@ import axios from "axios";
 import { VideoInfo } from "../../types/data/video/info";
 
 export class Videos {
-  credential: { withCredentials: boolean };
+  static credential: { withCredentials: boolean };
 
   constructor(readonly baseUrl: string) {
     this.baseUrl = baseUrl;
-    this.credential = {
+    Videos.credential = {
       withCredentials: true,
     };
   }
 
   async getAll() {
-    return await axios.get(`${this.baseUrl}`, this.credential);
+    return await axios.get(`${this.baseUrl}`, Videos.credential);
   }
 
   async getOne() {
-    return axios.get(`${this.baseUrl}/get-videos`, this.credential);
+    return axios.get(`${this.baseUrl}/get-videos`, Videos.credential);
   }
 
   async upload(formData: FormData) {
     return await axios.post(
       `${this.baseUrl}/upload`,
       formData,
-      this.credential
+      Videos.credential
     );
   }
 
@@ -32,18 +32,22 @@ export class Videos {
     return await axios.patch(
       `${this.baseUrl}/update`,
       formData,
-      this.credential
+      Videos.credential
     );
   }
 
   async delete(videoId: Pick<VideoInfo, "_id">) {
-    return await axios.post(`${this.baseUrl}/delete`, videoId, this.credential);
+    return await axios.post(
+      `${this.baseUrl}/delete`,
+      videoId,
+      Videos.credential
+    );
   }
 
   async search(keyword: string) {
     return await axios.get(
       `${this.baseUrl}/search?keyword=${keyword}`,
-      this.credential
+      Videos.credential
     );
   }
 }

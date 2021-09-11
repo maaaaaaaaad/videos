@@ -17,7 +17,9 @@ const HomeView = () => {
         height={50}
       />
 
-      <span>Hello {isUser?.nickname ? isUser.nickname : "User"}</span>
+      <span className="text-purple-700 text-opacity-75">
+        Hello {isUser?.nickname ? isUser.nickname : "User"}
+      </span>
     </section>
   );
 };

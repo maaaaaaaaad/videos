@@ -5,7 +5,7 @@ import { VideoInfo } from "../../types/data/video/info";
 export class Videos {
   static credential: { withCredentials: boolean };
 
-  constructor(readonly baseUrl: string) {
+  constructor(private readonly baseUrl: string) {
     this.baseUrl = baseUrl;
     Videos.credential = {
       withCredentials: true,

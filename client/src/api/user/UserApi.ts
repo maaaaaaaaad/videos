@@ -8,7 +8,7 @@ import {
 export class Users {
   static credential: { withCredentials: boolean };
 
-  constructor(readonly baseUrl: string) {
+  constructor(private readonly baseUrl: string) {
     this.baseUrl = baseUrl;
     Users.credential = {
       withCredentials: true,
@@ -24,9 +24,11 @@ export class Users {
   }
 
   async login(signInData: SignInForm) {
-    return await axios.post(`${this.baseUrl}/login`, signInData, {
-      withCredentials: true,
-    });
+    return await axios.post(
+      `${this.baseUrl}/login`,
+      signInData,
+      Users.credential
+    );
   }
 
   async userLoggedIn() {

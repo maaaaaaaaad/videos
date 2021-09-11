@@ -5,7 +5,7 @@ import { Injectable } from '@nestjs/common';
 export class MailService {
   constructor(private readonly emailService: MailerService) {}
 
-  async _send(
+  private async send(
     tos: string[],
     subject: string,
     templateName: string,
@@ -27,7 +27,7 @@ export class MailService {
       secret_key: Math.floor(Math.random() * 100000) + 100000,
     };
 
-    await this._send(
+    await this.send(
       [to],
       'Email Authentication from Woong',
       'email-authentication.ejs',

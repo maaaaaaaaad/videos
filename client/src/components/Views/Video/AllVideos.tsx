@@ -14,7 +14,9 @@ const VideosView: React.FC<VideoProps> = ({ item }) => {
   return (
     <li>
       {item.age_verification === "false" ? (
-        <Link to={goToPlayer}>{item.title}</Link>
+        <Link to={goToPlayer} className="text-black hover:text-blue-500">
+          {item.title}
+        </Link>
       ) : (
         "Please you checking age verification" // create verification button with api
       )}

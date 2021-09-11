@@ -8,7 +8,7 @@ const Navigators = () => {
   const isUser = useContext(ResUserDataContext);
 
   return (
-    <section>
+    <section className="bg-primary text-white">
       <ul>
         <li>
           <Link to="/">Home</Link>

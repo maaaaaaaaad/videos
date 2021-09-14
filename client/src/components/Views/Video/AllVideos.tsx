@@ -11,6 +11,11 @@ const VideosView: React.FC<VideoProps> = ({ item }) => {
     },
   };
 
+  const onAgeVerification = () => {
+    const { IMP } = window;
+    IMP!.init(process.env.REACT_APP_IAMPORT_KEY! as string);
+  };
+
   return (
     <li>
       {item.age_verification === "false" ? (
@@ -18,7 +23,9 @@ const VideosView: React.FC<VideoProps> = ({ item }) => {
           {item.title}
         </Link>
       ) : (
-        "Please you checking age verification" // create verification button with api
+        <span onClick={onAgeVerification}>
+          Please you checking age verification
+        </span>
       )}
 
       <span>

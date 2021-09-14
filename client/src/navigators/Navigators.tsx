@@ -9,7 +9,7 @@ const Navigators = () => {
 
   return (
     <section className="bg-primary text-white">
-      <ul>
+      <ul className="flex justify-evenly">
         <li>
           <Link to="/">Home</Link>
         </li>

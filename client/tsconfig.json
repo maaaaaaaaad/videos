@@ -18,10 +18,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx",
-    "types": [
-      "iamport-typings"
-    ]
+    "jsx": "react-jsx"
   },
   "include": [
     "src"

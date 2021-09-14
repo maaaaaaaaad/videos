@@ -1,6 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { VideoProps } from "../../../types/data/video/props.interface";
+import {
+  IMP,
+  Carrier,
+  CertificationData,
+  CertificationOptions,
+  Response,
+} from "iamport-capacitor";
 
 const VideosView: React.FC<VideoProps> = ({ item }) => {
   const goToPlayer = {
@@ -11,9 +18,35 @@ const VideosView: React.FC<VideoProps> = ({ item }) => {
     },
   };
 
+  const callback = (response: Response) => {
+    const { imp_uid, merchant_uid } = response;
+    alert(`UID: ${imp_uid}, Merchant_number: ${merchant_uid}`);
+  };
+
+  const callbackOnBack = () => {
+    alert("Stop to verification");
+  };
+
   const onAgeVerification = () => {
-    const { IMP } = window;
-    IMP!.init(process.env.REACT_APP_IAMPORT_KEY! as string);
+    const imp = new IMP();
+    const userCode: string = process.env.REACT_APP_IAMPORT_KEY! as string;
+    const carrier: Carrier = "LGT";
+
+    const data: CertificationData = {
+      merchant_uid: `mid_${new Date().getTime()}`,
+      company: "VBN",
+      carrier,
+      name: "Tester",
+      phone: process.env.REACT_APP_TEST_PHONENUMBER! as string,
+    };
+
+    const options: CertificationOptions = {
+      userCode,
+      data,
+      callback,
+      callbackOnBack,
+    };
+    imp.certification(options);
   };
 
   return (

@@ -39,7 +39,7 @@ export class VideoInformation {
       comment: {
         author: { type: String, default: null },
         content: { type: String, default: null },
-        date: { type: Number, default: Date.now() },
+        date: { type: Number, default: null },
       },
     }),
   )

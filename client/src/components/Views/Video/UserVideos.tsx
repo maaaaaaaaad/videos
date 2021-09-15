@@ -8,7 +8,7 @@ const UserVideosView: React.FC<VideoProps> = ({ item }) => {
   return (
     <li>
       <video controls width={400} height={300}>
-        <source src={`http://localhost:5000/${item.videoUrl}`} />
+        <source src={`${process.env.REACT_APP_SERVER_URL}/${item.videoUrl}`} />
       </video>
       <h2>{item.title}</h2>
       <p>{item.theme}</p>

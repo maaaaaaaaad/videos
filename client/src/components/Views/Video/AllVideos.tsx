@@ -14,14 +14,14 @@ const VideosView: React.FC<VideoProps> = ({ item }) => {
   const ageVerification = () => {};
 
   return (
-    <li>
+    <li className="mb-10">
       {item.age_verification === "false" ? (
-        <Link to={goToPlayer} className="text-black hover:text-blue-500">
+        <Link to={goToPlayer} className="text-green-500 hover:text-blue-500">
           {item.title}
         </Link>
       ) : (
-        <span onClick={ageVerification}>
-          Please you checking age verification
+        <span className="text-red-500" onClick={ageVerification}>
+          {item.title} ⚠️ Please you checking age verification
         </span>
       )}
 
@@ -38,9 +38,10 @@ const VideosView: React.FC<VideoProps> = ({ item }) => {
         />
         {item.owner?.nickname}
       </span>
-      <p>Theme {item.theme}</p>
-      <p>{item.date}</p>
-      <p>{item.description}</p>
+      <p>Theme: {item.theme}</p>
+      <p>Date: {item.date}</p>
+      <p>Description: {item.description}</p>
+      <p>views: {item.metadata!.views_count}</p>
     </li>
   );
 };

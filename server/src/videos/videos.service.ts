@@ -30,7 +30,8 @@ export class VideosService {
   }
 
   async upload(userSession: UserDocument, videoData: VideoDto) {
-    const { video, title, description, theme, age_verification } = videoData;
+    const { video, title, description, theme, age_verification, metadata } =
+      videoData;
 
     const createVideo = new this.videoModel({
       videoUrl: video.path,
@@ -40,6 +41,7 @@ export class VideosService {
       date: new Date(),
       age_verification,
       owner: userSession._id,
+      metadata,
     });
     return await createVideo.save();
   }

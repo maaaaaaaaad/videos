@@ -26,9 +26,7 @@ const VideoControllers = () => {
       String(state!.uploadForm!.age_verification!)
     );
 
-    const res = await api.upload(formData);
-
-    console.log(res.data);
+    await api.upload(formData);
     window.location.href = "/videos";
   };
 

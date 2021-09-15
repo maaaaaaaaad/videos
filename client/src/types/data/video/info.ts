@@ -12,11 +12,11 @@ export type VideoInfo = {
     avatarUrl: string | null;
   };
   readonly metadata?: {
-    views_count: number;
-    comment: {
+    views_count?: number;
+    comment?: {
       author: string | null;
       content: string | null;
-      date: Date | null;
+      date: string | null;
     };
   };
 };

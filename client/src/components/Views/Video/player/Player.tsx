@@ -1,18 +1,38 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useContext, useState } from "react";
 import { RouteComponentProps } from "react-router-dom";
-import { VideoProps } from "../../../../types/data/video/props.interface";
+import { ResUserDataContext } from "../../../../App";
+import {
+  VideoMetadata,
+  VideoProps,
+} from "../../../../types/data/video/props.interface";
 
 const Player: React.FC<RouteComponentProps> = ({ location }) => {
   const selectedVideo = location.state! as VideoProps;
-  const [value, setValue] = useState<string | null>(null);
+  const isUser = useContext(ResUserDataContext);
+  const [value, setValue] = useState<VideoMetadata | null>(null);
   const [comments, setComments] = useState<[] | null>(null); // comment items
 
-  const handleAddComment = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleAddComment = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    await axios.post(
+      `${process.env.REACT_APP_SERVER_URL}/videos/comment/:${selectedVideo.item._id}`,
+      value,
+      { withCredentials: true }
+    );
   };
 
   const handleChangeComment = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //Add to create the comment api
+    const userComment: VideoMetadata = {
+      metadata: {
+        comment: {
+          author: isUser?._id!,
+          content: e.currentTarget.value,
+          date: new Date().toLocaleDateString(),
+        },
+      },
+    };
+    setValue(userComment);
   };
 
   return (

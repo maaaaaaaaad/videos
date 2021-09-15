@@ -36,11 +36,13 @@ export class VideoInformation {
   @Prop(
     raw({
       views_count: { type: Number, default: 0 },
-      comment: {
-        author: { type: String, default: null },
-        content: { type: String, default: null },
-        date: { type: Number, default: null },
-      },
+      comment: [
+        {
+          author: { type: String, default: null },
+          content: { type: String, default: null },
+          date: { type: Number, default: null },
+        },
+      ],
     }),
   )
   metadata: VideoMetadata;

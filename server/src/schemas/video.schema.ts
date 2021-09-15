@@ -5,8 +5,8 @@ import { UserInformation } from './user.schema';
 
 export type VideoDocument = VideoInformation & Document;
 export type VideoMetadata = {
-  views_count: number;
-  comment: {
+  views_count?: number;
+  comment?: {
     author: string | null;
     content: string | null;
     date: number;

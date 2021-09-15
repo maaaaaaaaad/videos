@@ -16,7 +16,7 @@ const Player: React.FC<RouteComponentProps> = ({ location }) => {
   const handleAddComment = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     await axios.post(
-      `${process.env.REACT_APP_SERVER_URL}/videos/comment/:${selectedVideo.item._id}`,
+      `${process.env.REACT_APP_SERVER_URL}/videos/comment/${selectedVideo.item._id}`,
       value,
       { withCredentials: true }
     );
@@ -71,6 +71,7 @@ const Player: React.FC<RouteComponentProps> = ({ location }) => {
               type="text"
               placeholder="Please you enter comment"
               autoComplete="off"
+              name="comment"
               onChange={handleChangeComment}
             />
             <input type="submit" value="OK" />

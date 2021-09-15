@@ -4,6 +4,7 @@ import {
   Controller,
   Get,
   NotFoundException,
+  Param,
   Patch,
   Post,
   Query,
@@ -116,5 +117,18 @@ export class VideosController {
     return res.status(200).json({
       result,
     });
+  }
+
+  @Post('comment/:videoId')
+  async addComment(
+    @Param('videoId') videoId: string,
+    @Res() res: Response,
+    @Body() body: Pick<VideoDto, 'metadata'>,
+  ) {
+    const test = {
+      videoId,
+      body,
+    };
+    console.log(test);
   }
 }

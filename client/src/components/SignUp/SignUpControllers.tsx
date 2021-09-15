@@ -85,7 +85,6 @@ const SignUpControllers = () => {
         console.log("User secret key: " + res.data.secret_key);
         setEmailKey(String(res.data.secret_key));
       } catch (error) {
-        console.log(error.message);
         setEmailKey(null);
       }
     } else {

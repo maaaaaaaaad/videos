@@ -1,5 +1,4 @@
 import { ValidateNested, IsString } from 'class-validator';
-import { VideoMetadata } from 'src/schemas/video.schema';
 
 export class VideoDto {
   @ValidateNested()
@@ -16,7 +15,4 @@ export class VideoDto {
 
   @IsString()
   age_verification: string;
-
-  @ValidateNested()
-  metadata?: VideoMetadata;
 }

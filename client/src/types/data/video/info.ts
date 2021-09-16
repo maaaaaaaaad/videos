@@ -11,14 +11,6 @@ export type VideoInfo = {
     nickname: string;
     avatarUrl: string | null;
   };
-  readonly metadata?: {
-    views_count?: number;
-    comment?: {
-      author: string | null;
-      content: string | null;
-      date: string | null;
-    };
-  };
 };
 
 export type AllVideos = Array<VideoInfo>;

@@ -21,4 +21,8 @@ export class MetadataService {
 
     return await createComment.save();
   }
+
+  async getAllComments() {
+    return await this.metadataModel.find({});
+  }
 }

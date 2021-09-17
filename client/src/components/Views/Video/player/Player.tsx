@@ -1,12 +1,10 @@
-import React, { useContext } from "react";
+import React from "react";
 import { RouteComponentProps } from "react-router-dom";
-import { ResUserDataContext } from "../../../../App";
 import { VideoProps } from "../../../../types/data/video/props.interface";
 import CommentControllers from "./comment/CommentControllers";
 
 const Player: React.FC<RouteComponentProps> = ({ location }) => {
   const selectedVideo = location.state! as VideoProps;
-  const isUser = useContext(ResUserDataContext);
 
   return (
     <section>
@@ -37,7 +35,7 @@ const Player: React.FC<RouteComponentProps> = ({ location }) => {
 
       <article>
         <div>comments : 0</div>
-        {isUser?.userId ? <CommentControllers /> : <div>Please you login</div>}
+        <CommentControllers />
       </article>
     </section>
   );

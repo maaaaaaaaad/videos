@@ -50,7 +50,7 @@ const VideoForm: React.FC<ChangeHandler> = ({
           type="checkbox"
           name="age_verification"
           id="age_verification"
-          onChange={(e) => handleAgeCheck(e)}
+          onChange={(e) => handleAgeCheck!(e)}
         />
         Age verification
       </label>

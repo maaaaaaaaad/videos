@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useContext, useState } from "react";
 import { ResUserDataContext } from "../../../../../App";
 import { Comment } from "../../../../../types/data/metadata/comment.type";
-import CommentView from "./CommentView";
+import CommentForm from "./CommentForm";
 
 const CommentControllers = () => {
   const isUser = useContext(ResUserDataContext);
@@ -34,7 +34,7 @@ const CommentControllers = () => {
     setAddComment(e.currentTarget.value);
   };
   return (
-    <CommentView
+    <CommentForm
       handleSubmitBtn={handleSubmitBtn}
       handleChange={handleChange}
     />

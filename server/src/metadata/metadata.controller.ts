@@ -1,5 +1,5 @@
 import { CommentDto } from './dto/comment.dto';
-import { Body, Controller, Post, Res } from '@nestjs/common';
+import { Body, Controller, Get, Post, Res } from '@nestjs/common';
 import { MetadataService } from './metadata.service';
 import { Response } from 'express';
 
@@ -11,6 +11,20 @@ export class MetadataController {
   async createComment(@Body() comment: CommentDto, @Res() res: Response) {
     try {
       const result = await this.metadataService.addComment(comment);
+      return res.status(200).json({
+        result,
+      });
+    } catch (error) {
+      return res.status(400).json({
+        error: error.message,
+      });
+    }
+  }
+
+  @Get('get-comments')
+  async getComments(@Res() res: Response) {
+    try {
+      const result = await this.metadataService.getAllComments();
       return res.status(200).json({
         result,
       });

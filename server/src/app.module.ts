@@ -7,6 +7,7 @@ import * as path from 'path';
 import { EjsAdapter } from '@nestjs-modules/mailer/dist/adapters/ejs.adapter';
 import { VideosModule } from './videos/videos.module';
 import { UsersModule } from './users/users.module';
+import { MetadataModule } from './metadata/metadata.module';
 
 @Module({
   imports: [
@@ -38,6 +39,7 @@ import { UsersModule } from './users/users.module';
     }),
     UsersModule,
     VideosModule,
+    MetadataModule,
   ],
 })
 export class AppModule {}

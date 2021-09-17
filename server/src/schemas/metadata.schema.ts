@@ -9,7 +9,7 @@ export class MetadataInformation {
   userId: string;
 
   @Prop({ required: true })
-  content: string;
+  comment: string;
 
   @Prop({ required: true })
   date: Date;

@@ -16,7 +16,7 @@ export class MetadataService {
     const createComment = new this.metadataModel({
       userId,
       comment,
-      date: new Date().toLocaleDateString(),
+      date: Date.now(),
     });
 
     return await createComment.save();

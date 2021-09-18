@@ -1,12 +1,19 @@
 import axios from "axios";
-import React, { useContext, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { ResUserDataContext } from "../../../../../App";
 import { Comment } from "../../../../../types/data/metadata/comment.type";
 import CommentForm from "./CommentForm";
 
 const CommentControllers = () => {
   const isUser = useContext(ResUserDataContext);
+  const commentUlRef = useRef<HTMLUListElement>(null);
   const [addComment, setAddComment] = useState<string>("");
+
+  const saveComment = (addComment: string) => {
+    const list = document.createElement("li");
+    list.innerHTML = addComment;
+    commentUlRef.current?.prepend(list);
+  };
 
   const handleSubmitBtn = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -20,24 +27,27 @@ const CommentControllers = () => {
       comment: addComment,
     };
 
-    const res = await axios.post(
+    await axios.post(
       `${process.env.REACT_APP_SERVER_URL}/metadata/create-comment`,
       comment,
       {
         withCredentials: true,
       }
     );
-    console.log(res.data.result);
+    saveComment(addComment);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAddComment(e.currentTarget.value);
   };
   return (
-    <CommentForm
-      handleSubmitBtn={handleSubmitBtn}
-      handleChange={handleChange}
-    />
+    <section>
+      <CommentForm
+        handleSubmitBtn={handleSubmitBtn}
+        handleChange={handleChange}
+      />
+      <ul ref={commentUlRef}></ul>
+    </section>
   );
 };
 

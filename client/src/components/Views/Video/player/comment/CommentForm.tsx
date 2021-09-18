@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { ResUserDataContext } from "../../../../../App";
 import { ChangeHandler } from "../../../../../types/changeHandler/change.interface";
-import CommentView from "./CommentView";
 
 const CommentForm: React.FC<ChangeHandler> = ({
   handleSubmitBtn,
@@ -25,10 +24,6 @@ const CommentForm: React.FC<ChangeHandler> = ({
       ) : (
         <div>please you login</div>
       )}
-
-      <article>
-        <CommentView />
-      </article>
     </section>
   );
 };

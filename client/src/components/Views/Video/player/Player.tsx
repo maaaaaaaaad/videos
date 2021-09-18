@@ -34,7 +34,6 @@ const Player: React.FC<RouteComponentProps> = ({ location }) => {
       </article>
 
       <article>
-        <div>comments : 0</div>
         <CommentControllers />
       </article>
     </section>

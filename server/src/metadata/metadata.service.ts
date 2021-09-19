@@ -11,12 +11,12 @@ export class MetadataService {
     private readonly metadataModel: Model<MetadataDocument>,
   ) {}
   async addComment(commentDto: CommentDto) {
-    const { userId, comment } = commentDto;
+    const { userId, comment, date } = commentDto;
 
     const createComment = new this.metadataModel({
       userId,
       comment,
-      date: Date.now(),
+      date,
     });
 
     return await createComment.save();

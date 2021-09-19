@@ -9,10 +9,21 @@ const CommentControllers = () => {
   const commentUlRef = useRef<HTMLUListElement>(null);
   const [addComment, setAddComment] = useState<string>("");
 
-  const saveComment = (addComment: string) => {
-    const list = document.createElement("li");
-    list.innerHTML = addComment;
-    commentUlRef.current?.prepend(list);
+  const saveComment = (userComment: Comment) => {
+    const commentItems = document.createElement("li");
+    const userId = document.createElement("div");
+    const comment = document.createElement("div");
+    const date = document.createElement("div");
+
+    userId.innerHTML = userComment.userId;
+    comment.innerHTML = userComment.comment;
+    date.innerHTML = userComment.date! as string;
+
+    commentItems.appendChild(userId);
+    commentItems.appendChild(comment);
+    commentItems.appendChild(date);
+
+    return commentUlRef.current?.prepend(commentItems);
   };
 
   const handleSubmitBtn = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -25,6 +36,7 @@ const CommentControllers = () => {
     const comment: Comment = {
       userId: isUser?.userId!,
       comment: addComment,
+      date: new Date().toLocaleDateString(),
     };
 
     await axios.post(
@@ -34,7 +46,7 @@ const CommentControllers = () => {
         withCredentials: true,
       }
     );
-    saveComment(addComment);
+    saveComment(comment);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -6,4 +6,7 @@ export class MetadataDto {
 
   @IsString()
   comment: string;
+
+  @IsString()
+  date: string;
 }

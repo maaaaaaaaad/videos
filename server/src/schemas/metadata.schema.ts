@@ -12,7 +12,7 @@ export class MetadataInformation {
   comment: string;
 
   @Prop({ required: true })
-  date: Date;
+  date: string;
 }
 
 export const metadataSchema = SchemaFactory.createForClass(MetadataInformation);

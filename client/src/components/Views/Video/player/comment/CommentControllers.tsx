@@ -1,13 +1,29 @@
 import axios from "axios";
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { ResUserDataContext } from "../../../../../App";
 import { Comment } from "../../../../../types/data/metadata/comment.type";
 import CommentForm from "./CommentForm";
+import CommentView from "./CommentView";
 
 const CommentControllers = () => {
   const isUser = useContext(ResUserDataContext);
   const commentUlRef = useRef<HTMLUListElement>(null);
   const [addComment, setAddComment] = useState<string>("");
+  const [getUserCommens, setGetUserComments] = useState<Comment[]>([]);
+
+  useEffect(() => {
+    async function getComments() {
+      const res = await axios.get(
+        `${process.env.REACT_APP_SERVER_URL}/metadata/get-comments`,
+        {
+          withCredentials: true,
+        }
+      );
+      setGetUserComments(res.data.result);
+      console.log(res.data.result);
+    }
+    getComments();
+  }, []);
 
   const saveComment = (userComment: Comment) => {
     const commentItems = document.createElement("li");
@@ -15,15 +31,16 @@ const CommentControllers = () => {
     const comment = document.createElement("div");
     const date = document.createElement("div");
 
-    userId.innerHTML = userComment.userId;
-    comment.innerHTML = userComment.comment;
-    date.innerHTML = userComment.date! as string;
+    userId.innerHTML = `User: ${userComment.userId}`;
+    comment.innerHTML = `Comment: ${userComment.comment}`;
+    date.innerHTML = `Date: ${userComment.date}`;
 
     commentItems.appendChild(userId);
     commentItems.appendChild(comment);
     commentItems.appendChild(date);
 
-    return commentUlRef.current?.prepend(commentItems);
+    commentItems.classList.add("mt-3");
+    commentUlRef.current?.appendChild(commentItems);
   };
 
   const handleSubmitBtn = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -32,13 +49,11 @@ const CommentControllers = () => {
     if (addComment === "") {
       return window.alert("Please send to fill the comment");
     }
-
     const comment: Comment = {
       userId: isUser?.userId!,
       comment: addComment,
-      date: new Date().toLocaleDateString(),
+      date: new Date().toLocaleString(),
     };
-
     await axios.post(
       `${process.env.REACT_APP_SERVER_URL}/metadata/create-comment`,
       comment,
@@ -58,7 +73,11 @@ const CommentControllers = () => {
         handleSubmitBtn={handleSubmitBtn}
         handleChange={handleChange}
       />
-      <ul ref={commentUlRef}></ul>
+      <ul ref={commentUlRef}>
+        {getUserCommens.map((comment, index) => (
+          <CommentView key={index} comments={comment} />
+        ))}
+      </ul>
     </section>
   );
 };

@@ -1,5 +1,9 @@
 export type Comment = {
-  userId: string;
-  comment: string;
-  date?: string;
+  readonly userId: string;
+  readonly comment: string;
+  readonly date?: string;
 };
+
+export interface IComment {
+  comments: Comment;
+}

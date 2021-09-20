@@ -1,11 +1,12 @@
-import axios from "axios";
 import React, { useContext, useEffect, useRef, useState } from "react";
+import { commentApiContext } from "../../../../../api/metadata/CommentApi";
 import { ResUserDataContext } from "../../../../../App";
 import { Comment } from "../../../../../types/data/metadata/comment.type";
 import CommentForm from "./CommentForm";
 import CommentView from "./CommentView";
 
 const CommentControllers = () => {
+  const api = useContext(commentApiContext);
   const isUser = useContext(ResUserDataContext);
   const commentUlRef = useRef<HTMLUListElement>(null);
   const [addComment, setAddComment] = useState<string>("");
@@ -13,17 +14,12 @@ const CommentControllers = () => {
 
   useEffect(() => {
     async function getComments() {
-      const res = await axios.get(
-        `${process.env.REACT_APP_SERVER_URL}/metadata/get-comments`,
-        {
-          withCredentials: true,
-        }
-      );
+      const res = await api.getAll();
       setGetUserComments(res.data.result);
       console.log(res.data.result);
     }
     getComments();
-  }, []);
+  }, [api]);
 
   const saveComment = (userComment: Comment) => {
     const commentItems = document.createElement("li");
@@ -54,13 +50,7 @@ const CommentControllers = () => {
       comment: addComment,
       date: new Date().toLocaleString(),
     };
-    await axios.post(
-      `${process.env.REACT_APP_SERVER_URL}/metadata/create-comment`,
-      comment,
-      {
-        withCredentials: true,
-      }
-    );
+    await api.upload(comment);
     saveComment(comment);
   };
 

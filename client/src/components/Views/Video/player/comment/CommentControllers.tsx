@@ -4,6 +4,7 @@ import { ResUserDataContext } from "../../../../../App";
 import { Comment } from "../../../../../types/data/metadata/comment.type";
 import CommentForm from "./CommentForm";
 import CommentView from "./CommentView";
+import "./css/comment_preview.css";
 
 const CommentControllers = () => {
   const api = useContext(commentApiContext);
@@ -23,19 +24,37 @@ const CommentControllers = () => {
 
   const saveComment = (userComment: Comment) => {
     const commentItems = document.createElement("li");
-    const userId = document.createElement("div");
-    const comment = document.createElement("div");
-    const date = document.createElement("div");
+    const section = document.createElement("section");
+    const article_user = document.createElement("article");
+    const article_content = document.createElement("article");
+    const img = document.createElement("img");
+    const span_user = document.createElement("span");
+    const span_comment = document.createElement("span");
+    const span_date = document.createElement("span");
 
-    userId.innerHTML = `User: ${userComment.userId}`;
-    comment.innerHTML = `Comment: ${userComment.comment}`;
-    date.innerHTML = `Date: ${userComment.date}`;
+    img.src = `${process.env.REACT_APP_SERVER_URL}/${isUser!.avatarUrl}`;
+    img.alt = "avatar";
+    img.classList.add("img");
 
-    commentItems.appendChild(userId);
-    commentItems.appendChild(comment);
-    commentItems.appendChild(date);
+    span_user.innerHTML = `${isUser!.nickname}`;
+    span_user.classList.add("span_user");
 
-    commentItems.classList.add("mt-3");
+    article_user.appendChild(img);
+    article_user.appendChild(span_user);
+    article_user.classList.add("article_user");
+
+    span_comment.innerHTML = `${userComment.comment}`;
+    span_date.innerHTML = `${userComment.date}`;
+    span_comment.classList.add("span_comment");
+    span_date.classList.add("span_date");
+
+    article_content.appendChild(span_comment);
+    article_content.appendChild(span_date);
+
+    section.appendChild(article_user);
+    section.appendChild(article_content);
+    section.classList.add("section");
+    commentItems.appendChild(section);
     commentUlRef.current?.appendChild(commentItems);
   };
 

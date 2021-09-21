@@ -8,7 +8,7 @@ const Navigators = () => {
   const isUser = useContext(ResUserDataContext);
 
   return (
-    <section className="bg-primary text-white p-5">
+    <section className="bg-black text-white p-5">
       <ul className="flex justify-evenly">
         <li>
           <Link to="/">Home</Link>

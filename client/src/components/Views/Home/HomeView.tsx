@@ -5,21 +5,17 @@ const HomeView = () => {
   const isUser = useContext(ResUserDataContext);
 
   return (
-    <section>
+    <section className="flex items-center">
       <img
+        className="mr-1 w-14 h-14 rounded-md"
         src={
           isUser?.avatarUrl
             ? `${process.env.REACT_APP_SERVER_URL}/${isUser.avatarUrl}`
             : `${process.env.REACT_APP_SERVER_URL}/assets/images/defaultImg.png`
         }
         alt="avatar"
-        width={60}
-        height={50}
       />
-
-      <span className="text-purple-700 text-opacity-75">
-        Hello {isUser?.nickname ? isUser.nickname : "User"}
-      </span>
+      <span>Hello {isUser?.nickname ? isUser.nickname : "User"}</span>
     </section>
   );
 };

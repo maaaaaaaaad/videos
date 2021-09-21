@@ -6,9 +6,9 @@ const VideoSearchForm: React.FC<SearchHandlers> = ({
   handleSearch,
 }) => {
   return (
-    <form onSubmit={(e) => handleSearch(e)}>
+    <form className="mb-5" onSubmit={(e) => handleSearch(e)}>
       <input
-        className="border-2 border-gray-400 outline-none"
+        className="border-b-2 w-72 border-gray-400 outline-none mr-1"
         type="text"
         name="keyword"
         placeholder="...Search"
@@ -16,7 +16,7 @@ const VideoSearchForm: React.FC<SearchHandlers> = ({
         onChange={(e) => handleKeyword(e)}
       />
       <input
-        className="p-1 cursor-pointer outline-none"
+        className="p-1 w-8 rounded-md bg-black text-white cursor-pointer outline-none"
         type="submit"
         value="Q"
       />

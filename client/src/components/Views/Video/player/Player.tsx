@@ -13,29 +13,33 @@ const Player: React.FC<RouteComponentProps> = ({ location }) => {
           src={`${process.env.REACT_APP_SERVER_URL}/${selectedVideo.item.videoUrl}`}
         />
       </video>
-      <article>
+      <section>
         <h2>{selectedVideo.item.title}</h2>
-        <span>
+        <article className="flex items-center">
           <img
+            className="w-12 h-12 rounded-md"
             src={
               selectedVideo.item.owner?.avatarUrl
                 ? `${process.env.REACT_APP_SERVER_URL}/${selectedVideo.item.owner.avatarUrl}`
                 : `${process.env.REACT_APP_SERVER_URL}/assets/images/defaultImg.png`
             }
             alt="avatar"
-            width={55}
-            height={40}
           />
-          {selectedVideo.item.owner?.nickname}
-        </span>
-        <p>Theme {selectedVideo.item.theme}</p>
-        <p>{selectedVideo.item.date}</p>
-        <p>Description: {selectedVideo.item.description}</p>
-      </article>
+          <span className="ml-1 text-xl">
+            {selectedVideo.item.owner?.nickname}
+          </span>
+        </article>
 
-      <article>
+        <article>
+          <p>Theme {selectedVideo.item.theme}</p>
+          <p>{selectedVideo.item.date}</p>
+          <p>Description: {selectedVideo.item.description}</p>
+        </article>
+      </section>
+
+      <section>
         <CommentControllers />
-      </article>
+      </section>
     </section>
   );
 };

@@ -17,7 +17,6 @@ const CommentControllers = () => {
     async function getComments() {
       const res = await api.getAll();
       setGetUserComments(res.data.result);
-      console.log(res.data.result);
     }
     getComments();
   }, [api]);
@@ -32,7 +31,9 @@ const CommentControllers = () => {
     const span_comment = document.createElement("span");
     const span_date = document.createElement("span");
 
-    img.src = `${process.env.REACT_APP_SERVER_URL}/${isUser!.avatarUrl}`;
+    img.src = isUser?.avatarUrl
+      ? `${process.env.REACT_APP_SERVER_URL}/${isUser.avatarUrl}`
+      : `${process.env.REACT_APP_SERVER_URL}/assets/images/defaultImg.png`;
     img.alt = "avatar";
     img.classList.add("img");
 

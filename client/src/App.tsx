@@ -16,7 +16,6 @@ const App = () => {
   const [resUserData, setResUserData] = useState<ResponseUserData | null>(null);
 
   const getSessionData = useCallback(async () => {
-    //
     const res = await api.userLoggedIn();
     const resUserData: ResponseUserData = res.data.userSession;
     console.log("User Nickname:", resUserData?.nickname ?? "Not logged in");
@@ -33,7 +32,9 @@ const App = () => {
       <BrowserRouter>
         <ResUserDataContext.Provider value={resUserData}>
           <Navigators />
-          <Routers />
+          <section className="m-5">
+            <Routers />
+          </section>
         </ResUserDataContext.Provider>
       </BrowserRouter>
     </MediaQuery>

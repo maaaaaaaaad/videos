@@ -25,7 +25,7 @@ const VideosView: React.FC<VideoProps> = ({ item }) => {
         </span>
       )}
 
-      <span>
+      <article className="flex items-center">
         <img
           src={
             item.owner?.avatarUrl
@@ -33,11 +33,10 @@ const VideosView: React.FC<VideoProps> = ({ item }) => {
               : `${process.env.REACT_APP_SERVER_URL}/assets/images/defaultImg.png`
           }
           alt="avatar"
-          width={55}
-          height={40}
+          className="w-9 h-9 rounded-md"
         />
-        {item.owner?.nickname}
-      </span>
+        <span className="ml-1">{item.owner?.nickname}</span>
+      </article>
       <p>Theme: {item.theme}</p>
       <p>Date: {item.date}</p>
       <p>Description: {item.description}</p>

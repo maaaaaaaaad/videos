@@ -8,13 +8,18 @@ const VideoSearchForm: React.FC<SearchHandlers> = ({
   return (
     <form onSubmit={(e) => handleSearch(e)}>
       <input
+        className="border-2 border-gray-400 outline-none"
         type="text"
         name="keyword"
         placeholder="...Search"
         autoComplete="off"
         onChange={(e) => handleKeyword(e)}
       />
-      <input type="submit" value="Q" />
+      <input
+        className="p-1 cursor-pointer outline-none"
+        type="submit"
+        value="Q"
+      />
     </form>
   );
 };

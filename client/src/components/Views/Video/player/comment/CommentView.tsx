@@ -8,9 +8,11 @@ const CommentView: React.FC<IComment> = ({ comments }) => {
         <article className="flex items-center mr-5">
           <img
             className="w-10 h-10 rounded-md"
-            src={`${process.env.REACT_APP_SERVER_URL}/${
-              comments.owner!.avatarUrl
-            }`}
+            src={
+              comments.owner?.avatarUrl
+                ? `${process.env.REACT_APP_SERVER_URL}/${comments.owner.avatarUrl}`
+                : `${process.env.REACT_APP_SERVER_URL}/assets/images/defaultImg.png`
+            }
             alt="avatar"
           />
           <span className="ml-1">{comments.owner!.nickname}</span>

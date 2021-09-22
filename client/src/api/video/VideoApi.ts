@@ -12,6 +12,13 @@ export class Videos {
     };
   }
 
+  async getComments(videoId: string) {
+    return await axios.get(
+      `${this.baseUrl}/get-videos-comments/${videoId}`,
+      Videos.credential
+    );
+  }
+
   async getAll() {
     return await axios.get(`${this.baseUrl}`, Videos.credential);
   }

@@ -1,26 +1,24 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { RouteComponentProps } from "react-router-dom";
+import { videosApiContext } from "../../api/video/VideoApi";
 import { Comments } from "../../types/data/video/info";
 import { VideoProps } from "../../types/data/video/props.interface";
 import CommentForm from "./comment/CommentForm";
 import CommentView from "./comment/CommentView";
 
 const Player: React.FC<RouteComponentProps> = ({ location }) => {
+  const api = useContext(videosApiContext);
   const selectedVideo = location.state! as VideoProps;
   const [getComments, setGetComments] = useState<Comments>();
 
   useEffect(() => {
-    async function getComments() {
-      const res = await axios.get(
-        `${process.env.REACT_APP_SERVER_URL}/videos/get-videos-comments/${selectedVideo.item._id}`,
-        { withCredentials: true }
-      );
+    async function getUserComments() {
+      const res = await api.getComments(selectedVideo.item._id!);
       const comments: Comments = res.data.result.comment;
       setGetComments(comments);
     }
-    getComments();
-  }, [selectedVideo.item._id]);
+    getUserComments();
+  }, [api, selectedVideo.item._id]);
 
   return (
     <section>
@@ -55,7 +53,7 @@ const Player: React.FC<RouteComponentProps> = ({ location }) => {
 
       <section>
         <article>
-          <CommentForm videoId={selectedVideo.item._id} />
+          <CommentForm videoId={selectedVideo.item._id!} />
         </article>
         <article>
           <ul>

@@ -1,5 +1,5 @@
 export type Comment = {
-  readonly userId: string;
+  readonly nickname: string;
   readonly comment: string;
   readonly date: string;
 };

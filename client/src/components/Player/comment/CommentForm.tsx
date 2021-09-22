@@ -1,12 +1,14 @@
-import axios from "axios";
 import React, { useContext, useState } from "react";
+import { commentApiContext } from "../../../api/metadata/CommentApi";
 import { ResUserDataContext } from "../../../App";
+import { Comment } from "../../../types/data/metadata/comment.type";
 
 interface Props {
-  videoId: string | undefined;
+  videoId: string;
 }
 
 const CommentForm: React.FC<Props> = ({ videoId }) => {
+  const api = useContext(commentApiContext);
   const isUser = useContext(ResUserDataContext);
   const [commentData, setCommentData] = useState<string>("");
 
@@ -14,18 +16,13 @@ const CommentForm: React.FC<Props> = ({ videoId }) => {
     e.preventDefault();
 
     if (commentData !== "") {
-      const date = {
-        nickname: isUser!.nickname,
+      const data: Comment = {
+        nickname: isUser!.nickname!,
         comment: commentData,
         date: new Date().toLocaleString(),
       };
 
-      const res = await axios.post(
-        `${process.env.REACT_APP_SERVER_URL}/metadata/create-comment/${videoId}`,
-        date,
-        { withCredentials: true }
-      );
-      console.log(res.data.result);
+      await api.upload(data, videoId!);
     }
   };
 

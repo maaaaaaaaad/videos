@@ -12,16 +12,9 @@ export class MetadataComments {
     };
   }
 
-  async getAll() {
-    return await axios.get(
-      `${this.baseUrl}/get-comments`,
-      MetadataComments.credential
-    );
-  }
-
-  async upload(comment: Comment) {
+  async upload(comment: Comment, videoId: string) {
     return await axios.post(
-      `${this.baseUrl}/create-comment`,
+      `${this.baseUrl}/create-comment/${videoId}`,
       comment,
       MetadataComments.credential
     );

@@ -10,20 +10,13 @@ export class MetadataService {
     @InjectModel('Metadatas')
     private readonly metadataModel: Model<MetadataDocument>,
   ) {}
-  async addComment(sessionId: string, commentDto: CommentDto) {
-    const { userId, comment, date } = commentDto;
-
-    const createComment = new this.metadataModel({
-      userId,
-      comment,
+  async createComment(commentDto: CommentDto) {
+    const { dataId, date } = commentDto;
+    const comment = await this.metadataModel.create({
+      dataId,
       date,
-      owner: sessionId,
     });
-
-    return await createComment.save();
-  }
-
-  async getAllComments() {
-    return await this.metadataModel.find({}).populate('owner');
+    //add to comment array into the video service
+    return comment;
   }
 }

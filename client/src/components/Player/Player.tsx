@@ -1,7 +1,6 @@
 import React from "react";
 import { RouteComponentProps } from "react-router-dom";
-import { VideoProps } from "../../../../types/data/video/props.interface";
-import CommentControllers from "./comment/CommentControllers";
+import { VideoProps } from "../../types/data/video/props.interface";
 
 const Player: React.FC<RouteComponentProps> = ({ location }) => {
   const selectedVideo = location.state! as VideoProps;
@@ -37,9 +36,7 @@ const Player: React.FC<RouteComponentProps> = ({ location }) => {
         </article>
       </section>
 
-      <section>
-        <CommentControllers />
-      </section>
+      <section>{/* Comments */}</section>
     </section>
   );
 };

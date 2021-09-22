@@ -2,6 +2,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 import * as mongoose from 'mongoose';
 import { UserInformation } from './user.schema';
+import { MetadataInformation } from './metadata.schema';
 
 export type VideoDocument = VideoInformation & Document;
 
@@ -27,6 +28,9 @@ export class VideoInformation {
 
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'UserData' })
   owner: UserInformation;
+
+  @Prop([{ type: mongoose.Schema.Types.ObjectId, ref: 'Metadatas' }])
+  comment: MetadataInformation[];
 }
 
 export const VideoSchema = SchemaFactory.createForClass(VideoInformation);

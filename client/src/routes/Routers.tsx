@@ -14,7 +14,7 @@ import UploadBook from "../components/Upload/UploadBook";
 import UploadNote from "../components/Upload/UploadNote";
 import UploadVideo from "../components/Upload/UploadVideo";
 import Videos from "../components/Videos";
-import Player from "../components/Views/Video/player/Player";
+import Player from "../components/Player/Player";
 import SignUpContexts from "../contexts/SignUpContexts";
 import VideoContexts from "../contexts/VideoContexts";
 

@@ -8,29 +8,29 @@ interface Props {
 
 const CommentForm: React.FC<Props> = ({ videoId }) => {
   const isUser = useContext(ResUserDataContext);
-  const [commentData, setCommentData] = useState({
-    nickname: isUser?.nickname,
-    comment: "",
-    date: new Date().toLocaleString(),
-  });
+  const [commentData, setCommentData] = useState<string>("");
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const res = await axios.post(
-      `${process.env.REACT_APP_SERVER_URL}/metadata/create-comment/${videoId}`,
-      commentData,
-      { withCredentials: true }
-    );
+    if (commentData !== "") {
+      const date = {
+        nickname: isUser!.nickname,
+        comment: commentData,
+        date: new Date().toLocaleString(),
+      };
 
-    console.log(res.data.result);
+      const res = await axios.post(
+        `${process.env.REACT_APP_SERVER_URL}/metadata/create-comment/${videoId}`,
+        date,
+        { withCredentials: true }
+      );
+      console.log(res.data.result);
+    }
   };
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCommentData({
-      ...commentData,
-      comment: e.currentTarget.value,
-    });
+    setCommentData(e.currentTarget.value);
   };
 
   return (

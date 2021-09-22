@@ -32,7 +32,7 @@ export class VideosService {
 
   async getComments(videoId: string) {
     const find = await this.videoModel
-      .find({ _id: videoId })
+      .findOne({ _id: videoId })
       .populate('comment');
 
     return find;

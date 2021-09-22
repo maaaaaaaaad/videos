@@ -1,5 +1,3 @@
-import { ResponseUserData } from "../../user/LoggedIn";
-
 export type Comment = {
   readonly userId: string;
   readonly comment: string;
@@ -7,10 +5,10 @@ export type Comment = {
 };
 
 export interface IComment {
-  comments: {
-    userId: string;
+  readonly comment: {
+    _id?: string | undefined;
     comment: string;
     date: string;
-    owner?: ResponseUserData;
+    nickname: string;
   };
 }

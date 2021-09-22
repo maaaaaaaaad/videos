@@ -14,10 +14,11 @@ export class MetadataService {
   ) {}
 
   async createComment(videoId: string, commentDto: CommentDto) {
-    const { comment, date } = commentDto;
+    const { nickname, comment, date } = commentDto;
     const commentData = await this.metadataModel.create({
       comment,
       date,
+      nickname,
     });
     await this.videosService.comment(videoId, commentData);
     return commentData;

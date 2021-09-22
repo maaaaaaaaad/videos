@@ -18,6 +18,7 @@ const Videos: React.FC<RouteComponentProps> = ({ location }) => {
     const res = await api.getAll();
     const allVideos: AllVideos = res.data.result;
     setVideos(allVideos);
+    console.log(allVideos);
   }, [api]);
 
   useEffect(() => {

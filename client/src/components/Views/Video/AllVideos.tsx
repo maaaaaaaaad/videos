@@ -40,6 +40,7 @@ const VideosView: React.FC<VideoProps> = ({ item }) => {
       <p>Theme: {item.theme}</p>
       <p>Date: {item.date}</p>
       <p>Description: {item.description}</p>
+      <p>Comments: {item.comment!.length}</p>
     </li>
   );
 };

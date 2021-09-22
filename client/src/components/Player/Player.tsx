@@ -1,6 +1,7 @@
 import React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { VideoProps } from "../../types/data/video/props.interface";
+import CommentForm from "./comment/CommentForm";
 
 const Player: React.FC<RouteComponentProps> = ({ location }) => {
   const selectedVideo = location.state! as VideoProps;
@@ -36,7 +37,9 @@ const Player: React.FC<RouteComponentProps> = ({ location }) => {
         </article>
       </section>
 
-      <section>{/* Comments */}</section>
+      <section>
+        <CommentForm videoId={selectedVideo.item._id} />
+      </section>
     </section>
   );
 };

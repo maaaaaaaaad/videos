@@ -35,7 +35,7 @@ const Update: React.FC<VideoProps> = ({ item }) => {
         await api.update(formData);
         window.location.reload();
       } catch (error) {
-        console.log(error.message);
+        console.log(error);
       }
     }
 

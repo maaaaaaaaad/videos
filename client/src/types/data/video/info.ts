@@ -11,6 +11,16 @@ export type VideoInfo = {
     nickname: string;
     avatarUrl: string | null;
   };
+  readonly comment?: Comments;
 };
+
+export type Comments = [
+  {
+    _id?: string;
+    comment: string;
+    nickname: string;
+    date: string;
+  }
+];
 
 export type AllVideos = Array<VideoInfo>;

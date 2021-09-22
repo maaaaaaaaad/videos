@@ -1,7 +1,6 @@
 import {
   Body,
   Controller,
-  Get,
   NotFoundException,
   Param,
   Post,
@@ -36,19 +35,5 @@ export class MetadataController {
       }
     }
     throw new NotFoundException('Not found user session');
-  }
-
-  @Get('get-comments/:videoId')
-  async getComments(@Param('videoId') videoId: string, @Res() res: Response) {
-    try {
-      const result = await this.metadataService.getComments(videoId);
-      return res.status(200).json({
-        result,
-      });
-    } catch (error) {
-      return res.status(400).json({
-        error: error.message,
-      });
-    }
   }
 }

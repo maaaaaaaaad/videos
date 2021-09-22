@@ -19,6 +19,7 @@ export class MetadataService {
       comment,
       date,
       nickname,
+      videos: videoId,
     });
     await this.videosService.comment(videoId, commentData);
     return commentData;

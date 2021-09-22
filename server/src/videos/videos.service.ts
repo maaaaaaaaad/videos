@@ -30,6 +30,14 @@ export class VideosService {
     return videos;
   }
 
+  async getComments(videoId: string) {
+    const find = await this.videoModel
+      .find({ _id: videoId })
+      .populate('comment');
+
+    return find;
+  }
+
   async upload(userSession: UserDocument, videoData: VideoDto) {
     const { video, title, description, theme, age_verification } = videoData;
 

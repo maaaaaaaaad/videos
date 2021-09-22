@@ -4,6 +4,7 @@ import {
   Controller,
   Get,
   NotFoundException,
+  Param,
   Patch,
   Post,
   Query,
@@ -49,6 +50,20 @@ export class VideosController {
     } catch (error) {
       return res.status(400).json({
         message: new NotFoundException(`Not found ${error.message}`),
+      });
+    }
+  }
+
+  @Get('get-videos-comments/:videoId')
+  async getComments(@Param('videoId') videoId: string, @Res() res: Response) {
+    try {
+      const result = await this.videoServie.getComments(videoId);
+      return res.status(200).json({
+        result,
+      });
+    } catch (error) {
+      return res.status(400).json({
+        error: error.message,
       });
     }
   }

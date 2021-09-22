@@ -5,6 +5,7 @@ import { Model } from 'mongoose';
 import { VideoDocument } from 'src/schemas/video.schema';
 import { VideoDto } from './dto/video.dto';
 import UpdateVideoDto from './dto/update.dto';
+import { MetadataDocument } from 'src/schemas/metadata.schema';
 
 @Injectable()
 export class VideosService {
@@ -72,5 +73,11 @@ export class VideosService {
       })
       .populate('owner')
       .sort({ date: 'desc' });
+  }
+
+  async comment(videoId: string, commentData: MetadataDocument) {
+    const find = await this.videoModel.findById({ _id: videoId });
+    find.comment.push(commentData);
+    await find.save();
   }
 }

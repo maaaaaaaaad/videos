@@ -8,9 +8,6 @@ export type MetadataDocument = MetadataInformation & Document;
 @Schema()
 export class MetadataInformation {
   @Prop({ required: true })
-  userId: string;
-
-  @Prop({ required: true })
   comment: string;
 
   @Prop({ required: true })

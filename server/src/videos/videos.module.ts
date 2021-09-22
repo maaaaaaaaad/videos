@@ -20,5 +20,6 @@ import { MulterModule } from '@nestjs/platform-express';
   ],
   providers: [VideosService],
   controllers: [VideosController],
+  exports: [VideosService],
 })
 export class VideosModule {}

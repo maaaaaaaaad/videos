@@ -23,7 +23,7 @@ export class VideosService {
   async getUserVideos(userSession: UserDocument) {
     const videos = await this.videoModel
       .find({ owner: userSession._id })
-      .populate('owner')
+      .populate('owner comment')
       .sort({
         date: 'desc',
       });

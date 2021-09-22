@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Query, Res } from '@nestjs/common';
+import { Body, Controller, Param, Post, Res } from '@nestjs/common';
 import { Response } from 'express';
 import { CommentDto } from './dto/comment.dto';
 import { MetadataService } from './metadata.service';
@@ -7,9 +7,9 @@ import { MetadataService } from './metadata.service';
 export class MetadataController {
   constructor(private readonly metadataService: MetadataService) {}
 
-  @Post('create-comment')
+  @Post('create-comment/:videoId')
   async postComment(
-    @Query('videoId') videoId: string,
+    @Param('videoId') videoId: string,
     @Body() body: CommentDto,
     @Res() res: Response,
   ) {

@@ -16,7 +16,7 @@ export class VideosService {
   async getAllVideos() {
     return await this.videoModel
       .find({})
-      .populate('owner')
+      .populate('owner comment')
       .sort({ date: 'desc' });
   }
 

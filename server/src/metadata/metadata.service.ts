@@ -19,10 +19,7 @@ export class MetadataService {
       comment,
       date,
     });
-    const video = await this.videosService.comment(videoId, commentData);
-    return {
-      video,
-      commentData,
-    };
+    await this.videosService.comment(videoId, commentData);
+    return commentData;
   }
 }

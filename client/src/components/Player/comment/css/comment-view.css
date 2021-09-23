@@ -1,0 +1,25 @@
+.item {
+  margin-top: 25px;
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.nickname {
+  margin-left: 10px;
+  font-size: 14px;
+}
+
+.date {
+  margin-left: 10px;
+  font-size: 10px;
+}
+
+.comment {
+  margin-left: 10px;
+}

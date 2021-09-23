@@ -14,7 +14,16 @@ export class MetadataInformation {
   date: string;
 
   @Prop({ required: true })
+  userId: string;
+
+  @Prop({ required: true })
   nickname: string;
+
+  @Prop({ required: true })
+  email: string;
+
+  @Prop()
+  avatarUrl: string | null;
 
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Videos' })
   videos: VideoInformation;

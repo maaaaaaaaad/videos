@@ -34,7 +34,6 @@ export class VideosService {
     const find = await this.videoModel
       .findOne({ _id: videoId })
       .populate('comment');
-
     return find;
   }
 

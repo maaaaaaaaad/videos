@@ -54,7 +54,7 @@ export class VideosController {
     }
   }
 
-  @Get('get-videos-comments/:videoId')
+  @Get('video-comments/:videoId')
   async getComments(@Param('videoId') videoId: string, @Res() res: Response) {
     try {
       const result = await this.videoServie.getComments(videoId);

@@ -15,7 +15,7 @@ import { MetadataService } from './metadata.service';
 export class MetadataController {
   constructor(private readonly metadataService: MetadataService) {}
 
-  @Post('create-comment/:videoId')
+  @Post('comment/:videoId')
   async postComment(
     @Param('videoId') videoId: string,
     @Body() body: CommentDto,

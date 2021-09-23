@@ -53,7 +53,7 @@ const Player: React.FC<RouteComponentProps> = ({ location }) => {
 
       <section>
         <article>
-          <CommentForm videoId={selectedVideo.item._id!} />
+          <CommentForm _id={selectedVideo.item._id!} />
         </article>
         <article>
           <ul>

@@ -14,7 +14,7 @@ export class Videos {
 
   async getComments(videoId: string) {
     return await axios.get(
-      `${this.baseUrl}/get-videos-comments/${videoId}`,
+      `${this.baseUrl}/video-comments/${videoId}`,
       Videos.credential
     );
   }

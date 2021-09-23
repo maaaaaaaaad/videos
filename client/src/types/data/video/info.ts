@@ -18,6 +18,9 @@ export type Comments = [
   {
     _id?: string;
     comment: string;
+    userId: string;
+    email: string;
+    avatarUrl: string | null;
     nickname: string;
     date: string;
   }

@@ -14,7 +14,7 @@ export class MetadataComments {
 
   async upload(comment: Comment, videoId: string) {
     return await axios.post(
-      `${this.baseUrl}/create-comment/${videoId}`,
+      `${this.baseUrl}/comment/${videoId}`,
       comment,
       MetadataComments.credential
     );

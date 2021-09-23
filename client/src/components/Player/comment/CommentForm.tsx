@@ -2,12 +2,9 @@ import React, { useContext, useState } from "react";
 import { commentApiContext } from "../../../api/metadata/CommentApi";
 import { ResUserDataContext } from "../../../App";
 import { Comment } from "../../../types/data/metadata/comment.type";
+import { VideoInfo } from "../../../types/data/video/info";
 
-interface Props {
-  videoId: string;
-}
-
-const CommentForm: React.FC<Props> = ({ videoId }) => {
+const CommentForm: React.FC<Pick<VideoInfo, "_id">> = ({ _id }) => {
   const api = useContext(commentApiContext);
   const isUser = useContext(ResUserDataContext);
   const [commentData, setCommentData] = useState<string>("");
@@ -17,12 +14,17 @@ const CommentForm: React.FC<Props> = ({ videoId }) => {
 
     if (commentData !== "") {
       const data: Comment = {
+        userId: isUser!.userId!,
+        email: isUser!.email!,
         nickname: isUser!.nickname!,
+        avatarUrl: isUser!.avatarUrl! ?? null,
         comment: commentData,
         date: new Date().toLocaleString(),
       };
 
-      await api.upload(data, videoId!);
+      console.log(data);
+
+      await api.upload(data, _id!);
     }
   };
 

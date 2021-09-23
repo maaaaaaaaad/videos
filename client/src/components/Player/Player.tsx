@@ -9,6 +9,7 @@ import CommentView from "./comment/CommentView";
 const Player: React.FC<RouteComponentProps> = ({ location }) => {
   const api = useContext(videosApiContext);
   const selectedVideo = location.state! as VideoProps;
+
   const [getComments, setGetComments] = useState<Comments>();
 
   useEffect(() => {
@@ -56,7 +57,7 @@ const Player: React.FC<RouteComponentProps> = ({ location }) => {
           <CommentForm _id={selectedVideo.item._id!} />
         </article>
         <article>
-          <ul>
+          <ul className="comment-list">
             {getComments?.map((comment, index) => (
               <CommentView key={index} comment={comment} />
             ))}

@@ -4,9 +4,9 @@ import "./css/comment-view.css";
 
 const CommentView: React.FC<IComment> = ({ comment }) => {
   return (
-    <li className="comment-view item">
+    <li className="item">
       <img
-        className="comment-view avatar"
+        className="avatar"
         src={
           comment?.avatarUrl
             ? `${process.env.REACT_APP_SERVER_URL}/${comment.avatarUrl}`
@@ -14,14 +14,14 @@ const CommentView: React.FC<IComment> = ({ comment }) => {
         }
         alt="avatar"
       />
-      <section className="comment-view main">
-        <article className="comment-view owner">
-          <span className="comment-view nickname">{comment.nickname}</span>
-          <span className="comment-view date">{comment.date}</span>
+      <section className="main">
+        <article className="owner">
+          <span className="nickname">{comment.nickname}</span>
+          <span className="date">{comment.date}</span>
         </article>
 
-        <article className="comment-view content">
-          <span className="comment-view comment">{comment.comment}</span>
+        <article className="content">
+          <span className="comment">{comment.comment}</span>
         </article>
       </section>
     </li>

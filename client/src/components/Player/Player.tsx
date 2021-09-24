@@ -23,7 +23,7 @@ const Player: React.FC<RouteComponentProps> = ({ location }) => {
 
   return (
     <section>
-      <video className="w-42" controls>
+      <video width="600" height="300" controls>
         <source
           src={`${process.env.REACT_APP_SERVER_URL}/${selectedVideo.item.videoUrl}`}
         />

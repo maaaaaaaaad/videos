@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { useContext } from "react";
 import { videosApiContext } from "../../../api/video/VideoApi";
 import {
@@ -12,6 +12,8 @@ const VideoControllers = () => {
   const api = useContext(videosApiContext);
   const state = useContext(VideoStateContext);
   const dispatch = useContext(VideoDispatchContext);
+  const [videoFile, setVideoFile] = useState<File | null>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   const handleSubmitBtn = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -32,6 +34,8 @@ const VideoControllers = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, files } = e.currentTarget;
+
+    files && setVideoFile(files[0]);
 
     dispatch!({
       type: "VIDEO_UPLOAD",
@@ -76,14 +80,48 @@ const VideoControllers = () => {
     });
   };
 
+  const handleCaptureThumbnail = () => {
+    const canvas = document.createElement("canvas");
+    canvas.width = videoRef.current!.width;
+    canvas.height = videoRef.current!.height;
+
+    canvas
+      .getContext("2d")
+      ?.drawImage(
+        videoRef.current!,
+        0,
+        0,
+        videoRef.current!.width,
+        videoRef.current!.height
+      );
+  };
+
+  console.log(videoFile);
+
   return (
-    <VideoForm
-      handleSelectedChange={handleSelectedChange}
-      handleChange={handleChange}
-      handleSubmitBtn={handleSubmitBtn}
-      handleChangeTextArea={handleChangeTextArea}
-      handleAgeCheck={handleAgeCheck}
-    />
+    <>
+      {videoFile ? (
+        <article>
+          <video
+            width="300"
+            height="100"
+            ref={videoRef}
+            src={URL.createObjectURL(videoFile)}
+            controls
+          ></video>
+          <button onClick={handleCaptureThumbnail}>Capture Thumbnail</button>
+        </article>
+      ) : (
+        ""
+      )}
+      <VideoForm
+        handleSelectedChange={handleSelectedChange}
+        handleChange={handleChange}
+        handleSubmitBtn={handleSubmitBtn}
+        handleChangeTextArea={handleChangeTextArea}
+        handleAgeCheck={handleAgeCheck}
+      />
+    </>
   );
 };
 

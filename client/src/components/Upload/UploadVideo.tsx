@@ -2,11 +2,7 @@ import React from "react";
 import VideoControllers from "./Video/VideoControllers";
 
 const UploadVideo = () => {
-  return (
-    <section>
-      <VideoControllers />
-    </section>
-  );
+  return <VideoControllers />;
 };
 
 export default UploadVideo;

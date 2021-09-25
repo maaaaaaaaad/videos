@@ -27,15 +27,21 @@ const Videos: React.FC<RouteComponentProps> = ({ location }) => {
 
   return (
     <section>
-      <VideoSearchControllers />
+      <article>
+        <VideoSearchControllers />
+      </article>
 
-      <ul>
-        {searchVideo
-          ? searchVideo.map((item, index) => (
-              <VideosView key={index} item={item} />
-            ))
-          : videos.map((item, index) => <VideosView key={index} item={item} />)}
-      </ul>
+      <article>
+        <ul>
+          {searchVideo
+            ? searchVideo.map((item, index) => (
+                <VideosView key={index} item={item} />
+              ))
+            : videos.map((item, index) => (
+                <VideosView key={index} item={item} />
+              ))}
+        </ul>
+      </article>
     </section>
   );
 };

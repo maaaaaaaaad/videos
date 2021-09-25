@@ -13,6 +13,7 @@ const VideoControllers = () => {
   const state = useContext(VideoStateContext);
   const dispatch = useContext(VideoDispatchContext);
   const [videoFile, setVideoFile] = useState<File | null>(null);
+  const [thumbnailSrc, setThumbnailSrc] = useState<string | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const handleSubmitBtn = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -94,12 +95,14 @@ const VideoControllers = () => {
         videoRef.current!.width,
         videoRef.current!.height
       );
+
+    setThumbnailSrc(canvas.toDataURL());
   };
 
-  console.log(videoFile);
+  console.log(thumbnailSrc);
 
   return (
-    <>
+    <section>
       {videoFile ? (
         <article>
           <video
@@ -114,14 +117,23 @@ const VideoControllers = () => {
       ) : (
         ""
       )}
-      <VideoForm
-        handleSelectedChange={handleSelectedChange}
-        handleChange={handleChange}
-        handleSubmitBtn={handleSubmitBtn}
-        handleChangeTextArea={handleChangeTextArea}
-        handleAgeCheck={handleAgeCheck}
-      />
-    </>
+      {thumbnailSrc ? (
+        <div>
+          <img width="300" height="200" src={thumbnailSrc} alt="thumbnail" />
+        </div>
+      ) : (
+        ""
+      )}
+      <article>
+        <VideoForm
+          handleSelectedChange={handleSelectedChange}
+          handleChange={handleChange}
+          handleSubmitBtn={handleSubmitBtn}
+          handleChangeTextArea={handleChangeTextArea}
+          handleAgeCheck={handleAgeCheck}
+        />
+      </article>
+    </section>
   );
 };
 

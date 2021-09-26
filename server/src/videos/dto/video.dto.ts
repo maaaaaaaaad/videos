@@ -4,9 +4,6 @@ export class VideoDto {
   @ValidateNested()
   video: Express.Multer.File | null;
 
-  @ValidateNested()
-  thumbnail: Express.Multer.File | null;
-
   @IsString()
   title: string;
 

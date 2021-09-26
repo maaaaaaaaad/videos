@@ -12,9 +12,6 @@ export class VideoInformation {
   videoUrl: string;
 
   @Prop({ required: true })
-  thumbnail: string;
-
-  @Prop({ required: true })
   title: string;
 
   @Prop({ required: true })

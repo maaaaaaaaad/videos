@@ -1,4 +1,4 @@
-import { FileFieldsInterceptor } from '@nestjs/platform-express';
+import { FileInterceptor } from '@nestjs/platform-express';
 import {
   Body,
   Controller,
@@ -10,14 +10,13 @@ import {
   Query,
   Req,
   Res,
-  UploadedFiles,
+  UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { VideoDto } from './dto/video.dto';
 import { VideosService } from './videos.service';
 import UpdateVideoDto from './dto/update.dto';
-import { diskStorage } from 'multer';
 
 @Controller('videos')
 export class VideosController {
@@ -70,29 +69,15 @@ export class VideosController {
   }
 
   @Post('upload')
-  @UseInterceptors(
-    FileFieldsInterceptor(
-      [
-        { name: 'video', maxCount: 1 },
-        { name: 'thumbnail', maxCount: 1 },
-      ],
-      {
-        storage: diskStorage({
-          destination: 'upload/videos/data',
-        }),
-      },
-    ),
-  )
+  @UseInterceptors(FileInterceptor('video'))
   async upload(
-    @UploadedFiles() videoDatas: Express.Multer.File,
+    @UploadedFile() video: Express.Multer.File,
     @Body() body: VideoDto,
     @Req() req: Request,
     @Res() res: Response,
   ) {
-    body.video = videoDatas['video'][0];
-    body.thumbnail = videoDatas['thumbnail'][0];
-
     const userSession = req.session.user;
+    body.video = video;
 
     try {
       const upload = await this.videoServie.upload(userSession, body);

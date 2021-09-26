@@ -82,24 +82,23 @@ const VideoControllers = () => {
   };
 
   const handleCaptureThumbnail = () => {
-    const canvas = document.createElement("canvas");
-    canvas.width = videoRef.current!.width;
-    canvas.height = videoRef.current!.height;
+    if (videoRef !== null) {
+      const canvas = document.createElement("canvas");
+      canvas.width = videoRef.current!.width;
+      canvas.height = videoRef.current!.height;
 
-    canvas
-      .getContext("2d")
-      ?.drawImage(
-        videoRef.current!,
-        0,
-        0,
-        videoRef.current!.width,
-        videoRef.current!.height
-      );
-
-    setThumbnailSrc(canvas.toDataURL());
+      canvas
+        .getContext("2d")
+        ?.drawImage(
+          videoRef.current!,
+          0,
+          0,
+          videoRef.current!.width,
+          videoRef.current!.height
+        );
+      setThumbnailSrc(canvas.toDataURL());
+    }
   };
-
-  console.log(thumbnailSrc);
 
   return (
     <section>
@@ -118,9 +117,9 @@ const VideoControllers = () => {
         ""
       )}
       {thumbnailSrc ? (
-        <div>
+        <article>
           <img width="300" height="200" src={thumbnailSrc} alt="thumbnail" />
-        </div>
+        </article>
       ) : (
         ""
       )}

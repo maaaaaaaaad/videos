@@ -15,7 +15,7 @@ import { MulterModule } from '@nestjs/platform-express';
       },
     ]),
     MulterModule.register({
-      dest: 'upload/video/',
+      dest: 'upload/',
     }),
   ],
   providers: [VideosService],

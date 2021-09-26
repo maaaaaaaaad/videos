@@ -38,10 +38,12 @@ export class VideosService {
   }
 
   async upload(userSession: UserDocument, videoData: VideoDto) {
-    const { video, title, description, theme, age_verification } = videoData;
+    const { video, thumbnail, title, description, theme, age_verification } =
+      videoData;
 
     const createVideo = new this.videoModel({
       videoUrl: video.path,
+      thumbnail: thumbnail.path,
       title,
       description,
       theme,
@@ -53,7 +55,7 @@ export class VideosService {
   }
 
   async update(updateData: UpdateVideoDto) {
-    const { _id, title, description, theme } = updateData;
+    const { _id, title, description, theme, thumbnail } = updateData;
 
     const update = await this.videoModel.findByIdAndUpdate(
       _id,
@@ -61,6 +63,7 @@ export class VideosService {
         title,
         description,
         theme,
+        thumbnail: thumbnail.path,
       },
       { new: true },
     );

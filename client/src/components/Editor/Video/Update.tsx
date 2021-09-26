@@ -7,7 +7,7 @@ import {
   VideoStateContext,
 } from "../../../contexts/VideoContexts";
 import { VideoFormState } from "../../../types/data/video/form.type";
-import { VideoInfo } from "../../../types/data/video/info";
+import { VideoInfo } from "../../../types/data/video/info.type";
 import { VideoProps } from "../../../types/data/video/props.interface";
 
 const Update: React.FC<VideoProps> = ({ item }) => {

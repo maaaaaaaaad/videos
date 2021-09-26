@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { commentApiContext } from "../../../api/metadata/CommentApi";
 import { ResUserDataContext } from "../../../App";
 import { Comment } from "../../../types/data/metadata/comment.type";
-import { VideoInfo } from "../../../types/data/video/info";
+import { VideoInfo } from "../../../types/data/video/info.type";
 import "./css/comment-view.css";
 
 const CommentForm: React.FC<Pick<VideoInfo, "_id">> = ({ _id }) => {

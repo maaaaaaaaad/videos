@@ -92,22 +92,18 @@ export class VideosController {
     body.video = videoDatas['video'][0];
     body.thumbnail = videoDatas['thumbnail'][0];
 
-    return res.status(200).json({
-      body,
-    });
+    const userSession = req.session.user;
 
-    // const userSession = req.session.user;
-
-    // try {
-    //   const upload = await this.videoServie.upload(userSession, body);
-    //   return res.status(200).json({
-    //     result: upload,
-    //   });
-    // } catch (error) {
-    //   return res.status(400).json({
-    //     error: error.message,
-    //   });
-    // }
+    try {
+      const upload = await this.videoServie.upload(userSession, body);
+      return res.status(200).json({
+        result: upload,
+      });
+    } catch (error) {
+      return res.status(400).json({
+        error: error.message,
+      });
+    }
   }
 
   @Patch('update')

@@ -1,7 +1,7 @@
 import React from "react";
 import { useContext } from "react";
 import { videosApiContext } from "../../../api/video/VideoApi";
-import { VideoInfo } from "../../../types/data/video/info";
+import { VideoInfo } from "../../../types/data/video/info.type";
 import { VideoProps } from "../../../types/data/video/props.interface";
 
 const Delete: React.FC<VideoProps> = ({ item }) => {

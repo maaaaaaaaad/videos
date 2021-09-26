@@ -5,7 +5,7 @@ import { useCallback } from "react";
 import { useEffect } from "react";
 import { Link, RouteComponentProps } from "react-router-dom";
 import { videosApiContext } from "../api/video/VideoApi";
-import { VideoInfo } from "../types/data/video/info";
+import { VideoInfo } from "../types/data/video/info.type";
 import { ResponseUserData } from "../types/user/LoggedIn";
 import UserVideosView from "./Views/Video/UserVideos";
 

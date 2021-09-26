@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { videosApiContext } from "../../api/video/VideoApi";
-import { Comments } from "../../types/data/video/info";
+import { Comments } from "../../types/data/video/info.type";
 import { VideoProps } from "../../types/data/video/props.interface";
 import CommentForm from "./comment/CommentForm";
 import CommentView from "./comment/CommentView";

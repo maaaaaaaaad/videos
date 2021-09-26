@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { videosApiContext } from "../api/video/VideoApi";
-import { AllVideos } from "../types/data/video/info";
+import { AllVideos } from "../types/data/video/info.type";
 import VideoSearchControllers from "./Search/Video/VideoSearchControllers";
 import VideosView from "./Views/Video/AllVideos";
 

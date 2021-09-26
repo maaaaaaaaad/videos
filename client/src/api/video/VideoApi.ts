@@ -1,6 +1,6 @@
 import { createContext } from "react";
 import axios from "axios";
-import { VideoInfo } from "../../types/data/video/info";
+import { VideoInfo } from "../../types/data/video/info.type";
 
 export class Videos {
   static credential: { withCredentials: boolean };

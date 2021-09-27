@@ -22,7 +22,7 @@ import UpdateVideoDto from './dto/update.dto';
 export class VideosController {
   constructor(private readonly videoServie: VideosService) {}
 
-  @Get()
+  @Get('get-all')
   async getAll(@Res() res: Response) {
     try {
       const result = await this.videoServie.getAllVideos();
@@ -37,7 +37,7 @@ export class VideosController {
     }
   }
 
-  @Get('get-videos')
+  @Get('get-one')
   async getOne(@Req() req: Request, @Res() res: Response) {
     const userSession = req.session.user;
 
@@ -68,7 +68,7 @@ export class VideosController {
     }
   }
 
-  @Post('upload')
+  @Post()
   @UseInterceptors(FileInterceptor('video'))
   async upload(
     @UploadedFile() video: Express.Multer.File,
@@ -91,7 +91,7 @@ export class VideosController {
     }
   }
 
-  @Patch('update')
+  @Patch()
   async update(@Res() res: Response, @Body() body: UpdateVideoDto) {
     try {
       const result = await this.videoServie.update(body);

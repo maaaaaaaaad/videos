@@ -20,27 +20,19 @@ export class Videos {
   }
 
   async getAll() {
-    return await axios.get(`${this.baseUrl}`, Videos.credential);
+    return await axios.get(`${this.baseUrl}/get-all`, Videos.credential);
   }
 
   async getOne() {
-    return axios.get(`${this.baseUrl}/get-videos`, Videos.credential);
+    return axios.get(`${this.baseUrl}/get-one`, Videos.credential);
   }
 
   async upload(formData: FormData) {
-    return await axios.post(
-      `${this.baseUrl}/upload`,
-      formData,
-      Videos.credential
-    );
+    return await axios.post(`${this.baseUrl}`, formData, Videos.credential);
   }
 
   async update(formData: VideoInfo) {
-    return await axios.patch(
-      `${this.baseUrl}/update`,
-      formData,
-      Videos.credential
-    );
+    return await axios.patch(`${this.baseUrl}`, formData, Videos.credential);
   }
 
   async delete(videoId: Pick<VideoInfo, "_id">) {
